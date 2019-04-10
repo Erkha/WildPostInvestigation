@@ -1,0 +1,44 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+	<form>
+		<div class="form-row">
+		    <div class="form-group">
+		      <label for="inputText">Nom article</label>
+		      <input type="text" class="form-control" name="article" id="article">
+		    </div>
+		</div>	
+		<div class="form-row">
+			{# Todo: foreach #}
+			<select class="custom-select custom-select-sm">
+				 <option selected>Category</option>
+				 <option value="1">Sport</option>
+				 <option value="2">Politique</option>
+				 <option value="3">Autres</option>
+			</select> 
+		</div>	   
+		<div class="form-row">
+		    <div class="form-group">
+		      <label for="inputText">Author</label>
+		      <input type="text" class="form-control" name="author" id="author">
+		    </div>
+		</div>	
+		<div class="form-row">
+		    <div class="form-group">
+		      <label for="inputText">Short text</label>
+		      <input type="text" class="form-control" name="shortText" id="shortText">
+		    </div>
+		</div>	
+		<div class="form-row">
+		    <div class="form-group">
+		      <label for="inputText">Long text</label>
+		      <input type="textarea" class="form-control" name="longText" id="longText">
+		    </div>
+		</div>	
+		<div class="form-row">
+		    <div class="form-group">
+		      <label for="inputText">Tags</label>
+		      <input type="text" class="form-control" name="tag" id="tag">
+		    </div>				
+
+{% endblock %}
