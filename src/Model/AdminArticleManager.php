@@ -35,14 +35,16 @@ class AdminArticleManager extends AbstractManager
     public function insert(array $value): int
     {
         // prepared request
-        $statement = $this->pdo->prepare("INSERT INTO $this->table (title, `date`, author, category, shortText, tag) 
-            VALUES (:title, :udate, :author, :category, :shortText, :tag)");
+        $statement = $this->pdo->prepare("INSERT INTO $this->table 
+            (title, `date`, author, category, shortText, tag, content) 
+            VALUES (:title, :udate, :author, :category, :shortText, :tag, :content)");
         $statement->bindValue('title', $value['title'], \PDO::PARAM_STR);
         $statement->bindValue('udate', $value['date'], \PDO::PARAM_STR);
         $statement->bindValue('author', $value['author'], \PDO::PARAM_STR);
         $statement->bindValue('category', $value['selectCat'], \PDO::PARAM_STR);
         $statement->bindValue('shortText', $value['shortText'], \PDO::PARAM_STR);
         $statement->bindValue('tag', $value['tag'], \PDO::PARAM_STR);
+        $statement->bindValue('content', "salut", \PDO::PARAM_STR);
 
         if ($statement->execute()) {
             return (int)$this->pdo->lastInsertId();
