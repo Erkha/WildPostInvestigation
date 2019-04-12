@@ -1,0 +1,473 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"text",
+				"text-align\tproperty"
+			],
+			[
+				"margin",
+				"margin-top\tproperty"
+			],
+			[
+				"fon",
+				"font-family\tproperty"
+			],
+			[
+				"a",
+				"assets"
+			],
+			[
+				"getP",
+				"getPosition"
+			],
+			[
+				"Dire",
+				"DIRECTION"
+			],
+			[
+				"c",
+				"class\tclass …"
+			],
+			[
+				"my",
+				"my_html"
+			],
+			[
+				"er_",
+				"er_mail"
+			],
+			[
+				"max",
+				"maxlength\tAttr"
+			],
+			[
+				"w",
+				"weapons"
+			],
+			[
+				"in",
+				"indyWeapon"
+			],
+			[
+				"for",
+				"foreach\tforeach …"
+			],
+			[
+				"backgrou",
+				"background-image\tproperty"
+			],
+			[
+				"padd",
+				"padding-top\tproperty"
+			],
+			[
+				"space",
+				"space-around\tjustify-content"
+			],
+			[
+				"flex",
+				"flex-start\tjustify-content"
+			],
+			[
+				"spa",
+				"space-between\tjustify-content"
+			],
+			[
+				"text-al",
+				"text-align\tproperty"
+			],
+			[
+				"hei",
+				"height\tproperty"
+			],
+			[
+				"background",
+				"background-color\tproperty"
+			],
+			[
+				"font",
+				"font-size\tproperty"
+			],
+			[
+				"backgro",
+				"background-color\tproperty"
+			],
+			[
+				"wid",
+				"width\tproperty"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"PHP: Generate",
+				"PHP: Generate Getters and Setters"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"About"
+			],
+			[
+				"colo",
+				"Color Picker"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"LiveReload: Enable/disable plugins",
+				"LiveReload: Enable/disable plug-ins"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 150.0,
+		"history":
+		[
+			"color",
+			"color_pickers",
+			"color_picker",
+			"color_pick",
+			"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/wilder/Bureau/LYON-0219-php-projet2-WildPostInvestigation",
+		"/home/wilder/Bureau/LYON-0219-php-projet2-WildPostInvestigation/src",
+		"/home/wilder/Bureau/LYON-0219-php-projet2-WildPostInvestigation/src/View"
+	],
+	"file_history":
+	[
+		"/home/wilder/Bureau/LYON-0219-php-projet2-WildPostInvestigation/public/assets/css/style.css",
+		"/home/wilder/Bureau/LYON-0219-php-projet2-WildPostInvestigation/src/View/Home/card.html.twig",
+		"/home/wilder/Bureau/LYON-0219-php-projet2-WildPostInvestigation/src/View/Home/asidelist.html.twig",
+		"/home/wilder/Bureau/LYON-0219-php-projet2-WildPostInvestigation/src/View/Home/navbar.html.twig",
+		"/home/wilder/Bureau/LYON-0219-php-projet2-WildPostInvestigation/src/View/Home/cardLeft.html.twig",
+		"/home/wilder/Bureau/LYON-0219-php-projet2-WildPostInvestigation/src/View/Home/index.html.twig",
+		"/home/wilder/Bureau/LYON-0219-php-projet2-WildPostInvestigation/src/View/layout.html.twig",
+		"/home/wilder/Bureau/LYON-0219-php-projet2-WildPostInvestigation/config/db.php",
+		"/home/wilder/Bureau/LYON-0219-php-projet2-WildPostInvestigation/config/db.php.dist",
+		"/home/wilder/Bureau/LYON-0219-php-projet2-WildPostInvestigation/.gitignore",
+		"/home/wilder/Bureau/simple-mvc/src/Controller/HomeController.php",
+		"/home/wilder/Bureau/simple-mvc/src/Controller/HelloController.php",
+		"/home/wilder/Bureau/simple-mvc/src/View/hello.html.twig",
+		"/home/wilder/Bureau/simple-mvc/src/View/_header.html.twig",
+		"/home/wilder/Bureau/simple-mvc/public/index.php",
+		"/home/wilder/Bureau/simple-mvc/config/db.php",
+		"/home/wilder/Bureau/simple-mvc/config/db.php.dist",
+		"/home/wilder/Bureau/simple-mvc/src/Model/Connection.php",
+		"/home/wilder/Bureau/LYON-0219-php-projet2-WildPostInvestigation/public/index.php",
+		"/home/wilder/Bureau/VIERGE BOOT/index.html",
+		"/home/wilder/Bureau/simple-mvc/src/Model/AbstractManager.php",
+		"/home/wilder/Bureau/simple-mvc/src/Model/ItemManager.php",
+		"/home/wilder/Bureau/simple-mvc/vendor/composer/installed.json",
+		"/home/wilder/Bureau/simple-mvc/composer.json",
+		"/home/wilder/Bureau/simple-mvc/vendor/autoload.php",
+		"/home/wilder/Bureau/Composertest/composer.json",
+		"/home/wilder/Bureau/Composertest/vendor/scort/hello-world/src/HelloWorld.php",
+		"/home/wilder/Bureau/Composertest/src/APP/Hello.php",
+		"/home/wilder/Bureau/DOSSIER_SEMAINE/Atelier_POO2/src/soldier.php",
+		"/home/wilder/Bureau/DOSSIER_SEMAINE/Atelier_POO2/src/elf.php",
+		"/home/wilder/Bureau/DOSSIER_SEMAINE/Atelier_POO2/src/unit.php",
+		"/home/wilder/Bureau/DOSSIER_SEMAINE/Atelier_POO2/src/index.php",
+		"/home/wilder/Bureau/src/soldier.php",
+		"/home/wilder/Bureau/src/elf.php",
+		"/home/wilder/Bureau/src/unit.php",
+		"/home/wilder/Bureau/src/index.php",
+		"/home/wilder/Bureau/COURS_JAM/COMPOSER/QUETE_COMPOSER/vendor/ehime/hello-world/src/HelloWorld/SayHello.php",
+		"/home/wilder/Bureau/COURS_JAM/COMPOSER/QUETE_COMPOSER/src/Wcs/Hello.php",
+		"/home/wilder/Bureau/COURS_JAM/COMPOSER/QUETE_COMPOSER/public/index.php",
+		"/home/wilder/Bureau/QUETE_COMPOSER/vendor/ehime/hello-world/src/HelloWorld/SayHello.php",
+		"/home/wilder/Bureau/Lanceur.txt",
+		"/home/wilder/Bureau/QUETE_COMPOSER/composer.json",
+		"/home/wilder/Bureau/QUETE_COMPOSER/src/Wcs/Hello.php",
+		"/home/wilder/Bureau/QUETE_COMPOSER/public/index.php",
+		"/home/wilder/Bureau/QUETE_COMPOSER/vendor/ehime/hello-world/tests/HelloWorld/Tests/TestCase.php",
+		"/home/wilder/Bureau/QUETE_COMPOSER/vendor/ehime/hello-world/tests/bootstrap.php",
+		"/home/wilder/Bureau/QUETE_COMPOSER/vendor/autoload.php",
+		"/home/wilder/Bureau/COMPOSER_TEST/index.php",
+		"/home/wilder/Bureau/COMPOSER_TEST/vendor/composer/autoload_namespaces.php",
+		"/home/wilder/Bureau/COMPOSER_TEST/vendor/composer/autoload_psr4.php",
+		"/home/wilder/Bureau/php_checkpoint1/public/erreur.php",
+		"/home/wilder/Bureau/QUETE_COMPOSER/src/wcs/Hello.php",
+		"/home/wilder/.cache/.fr-NFjSDF/swiftmailer-swiftmailer-6fa3232/lib/swift_required.php",
+		"/home/wilder/Bureau/php_checkpoint1/public/index.php",
+		"/home/wilder/Bureau/COMPOSER/composer-setup.php",
+		"/home/wilder/Bureau/php_checkpoint1/public/config.php",
+		"/home/wilder/Bureau/QuentinPDO/exerciceQuentin.php",
+		"/home/wilder/Bureau/php_checkpoint1/src/functions.php",
+		"/home/wilder/Bureau/QuentinPDO/QuentinPDO.php",
+		"/home/wilder/Bureau/Composer/composer.phar",
+		"/home/wilder/Bureau/P_shop_php_voiture_cours_v3/data_auto70/dataAutoModal.php",
+		"/home/wilder/Bureau/P_shop_php_voiture_cours_v3/data_auto70/dataAutoCard.php",
+		"/home/wilder/Bureau/P_shop_php_voiture_cours_v3/page_retro.php",
+		"/home/wilder/Bureau/Checkpoint/src/functions.php",
+		"/home/wilder/Bureau/Checkpoint/public/config.php",
+		"/home/wilder/Bureau/Checkpoint/public/index.php",
+		"/home/wilder/Bureau/Checkpoint/src/fullname.php",
+		"/home/wilder/Bureau/public/index.php",
+		"/home/wilder/Bureau/public/config.php",
+		"/home/wilder/Bureau/TEST BOOSTRAP/VIERGE BOOTSTRAP/index.html",
+		"/home/wilder/Bureau/P_shop_php_voiture_cours_v3/style.css",
+		"/home/wilder/Bureau/P_shop_php_voiture_cours_v3/headerForm.php",
+		"/home/wilder/Bureau/P_shop_php_voiture_cours_v3/footerForm.php",
+		"/home/wilder/Bureau/P_shop_php_voiture_cours_v3/Voiture70.php",
+		"/home/wilder/Bureau/jamdb.sql",
+		"/home/wilder/Bureau/P_shop_php_voiture_cours_v3/secuVoiture.php",
+		"/home/wilder/Bureau/P_shop_php_voiture_cours_v3/formVoiture.php",
+		"/home/wilder/Bureau/DOSSIER_SEMAINE/Regex_classroom/regex.php",
+		"/home/wilder/Bureau/DOSSIER_SEMAINE/Quete_intro_POO/Challent_intro_POO/Personne.php",
+		"/home/wilder/Bureau/DOSSIER_SEMAINE/Quete_intro_POO/Challenge/index.php",
+		"/home/wilder/Bureau/DOSSIER_SEMAINE/Quete_formulaire/Quete_formulaire/formulaire.php",
+		"/home/wilder/Bureau/P_shop_php_voiture_cours_v3/data_auto70/dataAutoModal .php",
+		"/home/wilder/Bureau/P_shop_php_voiture_cours_v3/dataAuto.txt",
+		"/home/wilder/Bureau/DOSSIER_SEMAINE/POO_cours_atelier/Atelier_POO _1/index.php",
+		"/home/wilder/Bureau/DOSSIER_SEMAINE/POO_cours_atelier/Atelier POO - 1/Cat.php",
+		"/home/wilder/Bureau/commande php et sql.txt",
+		"/home/wilder/Bureau/DOSSIER_SEMAINE/POO_cours_atelier/Atelier POO - 1/Collar.php",
+		"/home/wilder/Bureau/DOSSIER_SEMAINE/POO_cours_atelier/Atelier POO - 1/index.php",
+		"/home/wilder/Bureau/DOSSIER_SEMAINE/grafikart_poo/Personnage2.php",
+		"/home/wilder/Bureau/DOSSIER_SEMAINE/grafikart_poo/index.php",
+		"/home/wilder/Bureau/DOSSIER_SEMAINE/grafikart_poo/personnage.php",
+		"/home/wilder/Bureau/DOSSIER SEMAINE/Quete_formulaire/Quete_formulaire/formulaire.php",
+		"/home/wilder/Bureau/DOSSIER SEMAINE/Quete_formulaire/Quete_formulaire/style.css",
+		"/home/wilder/Bureau/DOSSIER SEMAINE/Regex_classroom/regex.php",
+		"/home/wilder/.config/sublime-text-3/Packages/ColorPicker/ColorPicker.sublime-settings",
+		"/home/wilder/Bureau/DOSSIER SEMAINE/Test_formulaire/index.php",
+		"/home/wilder/Bureau/DOSSIER SEMAINE/Test_formulaire/style.css",
+		"/home/wilder/Bureau/DOSSIER SEMAINE/Test_formulaire/index.html",
+		"/home/wilder/Bureau/pawn_shop/Form_auto/fct_form.php",
+		"/home/wilder/Bureau/pawn_shop/Form_auto/form_jam.php",
+		"/home/wilder/Bureau/test2.php",
+		"/home/wilder/Bureau/VIERGE/style.css",
+		"/home/wilder/Bureau/DOSSIER SEMAINE/php_formulaire_jam/index.html",
+		"/home/wilder/Bureau/DOSSIER SEMAINE/php_formulaire_jam/form.php",
+		"/home/wilder/Bureau/DOSSIER SEMAINE/INTEGRATION_PC/Integration_1/Quete integration 1.2 Terminer/index.html",
+		"/home/wilder/Bureau/DOSSIER SEMAINE/INTEGRATION_PC/Integration_1/Quete integration 1.1/style.css",
+		"/home/wilder/Bureau/DOSSIER SEMAINE/INTEGRATION_PC/Integration_1/Quete integration 1.1/index.html",
+		"/home/wilder/Bureau/DOSSIER SEMAINE/INTEGRATION/Quete integration 1.2/index.html",
+		"/home/wilder/Bureau/DOSSIER SEMAINE/INTEGRATION/Quete integration 1.2/style.css",
+		"/home/wilder/Bureau/DOSSIER SEMAINE/INTEGRATION/gandalf/Gandalf.html",
+		"/home/wilder/Bureau/DOSSIER SEMAINE/INTEGRATION/gandalf/mystyle.css",
+		"/home/wilder/Bureau/Save_shop_html_V1.2_Terminer/header.html",
+		"/home/wilder/Bureau/PAWN_SHOP/P_shop_html_V1/Save_shop_html_V1.2_Terminer/index.html",
+		"/home/wilder/Bureau/DOJO/Dojos1_PHP/Intro PHP/style.css",
+		"/home/wilder/Bureau/Save_shop_html_V1.2_Terminer/index.html",
+		"/home/wilder/Bureau/fonction.php",
+		"/home/wilder/Bureau/Save_shop_html_V1.2_Terminer/head.html",
+		"/home/wilder/Bureau/Save_shop_html_V1.2_Terminer/style.css",
+		"/home/wilder/Bureau/pawn_shop/index.php",
+		"/home/wilder/installation-des-outils-php/bdd.php",
+		"/home/wilder/Bureau/infophp.php",
+		"/home/wilder/info.php",
+		"/home/wilder/infophp.php",
+		"/home/wilder/Bureau/Sauvegarde pawn shop/index.php",
+		"/home/wilder/Bureau/pawn_shop/Voiture70..php",
+		"/home/wilder/Bureau/pawn_shop/Voiture70..html",
+		"/home/wilder/Bureau/pawn_shop/Voiture.php",
+		"/home/wilder/Bureau/pawn_shop/Voiture.html"
+	],
+	"find":
+	{
+		"height": 28.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"magnum",
+			"set",
+			"error_reporting",
+			"display_errors",
+			"prod",
+			"dodg",
+			"lotus",
+			"bui",
+			">\n",
+			"aston",
+			"test",
+			"magnum",
+			"target",
+			"img",
+			"- mod",
+			"modal-pi",
+			"produit",
+			"body"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		},
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 47.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				0,
+				1,
+				1,
+				2
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			0.569469504422,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "wildPost.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/Bureau/LYON-0219-php-projet2-WildPostInvestigation/src/View/wildPost.sublime-workspace"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 1,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 296.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
