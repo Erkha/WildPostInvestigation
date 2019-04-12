@@ -1,3 +1,7 @@
+USE wildPost;
+
+DROP TABLE IF EXISTS articles;
+
 CREATE TABLE articles
 (
 id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,

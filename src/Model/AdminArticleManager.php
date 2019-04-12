@@ -44,7 +44,7 @@ class AdminArticleManager extends AbstractManager
         $statement->bindValue('category', $value['selectCat'], \PDO::PARAM_STR);
         $statement->bindValue('shortText', $value['shortText'], \PDO::PARAM_STR);
         $statement->bindValue('tag', $value['tag'], \PDO::PARAM_STR);
-        $statement->bindValue('content', "salut", \PDO::PARAM_STR);
+        $statement->bindValue('content', $value['content'], \PDO::PARAM_STR);
 
         if ($statement->execute()) {
             return (int)$this->pdo->lastInsertId();

@@ -21,7 +21,22 @@ class AdminArticleController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
+    /**
+     * Display item listing
+     *
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
 
+    public function index()
+    {
+        $articleManager = new AdminArticleManager();
+        $articles = $articleManager->selectAll();
+
+        return $this->twig->render('AdminArticle/AdminArticleList.html.twig', ['articles' => $articles]);
+    }
     
     private function testInput($data)
     {
@@ -34,7 +49,7 @@ class AdminArticleController extends AbstractController
 
 
 
-    public function add2()
+    public function add()
     {
             $value = [];
         /** Verification ajout article **/
@@ -71,6 +86,13 @@ class AdminArticleController extends AbstractController
             } else {
                  $value["shortText"] = $this->testInput($_POST["shortText"]);
             }
+
+                    /** Verification Short text **/
+            if (empty($_POST["content"])) {
+                $error['content'] = 'Add short text';
+            } else {
+                 $value["content"] = $this->testInput($_POST["content"]);
+            }
         /** Verification Short text **/
             // if (empty($_POST["upload"])){
             //     $error['upload'] = 'Add image';
@@ -95,7 +117,6 @@ class AdminArticleController extends AbstractController
             $itemManager = new AdminArticleManager();
 
             $id = $itemManager->insert($value);
-            // lien de redirection a definir
             //header('Location:/item/show/' . $id);
         }
 
