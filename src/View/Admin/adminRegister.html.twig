@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    {% block title %}identification{% endblock %}
+    
+    {% block content %}
+    <body>
+        <div class = "container">
+            <form action="" method="POST">      
+                <br/>
+                <div>
+                    <label for="username">Username :</label>
+                    <input type="text" id="username" name="username" 
+                        placeholder="login" >
+                    <span style="font-weight: bold; color : red"> 
+                        {% if adminError == null %}  
+                            {{"" }}
+                        {% else %} 
+                            {{adminError }}
+                        {% endif %}  
+                    </span>
+                </div>
+                <br/>
+                <div>
+                    <label for="pass">Password :</label>
+                    <input type="password" id="pass" name="password" 
+                        placeholder="password (8 characters minimum)">
+                        
+                </div>
+
+                <input type="submit" value="Sign in">
+                
+            </form>
+        </div>
+        
+    </body>
+    {% endblock %}
+</html>
