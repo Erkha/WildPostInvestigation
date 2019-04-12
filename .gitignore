@@ -4,4 +4,7 @@ public/assets/mdbootstrap
 .phpcs-cache
 *.cache
 db.php
+
+#Environnements personnels de travail
 .idea
+wildPost.sublime-project

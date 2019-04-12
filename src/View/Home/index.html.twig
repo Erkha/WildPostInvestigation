@@ -1,5 +1,74 @@
 {% extends 'layout.html.twig' %}
 
+
 {% block content %}
-    <h1>Hello Wilder !</h1>
+
+
+
+
+	<div class="contain">
+		
+		<section>
+			
+			<div class="container">
+				<div class="row actualite">
+					{# Block ACtualkité #}
+					<div class="col-md-9 actualite cols ">
+{#-------ACTUALITE LIGNE 1----------------------------- #}
+						<div class="row actuLigne1 ">
+							<div class="col-md-8  articleActu1 cols d-flex align-items-stretch ">
+								{% include 'Home/card.html.twig' %}
+
+							</div>
+							<div class="col-md-4  articleActu2 cols d-flex align-items-stretch ">
+								{% include 'Home/card.html.twig' %}
+							</div>
+						</div>
+					
+
+						<div class="row actuLigne2">
+{#-------ACTUALITE LIGNE 2----------------------------- #}						
+							<div class="col-md-4  articleActu3 cols d-flex align-items-stretch">
+								{% include 'Home/card.html.twig' %}
+
+							</div>
+							<div class="col-md-4 articleActu4 cols d-flex align-items-stretch">
+								{% include 'Home/card.html.twig' %}
+
+							</div>
+							<div class="col-md-4  articleActu5 cols d-flex align-items-stretch">
+								{% include 'Home/card.html.twig' %}
+
+							</div>						
+						</div>
+{#-------ACTUALITE LIGNE 3----------------------------- #}
+						<div class="row actuLigne3 ">
+							<div class="col-md-12  articleActu6 cols d-flex align-items-stretch">
+
+							{% include 'Home/cardLeft.html.twig' %}
+
+							</div>	
+						</div>
+					 </div>
+					
+
+					{# Block Aside info en continu #}
+					<div class="col-md-3  asideContinu flex-column d-flex align-items-stretch">
+						{% for i in 1..9  %}
+							{% include 'Home/asidelist.html.twig' %}
+							<br>
+						{% endfor %}
+
+						<div class="plus unique-color  h-100 mb-3">
+							
+								<a href="" class="text-white">
+									<span>Voir plus</span>
+						
+					    </div>
+				</div>{# FIN row #}
+			</div>
+		</section>
+	</contain>
+
+
 {% endblock %}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {# <link rel="icon" href="/assets/images/favicon.png"> #}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+ 
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="/assets/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="/assets/mdbootstrap/css/mdb.min.css" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+   <link rel="stylesheet" href="/assets/css/style.css">
+
+   <link href="https://fonts.googleapis.com/css?family=UnifrakturMaguntia" rel="stylesheet"> 
+   <!-- {% block stylesheet %}{% endblock %} -->
+   <h1>Wild Post Investigation</h1>
+</head>
+    
+    {% block content %}
+    <body>
+        <div class = "container">
+            <form action="" method="POST">      
+                <br/>
+                <div>
+                    <label for="username">Username :</label>
+                    <input type="text" id="username" name="username" 
+                        placeholder="login" >
+                    <span style="font-weight: bold; color : red"> 
+                        {% if adminError == null %}  
+                            {{"" }}
+                        {% else %} 
+                            {{adminError }}
+                        {% endif %}  
+                    </span>
+                </div>
+                <br/>
+                <div>
+                    <label for="pass">Password :</label>
+                    <input type="password" id="pass" name="password" 
+                        placeholder="password (8 characters minimum)">
+                        
+                </div>
+
+                <input type="submit" value="Sign in">
+                
+            </form>
+        </div>
+        
+    </body>
+    {% endblock %}
+</html>

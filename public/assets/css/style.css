@@ -1,0 +1,82 @@
+
+h1{
+	font-family:UnifrakturMaguntia;
+	background-color: white;
+	text-align: center;
+	margin:0px;
+}
+
+.cols{
+	padding:15px;
+}
+
+.nav-link,.dropdown-item{
+	font-weight:bold;
+	font-size:20px;
+}
+
+
+.md-form input{
+  	color:black;
+  	font-weight:bold;
+  
+}
+
+.logo{
+	color:white !important;
+}
+
+input::placeholder{
+	color:#3E4551 !important;
+}
+
+input{
+	background-color:white !important;
+}
+
+.input-group{
+	width:250px !important;
+}
+
+
+.vLeft img{
+	width:14rem !important;
+	height:auto !important;
+}
+
+
+.asideContinu{
+	margin-top:30px;
+	
+}
+
+.logoHome{
+	width:40px !important;
+	height:40px !important;
+	margin-top:5px;
+}
+
+.content{
+	font-weight: bold;
+	border-bottom:1px solid white;
+	padding-bottom:10px;  
+}
+
+.plus{
+	font-weight: bold;
+	text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
