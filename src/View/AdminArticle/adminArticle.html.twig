@@ -1,5 +1,8 @@
 {% extends 'adminLayout.html.twig' %}
-
+{% block javascript %}
+    <script src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey=w5r8f7bjk1wzj1l99fkqvxpv74xcpg35e0wqwzj2fu99magk"></script>
+    <script>  tinymce.init({selector: '#validationTextarea',}); </script>
+{% endblock %}
 {% block content %}
 <div class="container">
 	<form action="" method="POST">
