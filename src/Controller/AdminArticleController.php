@@ -51,10 +51,9 @@ class AdminArticleController extends AbstractController
 
     public function add()
     {
-            $value = [];
+        $value = [];
         /** Verification ajout article **/
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
 
         /** Verification title **/
             if (empty($_POST["title"])) {
@@ -87,18 +86,13 @@ class AdminArticleController extends AbstractController
                  $value["shortText"] = $this->testInput($_POST["shortText"]);
             }
 
-                    /** Verification Short text **/
+
             if (empty($_POST["content"])) {
                 $error['content'] = 'Add short text';
             } else {
-                 $value["content"] = $this->testInput($_POST["content"]);
+                 $value["content"] = $_POST["content"];
             }
-        /** Verification Short text **/
-            // if (empty($_POST["upload"])){
-            //     $error['upload'] = 'Add image';
-            // }else{
-            //      $value["upload"] = $this->testInput($_POST["upload"]);
-            // }
+        
         /** Verification tag **/
             if (empty($_POST["tag"])) {
                 $error['tag'] = 'Add tag';
@@ -117,7 +111,8 @@ class AdminArticleController extends AbstractController
             $itemManager = new AdminArticleManager();
 
             $id = $itemManager->insert($value);
-            //header('Location:/item/show/' . $id);
+            
+            header('Location:/adminArticle/index');
         }
 
         return $this->twig->render('AdminArticle/adminArticle.html.twig');
