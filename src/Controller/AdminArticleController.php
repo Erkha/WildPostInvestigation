@@ -33,14 +33,17 @@ class AdminArticleController extends AbstractController
 
         return $this->twig->render('AdminArticle/AdminArticleList.html.twig', ['articles' => $articles]);
     }
-    
-    private function testInput($data)
+
+    /**
+     * Handle article deletion
+     *
+     * @param int $id
+     */
+    public function delete(int $id)
     {
-     
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
+        $adminArticleManager = new AdminArticleManager();
+        $adminArticleManager->delete($id);
+        header('Location:/adminArticle/index');
     }
 
     /**
@@ -54,82 +57,97 @@ class AdminArticleController extends AbstractController
 
     public function add()
     {
-        $value = [];
         /** Verification ajout article **/
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $result=$this->verifyInputs($_POST);
 
-        /** Verification title **/
-            if (empty($_POST["title"])) {
-                $error['title'] = 'Add title';
-            } else {
-                 $value["title"] = $this->testInput($_POST["title"]);
-            }
-        /** Verification date **/
-            if (empty($_POST["date"])) {
-                $error['date'] = 'Add date';
-            } else {
-                 $value["date"] = $this->testInput($_POST["date"]);
-            }
-        /** Verification author **/
-            if (empty($_POST["author"])) {
-                $error['author'] = 'Add author';
-            } else {
-                 $value["author"] = $this->testInput($_POST["author"]);
-            }
-        /** Verification Category **/
-            if (empty($_POST["selectCat"])) {
-                $error['selectCat'] = 'Select Category';
-            } else {
-                 $value["selectCat"] = $this->testInput($_POST["selectCat"]);
-            }
-        /** Verification Short text **/
-            if (empty($_POST["shortText"])) {
-                $error['shortText'] = 'Add short text';
-            } else {
-                 $value["shortText"] = $this->testInput($_POST["shortText"]);
-            }
-
-
-            if (empty($_POST["content"])) {
-                $error['content'] = 'Add short text';
-            } else {
-                 $value["content"] = $_POST["content"];
-            }
-        
-        /** Verification tag **/
-            if (empty($_POST["tag"])) {
-                $error['tag'] = 'Add tag';
-            } else {
-                 $value["tag"] = $this->testInput($_POST["tag"]);
-            }
-
-            if (!empty($error)) {
+            if (!empty($result['errors'])) {
                 return $this->twig->render(
                     'AdminArticle/adminArticleForm.html.twig',
-                    ['error'=> $error, 'value' => $value]
+                    $result
                 );
             }
 
+            $adminArticleManager = new AdminArticleManager();
 
-            $itemManager = new AdminArticleManager();
-
-            $id = $itemManager->insert($value);
+            $id = $adminArticleManager->insert($result['values']);
             
             header('Location:/adminArticle/index');
         }
 
         return $this->twig->render('AdminArticle/adminArticleForm.html.twig');
     }
+    
+    /**
+     *
+     */
+    private function verifyInputs($inputData)
+    {
+            $value = [];
+            $error = [];
+        /** Verification title **/
+        if (empty($inputData["title"])) {
+            $error['title'] = 'Add title';
+        } else {
+             $value["title"] = $this->testInput($inputData["title"]);
+        }
+        /** Verification date **/
+        if (empty($inputData["date"])) {
+            $error['date'] = 'Add date';
+        } else {
+             $value["date"] = $this->testInput($inputData["date"]);
+        }
+        /** Verification author **/
+        if (empty($inputData["author"])) {
+            $error['author'] = 'Add author';
+        } else {
+             $value["author"] = $this->testInput($inputData["author"]);
+        }
+        /** Verification Category **/
+        if (empty($inputData["selectCat"])) {
+            $error['selectCat'] = 'Select Category';
+        } else {
+             $value["selectCat"] = $this->testInput($inputData["selectCat"]);
+        }
+        /** Verification Short text **/
+        if (empty($inputData["shortText"])) {
+            $error['shortText'] = 'Add short text';
+        } else {
+             $value["shortText"] = $this->testInput($inputData["shortText"]);
+        }
+
+
+        if (empty($inputData["content"])) {
+            $error['content'] = 'Add short text';
+        } else {
+             $value["content"] = $inputData["content"];
+        }
+        
+        /** Verification tag **/
+        if (empty($inputData["tag"])) {
+            $error['tag'] = 'Add tag';
+        } else {
+             $value["tag"] = $this->testInput($inputData["tag"]);
+        }
+            return ['errors'=>$error,'values'=>$value];
+    }
+
+
+
 
     /**
-     * Handle article deletion
+     * Verify imputs from form
      *
-     * @param int $id
+     * @return string of cleaned input
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
      */
-    public function delete(int $id)
+    private function testInput($data)
     {
-        $adminArticleManager = new AdminArticleManager();
-        $adminArticleManager->delete($id);
-        header('Location:/adminArticle/index');
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
     }
 }
