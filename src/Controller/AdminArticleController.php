@@ -102,7 +102,7 @@ class AdminArticleController extends AbstractController
 
             if (!empty($error)) {
                 return $this->twig->render(
-                    'AdminArticle/adminArticle.html.twig',
+                    'AdminArticle/adminArticleForm.html.twig',
                     ['error'=> $error, 'value' => $value]
                 );
             }
@@ -115,6 +115,6 @@ class AdminArticleController extends AbstractController
             header('Location:/adminArticle/index');
         }
 
-        return $this->twig->render('AdminArticle/adminArticle.html.twig');
+        return $this->twig->render('AdminArticle/adminArticleForm.html.twig');
     }
 }
