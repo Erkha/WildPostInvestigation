@@ -1,6 +1,8 @@
-USE wildPost;
+DROP DATABASE IF EXISTS wildPost;
 
-DROP TABLE IF EXISTS articles;
+create database wildPost character set UTF8mb4 collate utf8mb4_bin;
+
+USE wildPost;
 
 CREATE TABLE articles
 (
