@@ -10,19 +10,15 @@ namespace App\Controller;
 
 use App\Model\AdminArticleManager;
 
+/**
+ * Class ItemController
+ *
+ */
 class AdminArticleController extends AbstractController
 {
 
     /**
-     * Display home page
-     *
-     * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
-     */
-    /**
-     * Display item listing
+     * Display article listing for admin
      *
      * @return string
      * @throws \Twig\Error\LoaderError
@@ -47,7 +43,14 @@ class AdminArticleController extends AbstractController
         return $data;
     }
 
-
+    /**
+     * Create a new article
+     *
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
 
     public function add()
     {
@@ -116,5 +119,17 @@ class AdminArticleController extends AbstractController
         }
 
         return $this->twig->render('AdminArticle/adminArticleForm.html.twig');
+    }
+
+    /**
+     * Handle article deletion
+     *
+     * @param int $id
+     */
+    public function delete(int $id)
+    {
+        $adminArticleManager = new AdminArticleManager();
+        $adminArticleManager->delete($id);
+        header('Location:/adminArticle/index');
     }
 }
