@@ -1,28 +1,32 @@
 {% extends 'adminLayout.html.twig' %}
 
 {% block content %}
-	<h2>Liste des articles</h2>
+	<h2 class="mt-2">Liste des articles</h2>
   
 	<table class="table table-striped">
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Auteur</th>
-      <th scope="col">Catégorie</th>
       <th scope="col">Article</th>
+      <th scope="col">Date</th>
+      <th scope="col">Catégorie</th>
+      <th scope="col">Auteur</th>
+      <th scope="col">Publié</th>
+
     </tr>
   </thead>
   <tbody>
   	{% for article in articles %}
       <tr>
-        <th scope="row"><a href="update/{{article.id}}"><i class="fas fa-edit"></i></a> 
-            <a href="show/{{article.id}}"><i class="fas fa-eye"></i>  </a> 
-            <a href="delete/{{article.id}}"><i class="fas fa-trash-alt"></i></a>
+        <th scope="row"><a href="update/{{article.id}}"><i class="fas fa-edit" title="Modifier l'article"></i></a> 
+            <a href="show/{{article.id}}"><i class="fas fa-eye" title="Voir l'article"></i>  </a> 
+            <a href="delete/{{article.id}}"><i class="fas fa-trash-alt" title="Supprimer l'article"></i></a>
           </th>
-        <td>{{article.author}}</td>
+        <td>{{article.shortText|slice(0,50)}}</td>
+        <td>{{article.date}}</td>
         <td>{{article.category}}</td>
-        <td>{{article.content|striptags|slice(0,50)}}</td>
-        <td></td>
+        <td>{{article.author}}</td>
+        <td>{{article.published}}</td>
       </tr>
     {% endfor %}
 

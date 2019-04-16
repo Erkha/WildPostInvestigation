@@ -70,7 +70,10 @@ class AdminArticleController extends AbstractController
             if (!empty($result['errors'])) {
                 return $this->twig->render(
                     'AdminArticle/adminArticleForm.html.twig',
-                    ['errors'=>$errors,'values'=>$values,'categories'=>self::CATEGORIES]
+                    [   'errors'=>$errors,
+                        'values'=>$values,
+                        'categories'=>self::CATEGORIES,
+                        'title2'=>"Modification Article"]
                 );
             }
 
@@ -81,8 +84,12 @@ class AdminArticleController extends AbstractController
             header('Location:/adminArticle/index');
         }
 
-        return $this->twig->render('AdminArticle/adminArticleForm.html.twig', ['categories'=>self::CATEGORIES,
-            'values'=>['date'=>date("Y-m-j")]]);
+        return $this->twig->render(
+            'AdminArticle/adminArticleForm.html.twig',
+            ['categories'=>self::CATEGORIES,
+            'values'=>['date'=>date("Y-m-j")],
+            'title2'=>"NouvelArticle"]
+        );
     }
 
     /**
@@ -106,7 +113,10 @@ class AdminArticleController extends AbstractController
             if (!empty($result['errors'])) {
                 return $this->twig->render(
                     'AdminArticle/adminArticleForm.html.twig',
-                    ['errors'=>$errors,'values'=>$values,'categories'=>self::CATEGORIES]
+                    [   'errors'=>$errors,
+                        'values'=>$values,
+                        'categories'=>self::CATEGORIES,
+                        'title2'=>"NouvelArticle"]
                 );
             }
             $adminArticleManager = new AdminArticleManager();
@@ -118,7 +128,9 @@ class AdminArticleController extends AbstractController
         $article = $articleManager->selectOneById($id);
         return $this->twig->render(
             'AdminArticle/adminArticleForm.html.twig',
-            ['values' => $article,'categories'=>self::CATEGORIES]
+            [   'values' => $article,
+                'categories'=>self::CATEGORIES,
+                'title2'=>"NouvelArticle"]
         );
     }
 

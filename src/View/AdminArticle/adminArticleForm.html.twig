@@ -7,7 +7,8 @@
 {% endblock %}
 {% block content %}
 <div class="container">
-	<a href="index"> Retour à la liste des articles</a>
+	<h2 class="mt-2">{{title2}}</h2>
+	<a href="/adminArticle/index"> Retour à la liste des articles</a>
 	<form action="" method="POST">
 		<input id="id" name="id" type="hidden" value="{{values.id}}">
 		<div class="row justify-content-center">
