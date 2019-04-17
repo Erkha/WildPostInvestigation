@@ -72,6 +72,7 @@ class AdminArticleController extends AbstractController
                     'AdminArticle/adminArticleForm.html.twig',
                     [   'errors'=>$errors,
                         'values'=>$values,
+                        'isValid'=>$this->isValid($errors, $values),
                         'categories'=>self::CATEGORIES,
                         'title2'=>"Modification Article"]
                 );
@@ -109,12 +110,12 @@ class AdminArticleController extends AbstractController
             $result = $this->verifyInputs($_POST);
             $errors = $result['errors'];
             $values = $result['values'];
-
             if (!empty($result['errors'])) {
                 return $this->twig->render(
                     'AdminArticle/adminArticleForm.html.twig',
                     [   'errors'=>$errors,
                         'values'=>$values,
+                        'isValid'=>$this->isValid($errors, $values),
                         'categories'=>self::CATEGORIES,
                         'title2'=>"NouvelArticle"]
                 );
@@ -133,6 +134,24 @@ class AdminArticleController extends AbstractController
                 'title2'=>"NouvelArticle"]
         );
     }
+
+
+    private function isValid($errors, $values)
+    {
+        $isValid=[];
+        
+        foreach ($errors as $key => $value) {
+            $isValid[$key]="is-invalid";
+        }
+        foreach ($values as $key => $value) {
+            if (!array_key_exists($key, $errors)) {
+                $isValid[$key]="is-valid";
+            }
+        }
+        return $isValid;
+    }
+
+
 
     /**
      *
