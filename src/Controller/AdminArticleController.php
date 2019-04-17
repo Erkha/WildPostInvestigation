@@ -88,7 +88,7 @@ class AdminArticleController extends AbstractController
         return $this->twig->render(
             'AdminArticle/adminArticleForm.html.twig',
             ['categories'=>self::CATEGORIES,
-            'values'=>['date'=>date("Y-m-j")],
+            'values'=>['articleDate'=>date("Y-m-j")],
             'title2'=>"NouvelArticle"]
         );
     }
@@ -162,38 +162,43 @@ class AdminArticleController extends AbstractController
             $error = [];
 
         $value['id']=$this->testInput($inputData["id"]);
+        
         /** Verification title **/
         if (empty($inputData["title"])) {
-            $error['title'] = 'Add title';
+            $error['title'] = 'Titre obligatoire';
+        } elseif (strlen($inputData["title"])>100) {
+            $value["title"] = $this->testInput($inputData["title"]);
+            $error['title'] = 'le titre doit faire moins de 100 caractères';
         } else {
-             $value["title"] = $this->testInput($inputData["title"]);
+            $value["title"] = $this->testInput($inputData["title"]);
         }
+
         /** Verification date **/
-        if (empty($inputData["date"])) {
-            $error['date'] = 'Add date';
+        if (empty($inputData["articleDate"])) {
+            $error['articleDate'] = 'Add date';
         } else {
-             $value["date"] = $this->testInput($inputData["date"]);
+             $value["articleDate"] = $this->testInput($inputData["articleDate"]);
         }
         /** Verification author **/
         if (empty($inputData["author"])) {
             $error['author'] = 'Add author';
+        } elseif (strlen($inputData["author"])>50) {
+            $value["author"] = $this->testInput($inputData["author"]);
+            $error['author'] = 'le nom de l\'auteur doit faire moins de 50 caracteres' ;
         } else {
              $value["author"] = $this->testInput($inputData["author"]);
         }
         /** Verification Category **/
         if (empty($inputData["category"])) {
             $error['category'] = 'Select Category';
+        } elseif (strlen($inputData["category"])>50) {
+            $value["category"] = $this->testInput($inputData["category"]);
+            $error['category'] = 'la catégorie doit faire moins de 50 caractères';
         } else {
              $value["category"] = $this->testInput($inputData["category"]);
         }
-        /** Verification Short text **/
-        if (empty($inputData["shortText"])) {
-            $error['shortText'] = 'Add short text';
-        } else {
-             $value["shortText"] = $this->testInput($inputData["shortText"]);
-        }
-
-
+        
+        /** Verification content **/
         if (empty($inputData["content"])) {
             $error['content'] = 'Add short text';
         } else {
@@ -201,11 +206,28 @@ class AdminArticleController extends AbstractController
         }
         
         /** Verification tag **/
-        if (empty($inputData["tag"])) {
-            $error['tag'] = 'Add tag';
+        if (strlen($inputData["tag"])>50) {
+            $value["tag"] = $this->testInput($inputData["tag"]);
+            $error['tag'] = 'les tags doivent faire moins de 50 caractères';
         } else {
              $value["tag"] = $this->testInput($inputData["tag"]);
         }
+
+        /** Verification topArt **/
+        if (isset($inputData["topArt"])) {
+            $value["topArt"] = true;
+        } else {
+             $value["topArt"] = false;
+        }
+
+        /** Verification published **/
+        /** Verification topArt **/
+        if (isset($inputData["published"])) {
+            $value["published"] = true;
+        } else {
+             $value["published"] = false;
+        }
+
             return ['errors'=>$error,'values'=>$value];
     }
 

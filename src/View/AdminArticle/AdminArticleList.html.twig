@@ -12,21 +12,23 @@
       <th scope="col">Catégorie</th>
       <th scope="col">Auteur</th>
       <th scope="col">Publié</th>
+      <th scope="col">Top</th>
 
     </tr>
   </thead>
   <tbody>
   	{% for article in articles %}
       <tr>
-        <th scope="row"><a href="update/{{article.id}}"><i class="fas fa-edit" title="Modifier l'article"></i></a> 
-            <a href="show/{{article.id}}"><i class="fas fa-eye" title="Voir l'article"></i>  </a> 
+        <th  scope="row"><a href="update/{{article.id}}"><i class="fas fa-edit" title="Modifier l'article"></i></a> 
+            <a href="show/{{article.id}}"><i class="fas fa-eye"  title="Voir l'article"></i>  </a> 
             <a href="delete/{{article.id}}"><i class="fas fa-trash-alt" title="Supprimer l'article"></i></a>
           </th>
-        <td>{{article.shortText|slice(0,50)}}</td>
-        <td>{{article.date}}</td>
+        <td>{{article.title|slice(0,50)}}</td>
+        <td>{{article.articleDate}}</td>
         <td>{{article.category}}</td>
         <td>{{article.author}}</td>
-        <td>{{article.published}}</td>
+        <td>{% if article.published == true %} <i class="far fa-check-circle" style="color:green"></i> {% endif %}</td>
+        <td>{% if article.topArt == true %} <i class="fas fa-star" style="color:red"></i> {% endif %}</td>
       </tr>
     {% endfor %}
 

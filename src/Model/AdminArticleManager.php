@@ -36,15 +36,17 @@ class AdminArticleManager extends AbstractManager
     {
         // prepared request
         $statement = $this->pdo->prepare("INSERT INTO $this->table 
-            (title, `date`, author, category, shortText, tag, content) 
-            VALUES (:title, :udate, :author, :category, :shortText, :tag, :content)");
+            (title, articleDate, author, category, tag, content,topArt, published) 
+            VALUES (:title, :articleDate, :author, :category,
+                    :tag, :content, :topArt, :published)");
         $statement->bindValue('title', $values['title'], \PDO::PARAM_STR);
-        $statement->bindValue('udate', $values['date'], \PDO::PARAM_STR);
+        $statement->bindValue('articleDate', $values['articleDate'], \PDO::PARAM_STR);
         $statement->bindValue('author', $values['author'], \PDO::PARAM_STR);
         $statement->bindValue('category', $values['category'], \PDO::PARAM_STR);
-        $statement->bindValue('shortText', $values['shortText'], \PDO::PARAM_STR);
         $statement->bindValue('tag', $values['tag'], \PDO::PARAM_STR);
         $statement->bindValue('content', $values['content'], \PDO::PARAM_STR);
+        $statement->bindValue('topArt', $values['topArt'], \PDO::PARAM_BOOL);
+        $statement->bindValue('published', $values['published'], \PDO::PARAM_BOOL);
 
         if ($statement->execute()) {
             return (int)$this->pdo->lastInsertId();
@@ -72,20 +74,22 @@ class AdminArticleManager extends AbstractManager
         // prepared request
         $statement = $this->pdo->prepare("UPDATE $this->table 
             SET title = :title,
-                `date` = :udate,
+                articleDate = :articleDate,
                 author = :author,
                 category = :category,
-                shortText = :shortText,
                 tag = :tag,
+                topArt = :topArt,
+                published = :published,
                 content = :content WHERE id=:id");
         $statement->bindValue(':id', $values['id'], \PDO::PARAM_INT);
         $statement->bindValue('title', $values['title'], \PDO::PARAM_STR);
-        $statement->bindValue('udate', $values['date'], \PDO::PARAM_STR);
+        $statement->bindValue('articleDate', $values['articleDate'], \PDO::PARAM_STR);
         $statement->bindValue('author', $values['author'], \PDO::PARAM_STR);
         $statement->bindValue('category', $values['category'], \PDO::PARAM_STR);
-        $statement->bindValue('shortText', $values['shortText'], \PDO::PARAM_STR);
         $statement->bindValue('tag', $values['tag'], \PDO::PARAM_STR);
         $statement->bindValue('content', $values['content'], \PDO::PARAM_STR);
+        $statement->bindValue('topArt', $values['topArt'], \PDO::PARAM_BOOL);
+        $statement->bindValue('published', $values['published'], \PDO::PARAM_BOOL);
 
         return $statement->execute();
     }

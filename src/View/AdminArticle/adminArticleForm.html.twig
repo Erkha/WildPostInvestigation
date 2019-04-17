@@ -19,10 +19,10 @@
 
 		<div class="row">
 			<div class="col-md-6"> 
-		    <div class="form-group row"> <!-- date  -->
-		      <label for="date" class="col-4 text-right my-auto">Date</label>
-		      <input type="date" class="form-control col-8 {{isValid.date}}" name="date" id="date" value="{{ values.date }}" required>
-		      <div class="invalid-feedback">{{ errors.date }}</div>
+		    <div class="form-group row"> <!-- articleDate  -->
+		      <label for="articleDate" class="col-4 text-right my-auto">Date</label>
+		      <input type="date" class="form-control col-8 {{isValid.articleDate}}" name="articleDate" id="articleDate" value="{{ values.articleDate }}" required>
+		      <div class="invalid-feedback">{{ errors.articleDate }}</div>
 		    </div>
 		    <div class="form-group row"><!-- auteur  -->
 		      <label for="author" class="col-4 text-right my-auto">Auteur</label>
@@ -66,11 +66,11 @@
 		<div class="form-row ">
 			<div class="col-2"></div>
     		<div class="form-check col-4"><!-- top article  -->
-	        <input class="form-check-input " type="checkbox" value="" name="topArt" id="topArt">
+	        <input class="form-check-input " type="checkbox"  {% if values.topArt == true %} checked="checked" {% endif %} name="topArt" id="topArt">
 	        <label class="form-check-label" for="topArt">Top article</label>
     		</div>
     		<div class="form-check col-4"><!-- Publié  -->
-	        <input class="form-check-input" type="checkbox" value="" name="published" id="published">
+	        <input class="form-check-input" type="checkbox"  {% if values.published == true %} checked="checked" {% endif %} name="published" id="published">
 	        <label class="form-check-label" for="published">Publié</label>
     		</div>
     </div>
