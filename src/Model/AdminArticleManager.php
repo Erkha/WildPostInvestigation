@@ -39,9 +39,9 @@ class AdminArticleManager extends AbstractManager
     {
         // prepared request
         $statement = $this->pdo->prepare("INSERT INTO $this->table 
-            (title, articleDate, author, category, tag, content,topArt, published) 
+            (title, articleDate, author, category, tag, content,topArt, published, imageName) 
             VALUES (:title, :articleDate, :author, :category,
-                    :tag, :content, :topArt, :published)");
+                    :tag, :content, :topArt, :published, :imageName)");
         $statement->bindValue('title', $values['title'], \PDO::PARAM_STR);
         $statement->bindValue('articleDate', $values['articleDate'], \PDO::PARAM_STR);
         $statement->bindValue('author', $values['author'], \PDO::PARAM_STR);
@@ -50,6 +50,7 @@ class AdminArticleManager extends AbstractManager
         $statement->bindValue('content', $values['content'], \PDO::PARAM_STR);
         $statement->bindValue('topArt', $values['topArt'], \PDO::PARAM_BOOL);
         $statement->bindValue('published', $values['published'], \PDO::PARAM_BOOL);
+        $statement->bindValue('imageName', $values['imageName'], \PDO::PARAM_STR);
 
         if ($statement->execute()) {
             return (int)$this->pdo->lastInsertId();

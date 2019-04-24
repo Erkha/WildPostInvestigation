@@ -15,5 +15,6 @@ content text NOT NULL,
 tag VARCHAR(30),
 topArt BOOL NOT NULL,
 published BOOL NOT NULL,
+imageName VARCHAR(50),
 upFile varchar(50)
 );

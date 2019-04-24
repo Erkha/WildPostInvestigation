@@ -14,7 +14,7 @@
 	<a href="/adminArticle/index"> Retour à la liste des articles</a>
 
 
-	<form action="" method="POST" class="mt-4">
+	<form action="" method="POST" class="mt-4" enctype="multipart/form-data">
 		<input id="id" name="id" type="hidden" value="{{values.id}}">
 
 		<div class="row">
@@ -41,9 +41,14 @@
 			</div>
 			<div class="col-md-6">
 		    <div class="custom-file"> <!-- image  -->
-					<input type="file" class="custom-file-input {{isValid.upFile}}" name="upFile" id="upFile">
-					<label class="custom-file-label col-12	" for="upFile">Upload image</label>
+					<input type="file" class="custom-file-input {{isValid.upFile}}" name="fileU" id="fileU">
+					<label class="custom-file-label col-12	" for="fileU">Upload image</label>
 					<div class="invalid-feedback">{{ errors.upFile }}</div>
+				</div>
+				<div class="p-2">
+					{% if values.imageName is defined %}
+						<img src="/{{ values.imageName }}" class= "img-fluid">
+					{% endif %}
 				</div>
 			</div>
 		</div>
