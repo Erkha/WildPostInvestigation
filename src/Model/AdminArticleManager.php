@@ -85,6 +85,7 @@ class AdminArticleManager extends AbstractManager
                 tag = :tag,
                 topArt = :topArt,
                 published = :published,
+                imageName = :imageName,
                 content = :content WHERE id=:id");
         $statement->bindValue(':id', $values['id'], \PDO::PARAM_INT);
         $statement->bindValue('title', $values['title'], \PDO::PARAM_STR);
@@ -95,6 +96,7 @@ class AdminArticleManager extends AbstractManager
         $statement->bindValue('content', $values['content'], \PDO::PARAM_STR);
         $statement->bindValue('topArt', $values['topArt'], \PDO::PARAM_BOOL);
         $statement->bindValue('published', $values['published'], \PDO::PARAM_BOOL);
+        $statement->bindValue('imageName', $values['imageName'], \PDO::PARAM_STR);
 
         return $statement->execute();
     }
