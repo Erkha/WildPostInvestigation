@@ -1,17 +1,84 @@
-DROP DATABASE IF EXISTS wildPost;
-
-create database wildPost character set UTF8mb4 collate utf8mb4_bin;
+drop database wildPost;
+create database wildPost;
 
 USE wildPost;
 
-CREATE TABLE articles
-(
-id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-title VARCHAR(100) NOT NULL,
-date DATE NOT NULL,
-author VARCHAR(50) NOT NULL,
-category VARCHAR(50) NOT NULL,
-shortText VARCHAR(150) NOT NULL,
-content text NOT NULL,
-tag VARCHAR(30) NULL
-);
+DROP TABLE IF EXISTS articles;
+CREATE TABLE `articles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(50) NOT NULL,
+  `longText` text NOT NULL,
+  `author_id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `priority` int(11) DEFAULT NULL,
+  `category_id` int(11) NOT NULL,
+  `image_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_articles_categories_idx` (`category_id`),
+  KEY `fk_articles_authors_idx` (`author_id`),
+  KEY `fk_articles_images_idx` (`image_id`),
+  CONSTRAINT `fk_articles_authors` FOREIGN KEY (`author_id`) REFERENCES `authors` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_articles_categories` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_articles_images` FOREIGN KEY (`image_id`) REFERENCES `imagesArticle` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+DROP TABLE IF EXISTS 'authors';
+CREATE TABLE `authors` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `lastname` varchar(45) NOT NULL,
+  `firstname` varchar(45) NOT NULL,
+  `username` varchar(128) NOT NULL,
+  `password` varchar(128) NOT NULL,
+  `valid` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS 'categories';
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS 'fluxlive';
+CREATE TABLE `fluxLive` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date_heure` datetime NOT NULL,
+  `text` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS 'tags';
+CREATE TABLE `tags` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `text` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS 'tagsArticle';
+CREATE TABLE `tagsArticle` (
+  `article_id` int(11) NOT NULL,
+  `tag_id` int(11) NOT NULL,
+  PRIMARY KEY (`article_id`,`tag_id`),
+  KEY `fk_tagsArticle_tags_idx` (`tag_id`),
+  CONSTRAINT `fk_tagsArticle_articles` FOREIGN KEY (`article_id`) REFERENCES `articles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tagsArticle_tags` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS 'imagesArticle';
+CREATE TABLE `imagesArticle` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `article_id` int(11) NOT NULL,
+  `repertory_name` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_imagesArticle_Articles_idx` (`article_id`),
+  CONSTRAINT `fk_imagesArticle_Articles` FOREIGN KEY (`article_id`) REFERENCES `articles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+

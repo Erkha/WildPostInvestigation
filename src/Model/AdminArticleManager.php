@@ -29,64 +29,25 @@ class AdminArticleManager extends AbstractManager
 
 
     /**
-     * @param array $values
+     * @param array $value
      * @return int
      */
-    public function insert(array $values): int
+    public function insert(array $value): int
     {
         // prepared request
         $statement = $this->pdo->prepare("INSERT INTO $this->table 
             (title, `date`, author, category, shortText, tag, content) 
             VALUES (:title, :udate, :author, :category, :shortText, :tag, :content)");
-        $statement->bindValue('title', $values['title'], \PDO::PARAM_STR);
-        $statement->bindValue('udate', $values['date'], \PDO::PARAM_STR);
-        $statement->bindValue('author', $values['author'], \PDO::PARAM_STR);
-        $statement->bindValue('category', $values['category'], \PDO::PARAM_STR);
-        $statement->bindValue('shortText', $values['shortText'], \PDO::PARAM_STR);
-        $statement->bindValue('tag', $values['tag'], \PDO::PARAM_STR);
-        $statement->bindValue('content', $values['content'], \PDO::PARAM_STR);
+        $statement->bindValue('title', $value['title'], \PDO::PARAM_STR);
+        $statement->bindValue('udate', $value['date'], \PDO::PARAM_STR);
+        $statement->bindValue('author', $value['author'], \PDO::PARAM_STR);
+        $statement->bindValue('category', $value['selectCat'], \PDO::PARAM_STR);
+        $statement->bindValue('shortText', $value['shortText'], \PDO::PARAM_STR);
+        $statement->bindValue('tag', $value['tag'], \PDO::PARAM_STR);
+        $statement->bindValue('content', $value['content'], \PDO::PARAM_STR);
 
         if ($statement->execute()) {
             return (int)$this->pdo->lastInsertId();
         }
-    }
-
-        /**
-     * @param int $id
-     */
-    public function delete(int $id): void
-    {
-        // prepared request
-        $statement = $this->pdo->prepare("DELETE FROM $this->table WHERE id=:id");
-        $statement->bindValue('id', $id, \PDO::PARAM_INT);
-        $statement->execute();
-    }
-
-        /**
-     * @param array $values
-     * @return bool
-     */
-    public function edit(array $values):bool
-    {
-
-        // prepared request
-        $statement = $this->pdo->prepare("UPDATE $this->table 
-            SET title = :title,
-                `date` = :udate,
-                author = :author,
-                category = :category,
-                shortText = :shortText,
-                tag = :tag,
-                content = :content WHERE id=:id");
-        $statement->bindValue(':id', $values['id'], \PDO::PARAM_INT);
-        $statement->bindValue('title', $values['title'], \PDO::PARAM_STR);
-        $statement->bindValue('udate', $values['date'], \PDO::PARAM_STR);
-        $statement->bindValue('author', $values['author'], \PDO::PARAM_STR);
-        $statement->bindValue('category', $values['category'], \PDO::PARAM_STR);
-        $statement->bindValue('shortText', $values['shortText'], \PDO::PARAM_STR);
-        $statement->bindValue('tag', $values['tag'], \PDO::PARAM_STR);
-        $statement->bindValue('content', $values['content'], \PDO::PARAM_STR);
-
-        return $statement->execute();
     }
 }

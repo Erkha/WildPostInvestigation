@@ -1,28 +1,25 @@
 {% extends 'adminLayout.html.twig' %}
 {% block javascript %}
     <script src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey=w5r8f7bjk1wzj1l99fkqvxpv74xcpg35e0wqwzj2fu99magk"></script>
-    <script>  tinymce.init({	entity_encoding : "raw",
-															encoding: "UTF-8",
-    													selector: '#content',}); </script>
+    <script>  tinymce.init({selector: '#content',}); </script>
 {% endblock %}
 {% block content %}
 <div class="container">
 	<a href="index"> Retour à la liste des articles</a>
 	<form action="" method="POST">
-		<input id="id" name="id" type="hidden" value="{{values.id}}">
 		<div class="row justify-content-center">
 			<div class="form-row col-4">
 			    <div class="form-group">
 			      	<label for="inputText">Name article</label>
-			      	<input type="text" class="form-control" name="title" id="title" value="{{ values.title }}" required>
-					<label class="form-check-label">{{ errors.title }}</label>
+			      	<input type="text" class="form-control" name="title" id="title" required>
+					<label class="form-check-label">{{ error.title }}</label>
 			    </div>
 			</div>	
 			<div class="form-row col-4">
 			    <div class="form-group">
 			      <label for="inputText">Date</label>
-			      <input type="date" class="form-control" name="date" id="date" value="{{ values.date }}" required>
-			      <label class="form-check-label">{{ errors.date }}</label>
+			      <input type="date" class="form-control" name="date" id="date" required>
+			      <label class="form-check-label">{{ error.date }}</label>
 			    </div>
 			</div>
 	  	</div>
@@ -30,48 +27,49 @@
 			<div class="form-row col-4">
 			    <div class="form-group">
 			      <label for="inputText">Author</label>
-			      <input type="text" class="form-control" name="author" id="author" value="{{ values.author }}" required>
-			      <label class="form-check-label">{{ errors.author }}</label>
+			      <input type="text" class="form-control" name="author" id="author" required>
+			      <label class="form-check-label">{{ error.author }}</label>
 			    </div>
 			</div>
 			<div class="form-row col-4">
 			{# Todo: foreach #}
 				<label for="inputText">Category</label>
-				<select name="category" id="category" class="custom-select col-11" required>
-					{% for category in categories %}
-					 <option value="{{category.id}}" {% if category.id == values.category %} selected {% endif %}>{{category.name}}</option>
-    			{% endfor %}
+				<select name="selectCat" id="selectCat" class="custom-select col-11" required>
+					 <label class="form-check-label">{{ error.selectCat }}</label> 
+					 <option selected="selected">Choose</option>
+					 <option value="1">Sport</option>
+					 <option value="2">Politique</option>
+					 <option value="3">Autres</option>
 				</select>
-				<label class="form-check-label">{{ errors.category }}</label> 
 			</div>	   
 		</div>
 		<div class="row justify-content-center">
 			<div class="form-row col-4">
 			    <div class="form-group">
 			      <label for="inputText">Short text</label>
-			      <input type="text" class="form-control" name="shortText" id="shortText" value="{{ values.shortText }}"required>
-			      <label class="form-check-label">{{ errors.shortText }}</label>
+			      <input type="text" class="form-control" name="shortText" id="shortText" required>
+			      <label class="form-check-label">{{ error.shortText }}</label>
 			    </div>
 			</div>
 			<div class="form-row col-4">
 		    	<div class="form-group col-5">
 		      		<label for="inputText">Tags</label>
-		      		<input type="text" class="form-control" name="tag" id="tag" value="{{ values.tag }}" required>
-		      		<label class="form-check-label">{{ errors.tag }}</label>
+		      		<input type="text" class="form-control" name="tag" id="tag" required>
+		      		<label class="form-check-label">{{ error.tag }}</label>
 		    	</div>				
 	    	</div>			
 		</div>	
 		<div class="row justify-content-center">
 			<div class="col-8">
 			    <label for="content">Long text</label>
-			    <textarea class="form-control" id="content" name="content" placeholder="article description">{{ values.content }}</textarea>
+			    <textarea class="form-control" id="content" placeholder="article description"></textarea>
 			</div>    
 		</div>			
 		<div class="row justify-content-center">
 		    <div class="custom-file col-4">
 				<input type="file" class="custom-file-input" name="upload" id="upload">
 				<label class="custom-file-label col-6" for="customFile">Upload image</label>
-				<label class="form-check-label">{{ errors.upload }}</label>
+				<label class="form-check-label">{{ error.upload }}</label>
 			</div>
 			<div class="form-group col-4">
 	    		<div class="form-check">
@@ -81,7 +79,7 @@
 	  		</div>
 		</div>	
 		<div class="row justify-content-center">
-				<button type="submit" class="btn btn-dark btn-sm">Submit</button>
+				<button type="submit" class="btn btn-primary btn-sm">Submit</button>
 	  	</div>		
 	</form>
 </div>
