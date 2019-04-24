@@ -71,13 +71,16 @@ class AdminArticleController extends AbstractController
             $errors = $result['errors'];
             $values = $result['values'];
 
-            if(!empty($_FILES)){
-                if($_FILES['fileU']['size']<1000000 ){
+            if (!empty($_FILES)) {
+                if ($_FILES['fileU']['size']<1000000) {
                     $uploadDir = 'assets/images/';
-                    $extension = explode('/',$_FILES['fileU']['type']);
-                    $values['imageName'] = $uploadDir . "image".microtime(); 
-                    $values['imageName']=str_replace(".","",
-                        str_replace(" ", "", $values['imageName'])).".".$extension[1];
+                    $extension = explode('/', $_FILES['fileU']['type']);
+                    $values['imageName'] = $uploadDir . "image".microtime();
+                    $values['imageName']=str_replace(
+                        ".",
+                        "",
+                        str_replace(" ", "", $values['imageName'])
+                    ).".".$extension[1];
                     move_uploaded_file($_FILES['fileU']['tmp_name'], $values['imageName']);
                 }
             }
