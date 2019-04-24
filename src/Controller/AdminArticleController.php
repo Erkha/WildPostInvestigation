@@ -35,7 +35,11 @@ class AdminArticleController extends AbstractController
         $articleManager = new AdminArticleManager();
         $articles = $articleManager->selectAll();
 
-        return $this->twig->render('AdminArticle/AdminArticleList.html.twig', ['articles' => $articles]);
+        return $this->twig->render(
+            'AdminArticle/AdminArticleList.html.twig',
+            ['articles' => $articles,
+            'categories'=>self::CATEGORIES]
+        );
     }
 
     /**
@@ -151,8 +155,6 @@ class AdminArticleController extends AbstractController
         return $isValid;
     }
 
-
-
     /**
      *
      */
@@ -216,6 +218,8 @@ class AdminArticleController extends AbstractController
         /** Verification topArt **/
         if (isset($inputData["topArt"])) {
             $value["topArt"] = true;
+            $adminArticleManager = new AdminArticleManager();
+            $adminArticleManager->topArtEmpty();
         } else {
              $value["topArt"] = false;
         }
@@ -230,9 +234,6 @@ class AdminArticleController extends AbstractController
 
             return ['errors'=>$error,'values'=>$value];
     }
-
-
-
 
     /**
      * Verify imputs from form

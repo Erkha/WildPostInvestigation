@@ -7,6 +7,9 @@
  * PHP version 7
  */
 
+
+//TODO :add a method of select all sorted by top, more recent
+
 namespace App\Model;
 
 /**
@@ -64,9 +67,10 @@ class AdminArticleManager extends AbstractManager
         $statement->execute();
     }
 
-        /**
-     * @param array $values
-     * @return bool
+    /**
+     * [update an article in DB]
+     * @param  array  $values [elements of article]
+     * @return bool       [description]
      */
     public function edit(array $values):bool
     {
@@ -91,6 +95,17 @@ class AdminArticleManager extends AbstractManager
         $statement->bindValue('topArt', $values['topArt'], \PDO::PARAM_BOOL);
         $statement->bindValue('published', $values['published'], \PDO::PARAM_BOOL);
 
+        return $statement->execute();
+    }
+
+    /**
+     * [topArtEmpty description]
+     * @return bool [description]
+     */
+    public function topArtEmpty():bool
+    {
+        $statement = $this->pdo->prepare("UPDATE $this->table 
+            SET topArt = false WHERE topArt = true");
         return $statement->execute();
     }
 }
