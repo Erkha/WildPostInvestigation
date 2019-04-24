@@ -18,3 +18,13 @@ published BOOL NOT NULL,
 imageName VARCHAR(50),
 upFile varchar(50)
 );
+
+CREATE TABLE category
+(
+id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+name VARCHAR(50) NOT NULL
+);
+
+insert into category (name) values ('Sport');
+insert into category (name) values ('Meteo');
+insert into category (name) values ('Politique');

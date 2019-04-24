@@ -1,0 +1,29 @@
+{% extends 'adminLayout.html.twig' %}
+
+{% block content %}
+  <div class="container w-50">
+  	<h2>Category</h2>
+    	<table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Category</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        	{% for category in categoryAll %}
+            <tr>
+              <th scope="row"><a href="edit/{{category.id}}"><i class="fas fa-edit"></i></a> 
+                  <a href="delete/{{category.id}}"><i class="fas fa-trash-alt"></i></a>
+                </th>
+              <td>{{ category.name }}</td>
+            </tr>
+
+          {% endfor %}
+
+        </tbody>
+      </table>
+  <a href="/category/add"><button class="btn btn-dark">New category</button></a>
+</div>
+{% endblock %}
