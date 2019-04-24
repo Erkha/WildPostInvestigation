@@ -60,13 +60,13 @@ class CategoryManager extends AbstractManager
 //      * @param array $item
 //      * @return bool
 //      */
-    public function update(array $item):bool
+    public function update(array $category):bool
     {
 
         // prepared request
-        $statement = $this->pdo->prepare("UPDATE $this->table SET `title` = :title WHERE id=:id");
-        $statement->bindValue('id', $item['id'], \PDO::PARAM_INT);
-        $statement->bindValue('title', $item['title'], \PDO::PARAM_STR);
+        $statement = $this->pdo->prepare("UPDATE $this->table SET `name` = :name WHERE id=:id");
+        $statement->bindValue('id', $category['id'], \PDO::PARAM_INT);
+        $statement->bindValue('name', $category['name'], \PDO::PARAM_STR);
 
         return $statement->execute();
     }
