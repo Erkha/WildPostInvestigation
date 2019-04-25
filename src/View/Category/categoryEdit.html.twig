@@ -1,0 +1,12 @@
+{% extends 'adminLayout.html.twig' %}
+{% block content %}
+<div class="container w-50">
+	<form class="text-center border border-light p-5" method="post">
+	    <p class="h4 mb-4">Edit Category</p>
+	    <!-- Name -->
+    	<input type="text" id="defaultSubscriptionFormPassword" value="{{ category.name }}" class="form-control mb-4" name="name">
+		<button class="btn btn-dark" type="submit">Edit category</button>
+	</form>
+</div>
+<!-- Default form subscription -->
+{% endblock %}

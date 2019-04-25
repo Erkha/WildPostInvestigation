@@ -1,86 +1,87 @@
 {% extends 'adminLayout.html.twig' %}
 {% block javascript %}
     <script src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey=w5r8f7bjk1wzj1l99fkqvxpv74xcpg35e0wqwzj2fu99magk"></script>
-    <script>  tinymce.init({selector: '#content',}); </script>
+    <script>  tinymce.init({entity_encoding : "raw",
+														encoding: "UTF-8",
+    												selector: '#content',
+    												resize: true,
+    												plugins: "link",
+    												plugins: "autoresize"}); </script>
 {% endblock %}
 {% block content %}
 <div class="container">
-	<a href="index"> Retour à la liste des articles</a>
-	<form action="" method="POST">
-		<div class="row justify-content-center">
-			<div class="form-row col-4">
-			    <div class="form-group">
-			      	<label for="inputText">Name article</label>
-			      	<input type="text" class="form-control" name="title" id="title" required>
-					<label class="form-check-label">{{ error.title }}</label>
-			    </div>
-			</div>	
-			<div class="form-row col-4">
-			    <div class="form-group">
-			      <label for="inputText">Date</label>
-			      <input type="date" class="form-control" name="date" id="date" required>
-			      <label class="form-check-label">{{ error.date }}</label>
-			    </div>
+	<h2 class="mt-2">{{title2}}</h2>
+	<a href="/adminArticle/index"> Retour à la liste des articles</a>
+
+
+	<form action="" method="POST" class="mt-4" enctype="multipart/form-data">
+		<input id="id" name="id" type="hidden" value="{{values.id}}">
+
+		<div class="row">
+			<div class="col-md-6"> 
+		    <div class="form-group row"> <!-- articleDate  -->
+		      <label for="articleDate" class="col-4 text-right my-auto">Date</label>
+		      <input type="date" class="form-control col-8 {{isValid.articleDate}}" name="articleDate" id="articleDate" value="{{ values.articleDate }}" required>
+		      <div class="invalid-feedback">{{ errors.articleDate }}</div>
+		    </div>
+		    <div class="form-group row"><!-- auteur  -->
+		      <label for="author" class="col-4 text-right my-auto">Auteur</label>
+		      <input type="text" class="form-control col-8 {{isValid.author}}" name="author" id="author" value="{{ values.author }}" required>
+		      <div class="invalid-feedback">{{ errors.author }}</div>
+		    </div>
+				<div class="form-group row"> <!-- categorie  -->
+					<label for="category" class="col-4 text-right my-auto">Categorie</label>
+					<select name="category" id="category" class="custom-select col-8 {{isValid.category}}" required>
+						{% for category in categories %}
+							<option value="{{category.id}}" {% if category.id == values.category %} selected {% endif %}>{{category.name}}</option>
+						{% endfor %}
+					</select>
+					<div class="invalid-feedback">{{ errors.category }}</div>
+				</div>
 			</div>
-	  	</div>
-		<div class="row justify-content-center">
-			<div class="form-row col-4">
-			    <div class="form-group">
-			      <label for="inputText">Author</label>
-			      <input type="text" class="form-control" name="author" id="author" required>
-			      <label class="form-check-label">{{ error.author }}</label>
-			    </div>
+			<div class="col-md-6">
+		    <div class="custom-file"> <!-- image  -->
+					<input type="file" class="custom-file-input {{isValid.upFile}}" name="fileU" id="fileU">
+					<label class="custom-file-label col-12	" for="fileU">Upload image</label>
+					<div class="invalid-feedback">{{ errors.upFile }}</div>
+				</div>
+				<div class="p-2">
+					{% if values.imageName is defined %}
+						<img src="/{{ values.imageName }}" class= "img-fluid">
+					{% endif %}
+				</div>
 			</div>
-			<div class="form-row col-4">
-			{# Todo: foreach #}
-				<label for="inputText">Category</label>
-				<select name="selectCat" id="selectCat" class="custom-select col-11" required>
-					 <label class="form-check-label">{{ error.selectCat }}</label> 
-					 <option selected="selected">Choose</option>
-					 <option value="1">Sport</option>
-					 <option value="2">Politique</option>
-					 <option value="3">Autres</option>
-				</select>
-			</div>	   
 		</div>
+			
+    <div class="form-group row mr-0"> <!--  title -->
+      <label for="title" class="col-2 text-right my-auto">Titre</label> 
+      <input type="text" class="form-control col-10 {{isValid.title}}" name="title" id="title" value="{{ values.title }}"required>
+      <div class="invalid-feedback">{{ errors.title }}</div>
+    </div>
+  	<div class="form-group row mr-0"><!-- tags en attendant de les gérer dans  le texte  -->
+  		<label for="tag" class="col-2 text-right my-auto">Tags</label>
+  		<input type="text" class="form-control col-10 {{isValid.tag}}" name="tag" id="tag" value="{{ values.tag }}" >
+  		<div class="invalid-feedback text-center">{{ errors.tag }}</div>
+  	</div>				
+
+		<div class="form-group"><!-- tiny MCE  -->
+	    	<textarea class="form-control {{isValid.content}}" id="content" name="content" placeholder="article description">{{ values.content }}</textarea>
+	    	<div class="invalid-feedback">{{ errors.content }}</div>
+	  </div>
+		<div class="form-row ">
+			<div class="col-2"></div>
+    		<div class="form-check col-4"><!-- top article  -->
+	        <input class="form-check-input " type="checkbox"  {% if values.topArt == true %} checked="checked" {% endif %} name="topArt" id="topArt">
+	        <label class="form-check-label" for="topArt">Top article</label>
+    		</div>
+    		<div class="form-check col-4"><!-- Publié  -->
+	        <input class="form-check-input" type="checkbox"  {% if values.published == true %} checked="checked" {% endif %} name="published" id="published">
+	        <label class="form-check-label" for="published">Publié</label>
+    		</div>
+    </div>
 		<div class="row justify-content-center">
-			<div class="form-row col-4">
-			    <div class="form-group">
-			      <label for="inputText">Short text</label>
-			      <input type="text" class="form-control" name="shortText" id="shortText" required>
-			      <label class="form-check-label">{{ error.shortText }}</label>
-			    </div>
-			</div>
-			<div class="form-row col-4">
-		    	<div class="form-group col-5">
-		      		<label for="inputText">Tags</label>
-		      		<input type="text" class="form-control" name="tag" id="tag" required>
-		      		<label class="form-check-label">{{ error.tag }}</label>
-		    	</div>				
-	    	</div>			
-		</div>	
-		<div class="row justify-content-center">
-			<div class="col-8">
-			    <label for="content">Long text</label>
-			    <textarea class="form-control" id="content" placeholder="article description"></textarea>
-			</div>    
-		</div>			
-		<div class="row justify-content-center">
-		    <div class="custom-file col-4">
-				<input type="file" class="custom-file-input" name="upload" id="upload">
-				<label class="custom-file-label col-6" for="customFile">Upload image</label>
-				<label class="form-check-label">{{ error.upload }}</label>
-			</div>
-			<div class="form-group col-4">
-	    		<div class="form-check">
-			        <input class="form-check-input" type="checkbox" value="" name="topArt" id="topArt">
-			        <label class="form-check-label" for="invalidCheck2">Top article</label>
-	    		</div>
-	  		</div>
-		</div>	
-		<div class="row justify-content-center">
-				<button type="submit" class="btn btn-primary btn-sm">Submit</button>
-	  	</div>		
+			<button type="submit" class="btn btn-dark btn-sm">Enregistrer</button>
+  	</div>		
 	</form>
 </div>
 {% endblock %}
