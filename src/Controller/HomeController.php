@@ -32,7 +32,7 @@ class HomeController extends AbstractController
     public function article($id)
     {
         $articleManager = new AdminArticleManager();
-        $article = $articleManager->selectOneById($id);
+        $article = $articleManager->selectArticleByIdwithCatName($id);
         return $this->twig->render('Home/article.html.twig', [
             'article'=>$article]);
     }

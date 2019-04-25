@@ -7,9 +7,9 @@
 
 {% block content %}
 
-	<div class="container row mx-auto">
-		<div class = "articleHeader pt-4">
-			<p class = "category"> {{article.category}}  </p>
+	<div class="container  mx-auto row">
+		<div class = "articleHeader pt-4 col-12">
+			<p class = "category"> {{article.catName}}  </p>
 			<h3 class="articleTitle">{{article.title}}</h3>
 			<p class ="details"> Par {{article.author}} Publié le {{article.articleDate|date("d/m/Y")}}</p>
 		</div>
