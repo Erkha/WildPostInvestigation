@@ -66,14 +66,15 @@ class CategoryController extends AbstractController
     public function edit(int $id): string
     {
         $categoryManager = new CategoryManager();
-        $item = $categoryManager->selectOneById($id);
+        $category = $categoryManager->selectOneById($id);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $item['title'] = $_POST['title'];
-            $categoryManager->update($item);
+            $category['name'] = $_POST['name'];
+            $categoryManager->update($category);
+            header('Location: /category/show');
         }
 
-        return $this->twig->render('Item/edit.html.twig', ['item' => $item]);
+        return $this->twig->render('Category/categoryEdit.html.twig', ['category' => $category]);
     }
 
 
@@ -95,7 +96,7 @@ class CategoryController extends AbstractController
             $addCat = ['addCat' => $_POST['addCat']];
     
             $idCat = $categoryManager -> insert($addCat);
-            header('Location:/category/show/');
+            header('Location:/category/show');
         }
 
         return $this->twig->render('Category/category_add.html.twig');

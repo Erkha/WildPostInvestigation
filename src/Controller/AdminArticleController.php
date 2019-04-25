@@ -35,7 +35,11 @@ class AdminArticleController extends AbstractController
         $articleManager = new AdminArticleManager();
         $articles = $articleManager->selectAll();
 
-        return $this->twig->render('AdminArticle/AdminArticleList.html.twig', ['articles' => $articles]);
+        return $this->twig->render(
+            'AdminArticle/AdminArticleList.html.twig',
+            ['articles' => $articles,
+            'categories'=>self::CATEGORIES]
+        );
     }
 
     /**
@@ -67,10 +71,28 @@ class AdminArticleController extends AbstractController
             $errors = $result['errors'];
             $values = $result['values'];
 
+            if (!empty($_FILES)) {
+                if ($_FILES['fileU']['size']<1000000) {
+                    $uploadDir = 'assets/images/';
+                    $extension = explode('/', $_FILES['fileU']['type']);
+                    $values['imageName'] = $uploadDir . "image".microtime();
+                    $values['imageName']=str_replace(
+                        ".",
+                        "",
+                        str_replace(" ", "", $values['imageName'])
+                    ).".".$extension[1];
+                    move_uploaded_file($_FILES['fileU']['tmp_name'], $values['imageName']);
+                }
+            }
+
             if (!empty($result['errors'])) {
                 return $this->twig->render(
                     'AdminArticle/adminArticleForm.html.twig',
-                    ['errors'=>$errors,'values'=>$values,'categories'=>self::CATEGORIES]
+                    [   'errors'=>$errors,
+                        'values'=>$values,
+                        'isValid'=>$this->isValid($errors, $values),
+                        'categories'=>self::CATEGORIES,
+                        'title2'=>"Nouvel Article"]
                 );
             }
 
@@ -81,8 +103,12 @@ class AdminArticleController extends AbstractController
             header('Location:/adminArticle/index');
         }
 
-        return $this->twig->render('AdminArticle/adminArticleForm.html.twig', ['categories'=>self::CATEGORIES,
-            'values'=>['date'=>date("Y-m-j")]]);
+        return $this->twig->render(
+            'AdminArticle/adminArticleForm.html.twig',
+            ['categories'=>self::CATEGORIES,
+            'values'=>['articleDate'=>date("Y-m-j")],
+            'title2'=>"NouvelArticle"]
+        );
     }
 
     /**
@@ -102,11 +128,27 @@ class AdminArticleController extends AbstractController
             $result = $this->verifyInputs($_POST);
             $errors = $result['errors'];
             $values = $result['values'];
-
+            if (!empty($_FILES)) {
+                if ($_FILES['fileU']['size']<1000000) {
+                    $uploadDir = 'assets/images/';
+                    $extension = explode('/', $_FILES['fileU']['type']);
+                    $values['imageName'] = $uploadDir . "image".microtime();
+                    $values['imageName']=str_replace(
+                        ".",
+                        "",
+                        str_replace(" ", "", $values['imageName'])
+                    ).".".$extension[1];
+                    move_uploaded_file($_FILES['fileU']['tmp_name'], $values['imageName']);
+                }
+            }
             if (!empty($result['errors'])) {
                 return $this->twig->render(
                     'AdminArticle/adminArticleForm.html.twig',
-                    ['errors'=>$errors,'values'=>$values,'categories'=>self::CATEGORIES]
+                    [   'errors'=>$errors,
+                        'values'=>$values,
+                        'isValid'=>$this->isValid($errors, $values),
+                        'categories'=>self::CATEGORIES,
+                        'title2'=>"Mise à jour de l'article"]
                 );
             }
             $adminArticleManager = new AdminArticleManager();
@@ -118,8 +160,26 @@ class AdminArticleController extends AbstractController
         $article = $articleManager->selectOneById($id);
         return $this->twig->render(
             'AdminArticle/adminArticleForm.html.twig',
-            ['values' => $article,'categories'=>self::CATEGORIES]
+            [   'values' => $article,
+                'categories'=>self::CATEGORIES,
+                'title2'=>"Mise à jour de l'article"]
         );
+    }
+
+
+    private function isValid($errors, $values)
+    {
+        $isValid=[];
+        
+        foreach ($errors as $key => $value) {
+            $isValid[$key]="is-invalid";
+        }
+        foreach ($values as $key => $value) {
+            if (!array_key_exists($key, $errors)) {
+                $isValid[$key]="is-valid";
+            }
+        }
+        return $isValid;
     }
 
     /**
@@ -131,38 +191,43 @@ class AdminArticleController extends AbstractController
             $error = [];
 
         $value['id']=$this->testInput($inputData["id"]);
+        
         /** Verification title **/
         if (empty($inputData["title"])) {
-            $error['title'] = 'Add title';
+            $error['title'] = 'Titre obligatoire';
+        } elseif (strlen($inputData["title"])>100) {
+            $value["title"] = $this->testInput($inputData["title"]);
+            $error['title'] = 'le titre doit faire moins de 100 caractères';
         } else {
-             $value["title"] = $this->testInput($inputData["title"]);
+            $value["title"] = $this->testInput($inputData["title"]);
         }
+
         /** Verification date **/
-        if (empty($inputData["date"])) {
-            $error['date'] = 'Add date';
+        if (empty($inputData["articleDate"])) {
+            $error['articleDate'] = 'Add date';
         } else {
-             $value["date"] = $this->testInput($inputData["date"]);
+             $value["articleDate"] = $this->testInput($inputData["articleDate"]);
         }
         /** Verification author **/
         if (empty($inputData["author"])) {
             $error['author'] = 'Add author';
+        } elseif (strlen($inputData["author"])>50) {
+            $value["author"] = $this->testInput($inputData["author"]);
+            $error['author'] = 'le nom de l\'auteur doit faire moins de 50 caracteres' ;
         } else {
              $value["author"] = $this->testInput($inputData["author"]);
         }
         /** Verification Category **/
         if (empty($inputData["category"])) {
             $error['category'] = 'Select Category';
+        } elseif (strlen($inputData["category"])>50) {
+            $value["category"] = $this->testInput($inputData["category"]);
+            $error['category'] = 'la catégorie doit faire moins de 50 caractères';
         } else {
              $value["category"] = $this->testInput($inputData["category"]);
         }
-        /** Verification Short text **/
-        if (empty($inputData["shortText"])) {
-            $error['shortText'] = 'Add short text';
-        } else {
-             $value["shortText"] = $this->testInput($inputData["shortText"]);
-        }
-
-
+        
+        /** Verification content **/
         if (empty($inputData["content"])) {
             $error['content'] = 'Add short text';
         } else {
@@ -170,16 +235,32 @@ class AdminArticleController extends AbstractController
         }
         
         /** Verification tag **/
-        if (empty($inputData["tag"])) {
-            $error['tag'] = 'Add tag';
+        if (strlen($inputData["tag"])>50) {
+            $value["tag"] = $this->testInput($inputData["tag"]);
+            $error['tag'] = 'les tags doivent faire moins de 50 caractères';
         } else {
              $value["tag"] = $this->testInput($inputData["tag"]);
         }
+
+        /** Verification topArt **/
+        if (isset($inputData["topArt"])) {
+            $value["topArt"] = true;
+            $adminArticleManager = new AdminArticleManager();
+            $adminArticleManager->topArtEmpty();
+        } else {
+             $value["topArt"] = false;
+        }
+
+        /** Verification published **/
+        /** Verification topArt **/
+        if (isset($inputData["published"])) {
+            $value["published"] = true;
+        } else {
+             $value["published"] = false;
+        }
+
             return ['errors'=>$error,'values'=>$value];
     }
-
-
-
 
     /**
      * Verify imputs from form

@@ -1,0 +1,20 @@
+article{
+	font-family:Roboto;
+	font-size: 18px;
+}
+
+
+.articleTitle{
+	font-weight: bold;
+	font-size: 38px;
+}
+
+.category{
+	font-size: 18px;
+	color: grey;
+
+}
+ .details{
+ 	font-size: 14px;
+	color: grey;
+ }
