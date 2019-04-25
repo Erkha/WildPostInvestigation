@@ -92,7 +92,7 @@ input{
 }
 
 
-p{
+.textLeft,.textLayout,.textTop{
 	height:130px;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -108,7 +108,7 @@ p{
 	height:50%;
 }
 
-img{
+.imgcard,.imgcardLeft{
 	height:100%;
 }
 
