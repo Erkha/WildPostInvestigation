@@ -30,6 +30,18 @@ class AdminArticleManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
+    /**
+     * Get all row from database.
+     *
+     * @return array
+     */
+    public function selectArticleswithCatName(): array
+    {
+        return $this->pdo->query('  SELECT a.*, c.name as catName FROM articles a
+                                    JOIN category c ON a.category = c.id
+            ')->fetchAll();
+    }
+
 
     /**
      * @param array $values
