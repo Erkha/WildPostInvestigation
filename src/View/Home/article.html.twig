@@ -9,18 +9,15 @@
 
 	<div class="container row mx-auto">
 		<div class = "articleHeader pt-4">
-			<p class = "category"> DISPARITIONS  </p>
-			<h3 class="articleTitle">Dick Rivers, icône du rock’n’roll à la française, est mort</h3>
-			<p class ="details"> Par Sylvain Siclier Publié hier à 11h10, mis à jour à 08h48 </p>
+			<p class = "category"> {{article.category}}  </p>
+			<h3 class="articleTitle">{{article.title}}</h3>
+			<p class ="details"> Par {{article.author}} Publié le {{article.articleDate|date("d/m/Y")}}</p>
 		</div>
 
 		<article class="col-md-9">
-		<p class="text-center"><img src="/assets/images/dick.jpg" class="img-fluid"></p>
+		<p class="text-center"><img src="/{{article.imageName}}" class="img-fluid"></p>
 		<div class="text-justify">
-		<p>Ancien chanteur des Chats sauvages, groupe formé début 1961 et qu’il quittera à l’été 1962, Hervé Forneri, dit Dick Rivers, est mort à Paris des <em>suites d’un cancer</em>, dans la nuit du mardi 23 au mercredi 24 avril, jour anniversaire de ses 74 ans, a annoncé, dans la matinée de mercredi son manager, Denis Sabouret.</p>
-		<p>Il était l’un des plus célèbres défenseurs et le propagateur du rock’n’roll à la française au début des années 1960, avec Johnny Hallyday et Eddy Mitchell.</p>
-		<p>Né le 24 avril1945 à Nice, fils de commerçants, Dick Rivers – nom pris en référence au personnage de Deke Rivers, interprété par Elvis Presley dans le film <em>LovingYou</em> (1957), d’HalKanter – est tombé dans le rock’n’roll dès son enfance.</p>
-		<p>Ses idoles ont pour nom Elvis Presley, Gene Vincent, Johnny Cash, Jerry Lee Lewis, Little Richard…, dont il traque les moindres chansons diffusées à la radio et les rares 45-tours qui traversent l’Atlantique. Il déclarera régulièrement que c’est à leur écoute qu’il a appris l’anglais. Dans son chant en français, d’une voix assez grave, il y avait une pointe de cet accent, tout comme une forme de théâtralité vocale qui rappelait celle de son maître Presley.</p>
+		{{article.content|raw}}
 	</div>
 		</article>
 

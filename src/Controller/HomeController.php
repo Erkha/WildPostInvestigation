@@ -7,6 +7,8 @@
  */
 namespace App\Controller;
 
+use App\Model\AdminArticleManager;
+
 class HomeController extends AbstractController
 {
     /**
@@ -23,11 +25,15 @@ class HomeController extends AbstractController
     }
 
     /**
-     * Affiche un article
-     * @return string [renvoie la vue article au navigateur
+     * [article description]
+     * @param  int $id [description]
+     * @return string     [description]
      */
-    public function article()
+    public function article($id)
     {
-        return $this->twig->render('Home/article.html.twig');
+        $articleManager = new AdminArticleManager();
+        $article = $articleManager->selectOneById($id);
+        return $this->twig->render('Home/article.html.twig', [
+            'article'=>$article]);
     }
 }
