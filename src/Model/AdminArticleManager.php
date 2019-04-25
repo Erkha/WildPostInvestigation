@@ -7,6 +7,9 @@
  * PHP version 7
  */
 
+
+//TODO :add a method of select all sorted by top, more recent
+
 namespace App\Model;
 
 /**
@@ -36,15 +39,18 @@ class AdminArticleManager extends AbstractManager
     {
         // prepared request
         $statement = $this->pdo->prepare("INSERT INTO $this->table 
-            (title, `date`, author, category, shortText, tag, content) 
-            VALUES (:title, :udate, :author, :category, :shortText, :tag, :content)");
+            (title, articleDate, author, category, tag, content,topArt, published, imageName) 
+            VALUES (:title, :articleDate, :author, :category,
+                    :tag, :content, :topArt, :published, :imageName)");
         $statement->bindValue('title', $values['title'], \PDO::PARAM_STR);
-        $statement->bindValue('udate', $values['date'], \PDO::PARAM_STR);
+        $statement->bindValue('articleDate', $values['articleDate'], \PDO::PARAM_STR);
         $statement->bindValue('author', $values['author'], \PDO::PARAM_STR);
         $statement->bindValue('category', $values['category'], \PDO::PARAM_STR);
-        $statement->bindValue('shortText', $values['shortText'], \PDO::PARAM_STR);
         $statement->bindValue('tag', $values['tag'], \PDO::PARAM_STR);
         $statement->bindValue('content', $values['content'], \PDO::PARAM_STR);
+        $statement->bindValue('topArt', $values['topArt'], \PDO::PARAM_BOOL);
+        $statement->bindValue('published', $values['published'], \PDO::PARAM_BOOL);
+        $statement->bindValue('imageName', $values['imageName'], \PDO::PARAM_STR);
 
         if ($statement->execute()) {
             return (int)$this->pdo->lastInsertId();
@@ -62,9 +68,10 @@ class AdminArticleManager extends AbstractManager
         $statement->execute();
     }
 
-        /**
-     * @param array $values
-     * @return bool
+    /**
+     * [update an article in DB]
+     * @param  array  $values [elements of article]
+     * @return bool       [description]
      */
     public function edit(array $values):bool
     {
@@ -72,21 +79,36 @@ class AdminArticleManager extends AbstractManager
         // prepared request
         $statement = $this->pdo->prepare("UPDATE $this->table 
             SET title = :title,
-                `date` = :udate,
+                articleDate = :articleDate,
                 author = :author,
                 category = :category,
-                shortText = :shortText,
                 tag = :tag,
+                topArt = :topArt,
+                published = :published,
+                imageName = :imageName,
                 content = :content WHERE id=:id");
         $statement->bindValue(':id', $values['id'], \PDO::PARAM_INT);
         $statement->bindValue('title', $values['title'], \PDO::PARAM_STR);
-        $statement->bindValue('udate', $values['date'], \PDO::PARAM_STR);
+        $statement->bindValue('articleDate', $values['articleDate'], \PDO::PARAM_STR);
         $statement->bindValue('author', $values['author'], \PDO::PARAM_STR);
         $statement->bindValue('category', $values['category'], \PDO::PARAM_STR);
-        $statement->bindValue('shortText', $values['shortText'], \PDO::PARAM_STR);
         $statement->bindValue('tag', $values['tag'], \PDO::PARAM_STR);
         $statement->bindValue('content', $values['content'], \PDO::PARAM_STR);
+        $statement->bindValue('topArt', $values['topArt'], \PDO::PARAM_BOOL);
+        $statement->bindValue('published', $values['published'], \PDO::PARAM_BOOL);
+        $statement->bindValue('imageName', $values['imageName'], \PDO::PARAM_STR);
 
+        return $statement->execute();
+    }
+
+    /**
+     * [topArtEmpty description]
+     * @return bool [description]
+     */
+    public function topArtEmpty():bool
+    {
+        $statement = $this->pdo->prepare("UPDATE $this->table 
+            SET topArt = false WHERE topArt = true");
         return $statement->execute();
     }
 }
