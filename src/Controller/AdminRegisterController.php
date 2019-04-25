@@ -42,13 +42,11 @@ class AdminRegisterController extends AbstractController
             }
             
             if (empty($adminError)) {
-                
                 $adminManager = new AdminRegisterManager();
-                $adminError['id'] = $adminManager->userAdminExist($admin['username'], $admin['password'],'IN');
+                $adminError['id'] = $adminManager->userAdminExist($admin['username'], $admin['password'], 'IN');
             }
 
-            if (is_null($adminError['password'])) {
-                        
+            if (is_null($adminError['id'])) {
                 $_SESSION['username'] = $admin['username'];
 
                 header('Location: ../AdminArticle/index');
@@ -77,14 +75,13 @@ class AdminRegisterController extends AbstractController
             $values = $result['values'];
             
             if (empty($errors)) {
-            
                 $authorManager = new AdminRegisterManager();
                 $errors['lastname'] = $authorManager->authorExist($admin['lastname'], $admin['firstname']);
                 if (is_null($errors['lastname'])) {
                     // test username et password
                     $adminManager = new AdminRegisterManager();
                     $errors['password'] = $adminManager->userAdminExist($admin['username'], $admin['password'], 'UP');
-                    if(is_null($errors['password'])) {
+                    if (is_null($errors['password'])) {
                         // add author
                         $authorManager =  new AdminRegisterManager();
 

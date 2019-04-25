@@ -28,12 +28,11 @@ class AdminRegisterManager extends AbstractManager
         $adminRech = $userRes->fetch(PDO::FETCH_ASSOC);
         
         if (empty($adminRech)) {
-            if ($sign == 'IN' ){
+            if ($sign == 'IN') {
                 $ok = 'error identification !!'; // not exist
             } else {
                 $ok = 'username or password already exist';
             }
-
         } else {
             $ok = null; // exist
         }
