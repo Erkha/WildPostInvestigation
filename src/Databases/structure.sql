@@ -15,6 +15,13 @@ content text NOT NULL,
 tag VARCHAR(30),
 topArt BOOL NOT NULL,
 published BOOL NOT NULL,
-imageName VARCHAR(50),
-upFile varchar(50)
+imageName VARCHAR(50)
+);
+
+CREATE TABLE live
+(
+id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+articleDate DATE NOT NULL,
+content text NOT NULL,
+tag VARCHAR(30)
 );
