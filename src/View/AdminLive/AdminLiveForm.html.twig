@@ -1,0 +1,45 @@
+{% extends 'adminLayout.html.twig' %}
+
+{% block content %}
+<div class="container">
+	<h2 class="mt-2">{{title2}}</h2>
+	<a href="/adminArticle/index"> Retour à la liste des articles</a>
+	<table class="table table-striped text-center">
+  <thead>
+    <tr>
+      <th scope="col" style="width:60%">Contenu</th>
+      <th scope="col" style="width:30%">Date</th>
+      <th scope="col"style="width:10%">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  	<form action="" method="POST" class="" >
+    <tr>
+      <td class="">
+      	<input id="id" name="id" type="hidden" value="{{values.id}}">
+      	<textarea class="form-control {{isValid.content}}" id="content" name="content" placeholder="140 caracteres maxi">{{ values.content }}</textarea>
+      </td>
+      <td class=>
+      	<input type="date" class="form-control {{isValid.articleDate}}  " name="articleDate" id="articleDate" value="{{ values.articleDate }}" required>
+		  </td>
+      <td class="">
+      	<button type="submit" class="btn btn-dark btn-sm  ">Nouveau</button>
+      </td>
+    </tr>
+    </form>
+    <tr>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+
+</div>
+{% endblock %}
