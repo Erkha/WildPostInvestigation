@@ -21,4 +21,13 @@ class HomeController extends AbstractController
     {
         return $this->twig->render('Home/index.html.twig');
     }
+
+    /**
+     * Affiche un article
+     * @return string [renvoie la vue article au navigateur
+     */
+    public function article()
+    {
+        return $this->twig->render('Home/article.html.twig');
+    }
 }
