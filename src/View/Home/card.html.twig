@@ -1,21 +1,19 @@
 <div class="card">
-
+  
       <!--Card image-->
-      <div class="view">
-        <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/6-col/img%20(132).jpg" class="card-img-top"
-          alt="">
-        <a href="#">
-          <div class="mask rgba-white-slight"></div>
-        </a>
+      <div class="view viewTop">
+         <a href="#"> 
+          <img class="img w-100" src="/assets/images/{{article.image_id}}" alt="">
+         </a>
       </div>
 
       <!--Card content-->
-      <div class="card-body">
-        <!--Title-->
-        <h4 class="card-title">Card title</h4>
-        <!--Text-->
-        <p class="card-text">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-           </p>
+      <div class="card-body ">
+        <a href="">
+          <h4 class="card-title titleTop">{{article.title}}</h4>
+          <!--Text-->
+          <p class="card-text textTop">{{article.content}}</p>
+        </a>
       </div>
 
-    </div>
+</div>
