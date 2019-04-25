@@ -10,11 +10,19 @@ namespace App\Controller;
 
 use App\Model\AdminArticleManager;
 
+/**
+ * Class ItemController
+ *
+ */
 class AdminArticleController extends AbstractController
 {
 
+
+    const CATEGORIES = ['cat1'=>['id'=>1,'name'=>'Sports'],
+                        'cat2'=>['id'=>2,'name'=>'Politique'],
+                        'cat3'=>['id'=>3,'name'=>'Environnement']];
     /**
-     * Display home page
+     * Display article listing for admin
      *
      * @return string
      * @throws \Twig\Error\LoaderError
@@ -47,7 +55,7 @@ class AdminArticleController extends AbstractController
     }
 
     /**
-     * Display item listing
+     * Create a new article
      *
      * @return string
      * @throws \Twig\Error\LoaderError
@@ -55,7 +63,7 @@ class AdminArticleController extends AbstractController
      * @throws \Twig\Error\SyntaxError
      */
 
-    public function index()
+    public function add()
     {
         /** Verification ajout article **/
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -102,8 +110,18 @@ class AdminArticleController extends AbstractController
             'title2'=>"NouvelArticle"]
         );
     }
-    
-    private function testInput($data)
+
+    /**
+     * update an existing article
+     *
+     * @param int $id
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+
+    public function update(int $id)
     {
         // si POST, vérifier les entrées
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -170,9 +188,7 @@ class AdminArticleController extends AbstractController
     private function verifyInputs($inputData)
     {
             $value = [];
-        /** Verification ajout article **/
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
+            $error = [];
 
         $value['id']=$this->testInput($inputData["id"]);
         
@@ -246,10 +262,19 @@ class AdminArticleController extends AbstractController
             return ['errors'=>$error,'values'=>$value];
     }
 
-            $id = $itemManager->insert($value);
-            //header('Location:/item/show/' . $id);
-        }
-
-        return $this->twig->render('AdminArticle/adminArticle.html.twig');
+    /**
+     * Verify imputs from form
+     *
+     * @return string of cleaned input
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    private function testInput($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
     }
 }

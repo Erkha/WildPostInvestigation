@@ -19,7 +19,7 @@ class AdminRegisterManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
-    public function userAdminExist($username, $password)
+    public function userAdminExist($username, $password, $sign)
     {
         $ok = null;
         $userRes = $this->pdo->query("SELECT username FROM $this->table WHERE username = '"
@@ -28,7 +28,12 @@ class AdminRegisterManager extends AbstractManager
         $adminRech = $userRes->fetch(PDO::FETCH_ASSOC);
         
         if (empty($adminRech)) {
-            $ok = 'error identification !!'; // not exist
+            if ($sign == 'IN' ){
+                $ok = 'error identification !!'; // not exist
+            } else {
+                $ok = 'username or password already exist';
+            }
+
         } else {
             $ok = null; // exist
         }

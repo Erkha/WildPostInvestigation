@@ -8,7 +8,6 @@
 
 namespace App\Controller;
 
-
 use App\Model\AdminRegisterManager;  // utilisation de la class AdminManager
 
 class AdminRegisterController extends AbstractController
@@ -28,8 +27,6 @@ class AdminRegisterController extends AbstractController
         $_SESSION=[];
         $adminError = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-            
             $_POST['username'] = addslashes($_POST['username']);
             $_POST['password'] = md5($_POST['password']);
             //echo  $_POST['password'];
@@ -45,21 +42,15 @@ class AdminRegisterController extends AbstractController
             }
             
             if (empty($adminError)) {
-                echo "passage ";
+                
                 $adminManager = new AdminRegisterManager();
-                $adminError['password'] = $adminManager->userAdminExist($admin['username'], $admin['password']);
-                var_dump($adminError);
+                $adminError['id'] = $adminManager->userAdminExist($admin['username'], $admin['password'],'IN');
             }
-            
-        // var_dump($adminError);
-            if (is_null($adminError['password']) ) {
-                		// on la démarre :)
-                echo "pas";
-                // on enregistre les paramètres de notre visiteur comme variables de session ($login et $pwd) (notez bien que l'on utilise pas le $ pour enregistrer ces variables)
-                $_SESSION['username'] = $admin['username'];
-                $_SESSION['password'] = $admin['password'];
 
-                //var_dump($_SESSION);
+            if (is_null($adminError['password'])) {
+                        
+                $_SESSION['username'] = $admin['username'];
+
                 header('Location: ../AdminArticle/index');
                 exit();
             }
@@ -86,17 +77,23 @@ class AdminRegisterController extends AbstractController
             $values = $result['values'];
             
             if (empty($errors)) {
-                $authorError=null;
+            
                 $authorManager = new AdminRegisterManager();
-                $authorError = $authorManager->authorExist($admin['username'], $admin['password']);
-                if (empty($authorError)) {
-                    // add author
-                    $authorManager =  new AdminRegisterManager();
+                $errors['lastname'] = $authorManager->authorExist($admin['lastname'], $admin['firstname']);
+                if (is_null($errors['lastname'])) {
+                    // test username et password
+                    $adminManager = new AdminRegisterManager();
+                    $errors['password'] = $adminManager->userAdminExist($admin['username'], $admin['password'], 'UP');
+                    if(is_null($errors['password'])) {
+                        // add author
+                        $authorManager =  new AdminRegisterManager();
 
-                    $id = $authorManager->authorInsert($values);
-                    
-                    header('Location: ../AdminArticle/index');
-                    exit();
+                        $id = $authorManager->authorInsert($values);
+                        $_SESSION['authorId'] = $id;
+                        
+                        header('Location: ../AdminArticle/index');
+                        exit();
+                    }
                 }
             }
         }
@@ -167,7 +164,8 @@ class AdminRegisterController extends AbstractController
         return $data;
     }
 
-    public function logout() {
+    public function logout()
+    {
         //session_start();
         session_destroy();
     
