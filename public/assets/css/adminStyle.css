@@ -30,6 +30,28 @@ body {
     text-align: center;
 }
 
+a
+{
+	width:auto !important;
+}
+
+.btnuser
+{
+    width : 200px !important;
+}
+
+.btnauthor
+{
+    width : 200px !important;
+}
+
+.userquit
+{
+    width : 200px !important;
+    float : right;
+    text-transform: uppercase;
+}
+
 
 
 @media  ( max-width:768px ){
