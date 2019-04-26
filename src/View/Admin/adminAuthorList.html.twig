@@ -1,0 +1,36 @@
+{% extends 'adminLayout.html.twig' %}
+
+{% block content %}
+	<h2 class="mt-2">Not validated authors</h2>
+  
+	<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Lastname</th>
+      <th scope="col">Firstname</th>
+      <th scope="col">Validated</th>
+
+
+    </tr>
+  </thead>
+  <tbody>
+  	{% for author in authors %}
+      <tr>
+        <th  scope="row"><a href="/adminRegister/authorUpdate/{{author.id}}"><i class="fas fa-edit" title="modify author"></i></a> 
+            <a href="authorShow/{{author.id}}"><i class="fas fa-eye"  title="view author"></i>  </a> 
+            <a href="authorDelete/{{author.id}}"><i class="fas fa-trash-alt" title="delete author"></i></a>
+          </th>
+        <td>{{author.lastname}}</td>
+        <td>{{author.firstname}}</td>
+
+        <td>{% if author.valid == true %} <i class="far fa-check-circle" style="color:green"></i> {% endif %}</td>
+       
+      </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+	
+<!--<a href="add"><button class="btn btn-dark">Nouvel article</button></a> -->
+{% endblock %}

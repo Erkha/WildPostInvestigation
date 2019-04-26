@@ -13,8 +13,10 @@
     <link href="/assets/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="/assets/mdbootstrap/css/mdb.min.css" rel="stylesheet">
+    
     <!-- Your custom styles (optional) -->
     <link href="/assets/css/style.css" rel="stylesheet">
+
     {% block stylesheet %}{% endblock %}
   </head>
 
@@ -45,12 +47,19 @@
               <li class="nav-item">
                 <a class="nav-link" href="/category/show">Catégories</a>
               </li>
+              
             </ul>
             <!-- Links -->
             <form class="form-inline">
               <div class="md-form my-0">
                 <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
               </div>
+              <li> 
+                <a href="/adminRegister/logout" class="btn btn-info btn-lg">
+                      <i class="fas fa-sign-out-alt"></i> 
+                </a>
+              </li>
+              
             </form>
           </div>
           <!-- Collapsible content -->

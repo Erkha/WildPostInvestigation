@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS wildPost;
-
-create database wildPost character set UTF8mb4 collate utf8mb4_bin;
+drop database wildPost;
+create database wildPost;
 
 USE wildPost;
+
 
 CREATE TABLE articles
 (
@@ -35,4 +35,16 @@ articleDate DATE NOT NULL,
 content text NOT NULL,
 tag VARCHAR(30)
 );
+
+
+DROP TABLE IF EXISTS authors;
+CREATE TABLE `authors` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `lastname` varchar(45) NOT NULL,
+  `firstname` varchar(45) NOT NULL,
+  `username` varchar(128) NOT NULL,
+  `password` varchar(128) NOT NULL,
+  `valid` boolean DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
