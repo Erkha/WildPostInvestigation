@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 use App\Model\AdminArticleManager;
+use App\Model\CategoryManager;
 
 /**
  * Class ItemController
@@ -16,11 +17,6 @@ use App\Model\AdminArticleManager;
  */
 class AdminArticleController extends AbstractController
 {
-
-
-    const CATEGORIES = ['cat1'=>['id'=>1,'name'=>'Sports'],
-                        'cat2'=>['id'=>2,'name'=>'Politique'],
-                        'cat3'=>['id'=>3,'name'=>'Environnement']];
     /**
      * Display article listing for admin
      *
@@ -33,12 +29,11 @@ class AdminArticleController extends AbstractController
     public function index()
     {
         $articleManager = new AdminArticleManager();
-        $articles = $articleManager->selectAll();
+        $articles = $articleManager->selectArticleswithCatName();
 
         return $this->twig->render(
             'AdminArticle/AdminArticleList.html.twig',
-            ['articles' => $articles,
-            'categories'=>self::CATEGORIES]
+            ['articles' => $articles]
         );
     }
 
@@ -86,12 +81,14 @@ class AdminArticleController extends AbstractController
             }
 
             if (!empty($result['errors'])) {
+                $CategoryManager = new CategoryManager();
+                $categories = $CategoryManager->selectAll();
                 return $this->twig->render(
                     'AdminArticle/adminArticleForm.html.twig',
                     [   'errors'=>$errors,
                         'values'=>$values,
                         'isValid'=>$this->isValid($errors, $values),
-                        'categories'=>self::CATEGORIES,
+                        'categories'=>$categories,
                         'title2'=>"Nouvel Article"]
                 );
             }
@@ -102,10 +99,11 @@ class AdminArticleController extends AbstractController
             
             header('Location:/adminArticle/index');
         }
-
+        $CategoryManager = new CategoryManager();
+        $categories = $CategoryManager->selectAll();
         return $this->twig->render(
             'AdminArticle/adminArticleForm.html.twig',
-            ['categories'=>self::CATEGORIES,
+            ['categories'=>$categories,
             'values'=>['articleDate'=>date("Y-m-j")],
             'title2'=>"NouvelArticle"]
         );
@@ -142,12 +140,14 @@ class AdminArticleController extends AbstractController
                 }
             }
             if (!empty($result['errors'])) {
+                $CategoryManager = new CategoryManager();
+                $categories = $CategoryManager->selectAll();
                 return $this->twig->render(
                     'AdminArticle/adminArticleForm.html.twig',
                     [   'errors'=>$errors,
                         'values'=>$values,
                         'isValid'=>$this->isValid($errors, $values),
-                        'categories'=>self::CATEGORIES,
+                        'categories'=>$categories,
                         'title2'=>"Mise à jour de l'article"]
                 );
             }
@@ -158,10 +158,12 @@ class AdminArticleController extends AbstractController
 
         $articleManager = new AdminArticleManager();
         $article = $articleManager->selectOneById($id);
+        $CategoryManager = new CategoryManager();
+        $categories = $CategoryManager->selectAll();
         return $this->twig->render(
             'AdminArticle/adminArticleForm.html.twig',
             [   'values' => $article,
-                'categories'=>self::CATEGORIES,
+                'categories'=>$categories,
                 'title2'=>"Mise à jour de l'article"]
         );
     }

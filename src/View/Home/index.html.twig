@@ -7,68 +7,99 @@
 
 
 	<div class="contain">
-		
 		<section>
-			
 			<div class="container">
 				<div class="row actualite">
-					{# Block ACtualkité #}
+{# ------Block ACtualkité ------------------------------#}
 					<div class="col-md-9 actualite cols ">
 {#-------ACTUALITE LIGNE 1----------------------------- #}
 						<div class="row actuLigne1 ">
-							<div class="col-md-8  articleActu1 cols d-flex align-items-stretch ">
-								{% include 'Home/card.html.twig' %}
 
-							</div>
-							<div class="col-md-4  articleActu2 cols d-flex align-items-stretch ">
+							<div class="col-md-8  articleActu1 cols d-flex align-items-stretch ">
+								{% for article in articles|slice(0, 1) %}
 								{% include 'Home/card.html.twig' %}
+								{% endfor %}
+							</div>
+
+							<div class="col-md-4  articleActu2 d-flex align-items-stretch flex-column justify-content-between">
+							
+								<div class="cols">
+									{% for article in articles|slice(1, 1) %}
+									{% include 'Home/card.html.twig' %}
+									{% endfor %}
+								</div>
+								<div class="cols">
+									{% for article in articles|slice(2, 1) %}
+									{% include 'Home/card.html.twig' %}
+									{% endfor %}
+								</div>
+								
+
 							</div>
 						</div>
+{#-------FIN ACTUALITE LIGNE 1----------------------------- #}
+
+						<br>
 					
-
+{#-------ACTUALITE LIGNE 2----------------------------- #}
 						<div class="row actuLigne2">
-{#-------ACTUALITE LIGNE 2----------------------------- #}						
-							<div class="col-md-4  articleActu3 cols d-flex align-items-stretch">
-								{% include 'Home/card.html.twig' %}
-
-							</div>
-							<div class="col-md-4 articleActu4 cols d-flex align-items-stretch">
-								{% include 'Home/card.html.twig' %}
-
-							</div>
-							<div class="col-md-4  articleActu5 cols d-flex align-items-stretch">
-								{% include 'Home/card.html.twig' %}
-
-							</div>						
+							{% for article in articles|slice(3, 3) %}
+								<div class="col-md-4  articleActu3 cols d-flex align-items-stretch">
+									{% include 'Home/card.html.twig' %}
+								</div>
+							{% endfor %}
 						</div>
 {#-------ACTUALITE LIGNE 3----------------------------- #}
 						<div class="row actuLigne3 ">
 							<div class="col-md-12  articleActu6 cols d-flex align-items-stretch">
-
-							{% include 'Home/cardLeft.html.twig' %}
-
+							{% for article in articles|slice(6, 1) %}
+								{% include 'Home/cardLeft.html.twig' %}
+							{% endfor %}
 							</div>	
 						</div>
-					 </div>
+					</div>
+{# --------Fin Block actualite 9 ------------------------#}
 					
 
-					{# Block Aside info en continu #}
-					<div class="col-md-3  asideContinu flex-column d-flex align-items-stretch">
-						{% for i in 1..9  %}
+{#-------- Block Aside info en continu ------------------#}
+					<div class="col-md-3  asideContinu cols flex-column d-flex align-items-stretch">
+						{% for i in 1..12  %}
 							{% include 'Home/asidelist.html.twig' %}
 							<br>
 						{% endfor %}
 
 						<div class="plus unique-color  h-100 mb-3">
-							
-								<a href="" class="text-white">
-									<span>Voir plus</span>
-						
-					    </div>
-				</div>{# FIN row #}
-			</div>
-		</section>
-	</contain>
+							<a href="" class="text-white">
+							<span>Voir plus</span>
+							</a>
+						</div>
 
+					</div>
+				</div>
+				{# row actualite #}
+
+				{% for article in articles|slice(7, 2) %}
+					<div class="row article_restant">
+						<div class="col-md_12 cols d-flex align-items-stretch">
+							{% include 'Home/cardLeft.html.twig' %}
+						</div>
+					</div>
+					<br>
+				{% endfor %}
+
+				{% for article in articles|slice(9, 2) %}
+					<div class="row article_restant">
+						<div class="col-md_12 cols d-flex align-items-stretch">
+							{% include 'Home/cardlayout.html.twig' %}
+						</div>
+					</div>
+					<br>
+				{% endfor %}
+
+			</div>	
+			{# div container #}
+		</section>			  
+	</div>	{# div contain #}		
+			
 
 {% endblock %}
