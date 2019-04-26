@@ -30,8 +30,7 @@ class AdminRegisterController extends AbstractController
             $_POST['username'] = addslashes($_POST['username']);
             $_POST['password'] = md5($_POST['password']);
             //echo  $_POST['password'];
-            $admin = ['username' => $_POST['username'], 'password' => $_POST['password'],
-                    'lastname'=> $_POST['lastname'],'firstname'=>$_POST['firstname']];
+            $admin = ['username' => $_POST['username'], 'password' => $_POST['password']];
             // verif errors
             $adminError= [];
 
@@ -49,8 +48,8 @@ class AdminRegisterController extends AbstractController
             }
 
             if (is_null($adminError['id'])) {
-                $_SESSION['lastname'] = $admin['lastname'];
-                $_SESSION['firstname'] = $admin['firstname'];
+               // $_SESSION['lastname'] = $admin['lastname'];
+                //$_SESSION['firstname'] = $admin['firstname'];
                 header('Location: ../AdminAuthor/authorNotValidated');
                 exit();
             }
@@ -106,7 +105,7 @@ class AdminRegisterController extends AbstractController
         
         return $this->twig->render(
             'Admin/adminAuthorForm.html.twig',
-            ['errors'=>$errors,'values'=>$values,'title2'=>'Create Author','session'=>$_SESSION]
+            ['errors'=>$errors,'values'=>$values,'title2'=>'Création Auteur','session'=>$_SESSION]
         );
     }
 
@@ -116,10 +115,11 @@ class AdminRegisterController extends AbstractController
         $errors = [];
 
         $value = $author;
-        $value['password'] = md5($value['password']);
+        
         $value['id']=$this->verifInput($author["id"]);
         
         if ($quoi!='update') {
+            $value['password'] = md5($value['password']);
             if (!isset($author['username']) || empty($author['username'])) {
                 $errors['username']= "username required";
             } else {
@@ -190,10 +190,17 @@ class AdminRegisterController extends AbstractController
     {
         // si POST, vérifier les entrées
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $admin = ['username' => $_POST['username'], 'password' => $_POST['password'],
-            'lastname'=> $_POST ['lastname'], 'firstname' => $_POST['firstname'],
-            'confpassword'=>$_POST['confpassword'],
-            'id'=>$_POST['id']];
+            if ($_SESSION['doujeviensAuthor']!="updateAuthor") {
+                $admin = ['username' => $_POST['username'], 'password' => $_POST['password'],
+                'lastname'=> $_POST ['lastname'], 'firstname' => $_POST['firstname'],
+                'confpassword'=>$_POST['confpassword'],
+                'id'=>$_POST['id']];
+            } else {
+                $admin = ['lastname'=> $_POST ['lastname'], 'firstname' => $_POST['firstname'],
+                         'valid'=>$_POST['valid'],
+                         'id'=>$_POST['id']];
+            }
+
             $result = $this->verifyAuthors($admin, "update");
             
             $errors = $result['errors'];
@@ -207,12 +214,12 @@ class AdminRegisterController extends AbstractController
                     [   'errors'=>$errors,
                         'values'=>$values,
                        //'isValid'=>$this->isValid($errors, $values),
-                        'title2'=>"Update Author",
+                        'title2'=>"Modification Auteur",
                         'session'=>$_SESSION]
                 );
             }
             $adminAuthorManager = new AdminRegisterManager();
-            //$adminAuthorManager->edit($values);
+            $adminAuthorManager->authorUpdateBdd($values);
             header('Location:/AdminAuthor/authorNotValidated');
         }
 
@@ -223,12 +230,22 @@ class AdminRegisterController extends AbstractController
         return $this->twig->render(
             '/Admin/adminAuthorForm.html.twig',
             [   'values' => $author,
-                'title2'=>"Update Author",
+                'title2'=>"Modification Auteur",
                 'session'=>$_SESSION]
         );
     }
 
-
+   /**
+     * delet author not validated
+     *
+     * @param int $id
+     */
+    public function authorDelete(int $id)
+    {
+        $adminAuthorManager = new AdminRegisterManager();
+        $adminAuthorManager->authorDeleteBdd($id);
+        header('Location:/AdminAuthor/authorNotValidated');
+    }
 
 
 

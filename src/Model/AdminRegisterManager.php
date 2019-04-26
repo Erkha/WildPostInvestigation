@@ -29,15 +29,15 @@ class AdminRegisterManager extends AbstractManager
             $userRes = $this->pdo->query("SELECT count(*) as exist FROM $this->table WHERE username = '"
                             .$username."' or password = '".$password."'");
             $adminRech = $userRes->fetch(PDO::FETCH_ASSOC);
-        } 
+        }
         if ($sign=='IN') {
             $userRes = $this->pdo->query("SELECT id as exist FROM $this->table WHERE username = '"
                             .$username."' or password = '".$password."'");
             $adminRech = $userRes->fetch(PDO::FETCH_ASSOC);
-        }     
+        }
         
 
-        if ( $adminCptRech['cpteur']> 0 && ( ($adminRech['exist']>0  && $sign=='UP') 
+        if ($adminCptRech['cpteur']> 0 && ( ($adminRech['exist']>0  && $sign=='UP')
                     || ( empty($adminRech) && $sign=='IN'))) {
             if ($sign == 'IN') {
                 $ok = 'error identification !!'; // not exist
@@ -95,7 +95,17 @@ class AdminRegisterManager extends AbstractManager
         // prepared request
         $statement = $this->pdo->prepare("UPDATE $this->table SET `valid` = :valid WHERE id=:id");
         $statement->bindValue('id', $values['id'], \PDO::PARAM_INT);
-        $statement->bindValue('valid', $values['valid'], \PDO::PARAM_STR);
+        $statement->bindValue('valid', $values['valid'], \PDO::PARAM_BOOL);
+
+        return $statement->execute();
+    }
+
+    public function authorDeleteBdd($id):bool
+    {
+
+        // prepared request
+        $statement = $this->pdo->prepare("DELETE FROM $this->table WHERE id=:id");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
 
         return $statement->execute();
     }

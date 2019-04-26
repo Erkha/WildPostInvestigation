@@ -1,15 +1,15 @@
 {% extends 'adminLayout.html.twig' %}
 
 {% block content %}
-	<h2 class="mt-2">Not validated authors</h2>
+	<h2 class="mt-2">Auteurs non Validés</h2>
   
 	<table class="table table-striped">
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Lastname</th>
-      <th scope="col">Firstname</th>
-      <th scope="col">Validated</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Prénom</th>
+      <th scope="col">Validé</th>
 
 
     </tr>
@@ -17,9 +17,9 @@
   <tbody>
   	{% for author in authors %}
       <tr>
-        <th  scope="row"><a href="/adminRegister/authorUpdate/{{author.id}}"><i class="fas fa-edit" title="modify author"></i></a> 
-            <a href="authorShow/{{author.id}}"><i class="fas fa-eye"  title="view author"></i>  </a> 
-            <a href="authorDelete/{{author.id}}"><i class="fas fa-trash-alt" title="delete author"></i></a>
+        <th  scope="row"><a href="/adminRegister/authorUpdate/{{author.id}}"><i class="fas fa-edit" title="Modification Auteur"></i></a> 
+            
+            <a href="/adminRegister/authorDelete/{{author.id}}"><i class="fas fa-trash-alt" title="Suppression Auteur"></i></a>
           </th>
         <td>{{author.lastname}}</td>
         <td>{{author.firstname}}</td>
