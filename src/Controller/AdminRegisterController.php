@@ -34,16 +34,16 @@ class AdminRegisterController extends AbstractController
 
             if (!isset($admin['username']) || empty($admin['username'])) {
                 $errors['username']= "invalid username";
-            } 
+            }
             if (!isset($admin['password']) || empty($admin['password'])) {
                 $errors['password']= "invalid password";
-            } 
+            }
             $adminError = null;
             if (empty($errors)) {
                 $adminManager = new AdminRegisterManager();
                 $adminError = $adminManager->userAdminExist($admin['username'], $admin['password']);
             }
-            if (empty($adminError) ) {
+            if (empty($adminError)) {
                 echo "good";
                 //header('Location: ');
                 //exit();
