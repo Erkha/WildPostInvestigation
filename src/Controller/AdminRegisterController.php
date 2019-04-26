@@ -44,7 +44,7 @@ class AdminRegisterController extends AbstractController
             
             if (empty($adminError)) {
                 $adminManager = new AdminRegisterManager();
-                echo'passe';
+                
                 $adminError['id'] = $adminManager->userAdminExist($admin['username'], $admin['password'], 'IN');
             }
 

@@ -21,18 +21,24 @@ class AdminRegisterManager extends AbstractManager
 
     public function userAdminExist($username, $password, $sign)
     {
-
-        echo $username . "\n" . $password . "\n". $sign;
         $ok = null;
         $userCpt = $this->pdo->query("SELECT count(*) as cpteur FROM $this->table ");
         $adminCptRech = $userCpt->fetch(PDO::FETCH_ASSOC);
-
-        $userRes = $this->pdo->query("SELECT count(*) as exist FROM $this->table WHERE username = '"
+        $adminRech=[];
+        if ($sign=='UP') {
+            $userRes = $this->pdo->query("SELECT count(*) as exist FROM $this->table WHERE username = '"
                             .$username."' or password = '".$password."'");
+            $adminRech = $userRes->fetch(PDO::FETCH_ASSOC);
+        } 
+        if ($sign=='IN') {
+            $userRes = $this->pdo->query("SELECT id as exist FROM $this->table WHERE username = '"
+                            .$username."' or password = '".$password."'");
+            $adminRech = $userRes->fetch(PDO::FETCH_ASSOC);
+        }     
         
-        $adminRech = $userRes->fetch(PDO::FETCH_ASSOC);
 
-        if ($adminRech['exist']>0 && $adminCptRech['cpteur']> 0) {
+        if ( $adminCptRech['cpteur']> 0 && ( ($adminRech['exist']>0  && $sign=='UP') 
+                    || ( empty($adminRech) && $sign=='IN'))) {
             if ($sign == 'IN') {
                 $ok = 'error identification !!'; // not exist
             } else {
