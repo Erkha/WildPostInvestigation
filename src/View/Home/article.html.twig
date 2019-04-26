@@ -7,26 +7,35 @@
 
 {% block content %}
 
+
 	<div class="container  mx-auto row">
 		<div class = "articleHeader pt-4 col-12">
 			<p class = "category"> {{article.catName}}  </p>
+
 			<h3 class="articleTitle">{{article.title}}</h3>
 			<p class ="details"> Par {{article.author}} Publié le {{article.articleDate|date("d/m/Y")}}</p>
 		</div>
 
 		<article class="col-md-9">
-		<p class="text-center"><img src="/{{article.imageName}}" class="img-fluid"></p>
-		<div class="text-justify">
-		{{article.content|raw}}
-	</div>
+			{% if article.image_id != "" %}
+				<p class="text-center">
+					<img src="/assets/images/{{article.image_id}}" class="img-fluid imgarticle">
+				</p>
+			{% else %}
+
+			{% endif %}
+
+			<div class="text-justify">
+			{{article.content|raw}}
+			</div>
 		</article>
 
 		{# Block Aside info en continu #}
 		<div class="col-md-3 flex-column d-flex align-items-stretch">
-		{% for i in 1..9  %}
-			{% include 'Home/asidelist.html.twig' %}
-			<br>
-		{% endfor %}
+			{% for i in 1..9  %}
+				{% include 'Home/asidelist.html.twig' %}
+				<br>
+			{% endfor %}
 
 			<div class="plus unique-color  h-100 mb-3">
 			<a href="" class="text-white"><span>Voir plus</span></a>				
