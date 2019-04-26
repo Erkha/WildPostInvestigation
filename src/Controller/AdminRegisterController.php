@@ -104,8 +104,10 @@ class AdminRegisterController extends AbstractController
             }
         }
         
-        return $this->twig->render('Admin/adminAuthorForm.html.twig', 
-                ['errors'=>$errors,'values'=>$values,'title2'=>'Create Author','session'=>$_SESSION]);
+        return $this->twig->render(
+            'Admin/adminAuthorForm.html.twig',
+            ['errors'=>$errors,'values'=>$values,'title2'=>'Create Author','session'=>$_SESSION]
+        );
     }
 
     private function verifyAuthors($author, $quoi)
