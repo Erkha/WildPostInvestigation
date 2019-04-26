@@ -190,12 +190,12 @@ class AdminRegisterController extends AbstractController
     {
         // si POST, vérifier les entrées
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if ($_SESSION['doujeviensAuthor']!="updateAuthor"){
+            if ($_SESSION['doujeviensAuthor']!="updateAuthor") {
                 $admin = ['username' => $_POST['username'], 'password' => $_POST['password'],
                 'lastname'=> $_POST ['lastname'], 'firstname' => $_POST['firstname'],
                 'confpassword'=>$_POST['confpassword'],
                 'id'=>$_POST['id']];
-            }else {
+            } else {
                 $admin = ['lastname'=> $_POST ['lastname'], 'firstname' => $_POST['firstname'],
                          'valid'=>$_POST['valid'],
                          'id'=>$_POST['id']];
