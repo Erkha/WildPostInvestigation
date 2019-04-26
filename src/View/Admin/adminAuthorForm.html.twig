@@ -38,7 +38,7 @@
 		<div class="row justify-content-center">
 			<div class="form-row col-4">
 			    <div class="form-group">
-			      	<label for="inputText">Lastname</label>
+			      	<label for="inputText">Nom</label>
 			      	<input type="text" class="form-control" name="lastname" id="lastname" value="{{ values.lastname }}" >
 					<label class="form-check-label">
 						<span style = "color : red " >{{errors.lastname}}</span>
@@ -47,7 +47,7 @@
 			</div>	
 			<div class="form-row col-4">
 			    <div class="form-group">
-			    	<label for="inputText">Firstname</label>
+			    	<label for="inputText">Prénom</label>
 			    	<input type="text" class="form-control" name="firstname" id="firstname" value="{{ values.firstname }}" >
 					<label class="form-check-label">
 						<span style = "color : red" >{{errors.firstname}} </span>
@@ -61,7 +61,7 @@
 			    <div class="form-group">
 					{% if session.doujeviensAuthor=="createAuthor" %}
 					<i class="fas fa-user"></i>
-					<label for="inputText">Username</label>
+					<label for="inputText">Nom d'Utilisateur</label>
 					
 					<input type="text" class="form-control" name="username" id="username" value="{{ values.username }}" required>
 					<label class="form-check-label">
@@ -74,7 +74,7 @@
 				<div class="form-group">
 					{% if session.doujeviensAuthor=="createAuthor" %}
 						<i class="fas fa-key"></i>
-						<label for="inputText">Password</label>
+						<label for="inputText">Mot de Passe</label>
 						
 						<input type="password" class="form-control" name="password" id="password" required>
 						<label class="form-check-label" >
@@ -91,7 +91,7 @@
 					<div class="form-check col-4"><!-- validated  -->
 					{% if session.doujeviensAuthor!="createAuthor" %}
 						<input class="form-check-input " type="checkbox"  {% if values.valid == true %} checked="checked" {% endif %} name="valid" id="valid">
-						<label class="form-check-label" for="valid">validated</label>
+						<label class="form-check-label" for="valid">validé</label>
 					{% endif %}
 					</div>
 				</div>
@@ -100,7 +100,7 @@
 				<div class="form-group">
 					{% if session.doujeviensAuthor=="createAuthor" %}
 						<i class="fas fa-key"></i>
-						<label for="inputText">Confirmation Password</label>
+						<label for="inputText">Confirmation Mot de Passe</label>
 						
 						<input type="password" class="form-control" name="confpassword" id="confpassword" required>
 						<label class="form-check-label">
@@ -114,14 +114,14 @@
 		
 		<div class="row justify-content-center ">
 			<div class="col-sm-8 col-md-6  col-md-offset-1 ">	
-				<button type="submit" class="btn btn-dark btn-sm btn-block">valid</button>
+				<button type="submit" class="btn btn-dark btn-sm btn-block" >enregistrer</button>
 	  		</div>
 		</div>
 		</br>
 		<div class="row justify-content-center">
 			<div class="col-sm-8 col-md-6  col-md-offset-1 ">
 				<div class = "form-group">
-					<a href="/adminRegister/adminRegister"><button class="btn btn-dark btn-sm btn-block" name ="QuitAuthor" >Quit</button></a>
+					<a href="/adminRegister/adminRegister"><button class="btn btn-dark btn-sm btn-block" name ="QuitAuthor" >Quitter</button></a>
 				</div>
 			</div>
 		</div>

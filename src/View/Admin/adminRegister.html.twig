@@ -25,7 +25,7 @@
 
 {% block content %}
     <div class="container">
-        <h2 class="author">Author Authentication</h2>
+        <h2 class="author">Authentification</h2>
         <div id="contenu" class="row">
 
 
@@ -35,27 +35,27 @@
                     <form class="form-group" method="post">
 
                         <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Username" required >
+                            <label for="username">Nom d'Utilisateur</label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Nom Utilisateur" required >
                             <span style = "color : red" > {{ adminError.username }} </span>
                         </div>
 
                         <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                            <label for="password">Mot de Passe</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Mot de Passe" required>
                             <span style = "color : red" > {{ adminError.password }} </span>
                         </div>
                         <a style = "color : red"> {{ adminError.id}} </a>
                         <div>
-                            <button type="submit" class="btn btn-primary">Sign in</button>
+                            <button type="submit" class="btn btn-primary">Validation</button>
                            
                         </div>
 
                         <div>
                         <br/>
                             <br/>
-                            <p>Please sign up if you don't have any account</p>
-                            <a href="adminAuthor" type="button" class="btn btn-primary">Sign up</a>
+                            <p>Si vous n'avez pas de compte, cliquez ci-dessous.</p>
+                            <a href="adminAuthor" type="button" class="btn btn-primary">Création Compte</a>
                         </div>
 
                     </form>
