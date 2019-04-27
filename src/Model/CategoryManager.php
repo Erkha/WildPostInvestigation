@@ -36,7 +36,7 @@ class CategoryManager extends AbstractManager
     {
         // prepared request
         $statement = $this->pdo->prepare("INSERT INTO $this->table (`name`) VALUES (:addCat)");
-        $statement->bindValue(':addCat', $addCat['addCat'], \PDO::PARAM_STR);
+        $statement->bindValue(':addCat', $addCat['name'], \PDO::PARAM_STR);
 
         if ($statement->execute()) {
             return (int)$this->pdo->lastInsertId();
