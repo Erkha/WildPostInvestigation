@@ -67,7 +67,7 @@ class AdminArticleManager extends AbstractManager
     {
         // prepared request
         $statement = $this->pdo->prepare("INSERT INTO $this->table 
-            (title, articleDate, author, categoryId, tag, content,topArt, published, imageName) 
+            (title, articleDate, author, category, tag, content,topArt, published, imageName) 
             VALUES (:title, :articleDate, :author, :category,
                     :tag, :content, :topArt, :published, :imageName)");
         $statement->bindValue('title', $values['title'], \PDO::PARAM_STR);
