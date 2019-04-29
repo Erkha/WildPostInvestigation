@@ -1,0 +1,72 @@
+
+body {
+    padding-top:70px;
+    
+}
+
+.panel-heading {
+    font-family:UnifrakturMaguntia;
+    padding: 5px 15px;     
+    
+}
+
+.panel-body {
+    padding-left: 350px;
+}
+
+.author{
+    font-family:UnifrakturMaguntia;
+}
+
+.user
+{
+
+    margin-bottom: 20px;
+
+}
+
+.user h2
+{
+    text-align: center;
+}
+
+a
+{
+	width:auto !important;
+}
+
+.btnuser
+{
+    width : 200px !important;
+}
+
+.btnauthor
+{
+    width : 200px !important;
+}
+
+.userquit
+{
+    width : 200px !important;
+    float : right;
+    text-transform: uppercase;
+}
+
+
+
+@media  ( max-width:768px ){
+    
+    .panel-heading {
+        font-family:UnifrakturMaguntia;
+        padding: 5px 15px;       
+    }
+    
+    .panel-body {
+        padding-left: 50px;
+        
+    }
+    .author{
+        font-family:UnifrakturMaguntia;
+    }
+
+}

@@ -110,6 +110,6 @@ class ItemController extends AbstractController
     {
         $itemManager = new ItemManager();
         $itemManager->delete($id);
-        header('Location:/adminArticle/index');
+        header('Location:/item/index');
     }
 }
