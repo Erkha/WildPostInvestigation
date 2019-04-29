@@ -17,9 +17,9 @@
 		</div>
 
 		<article class="col-md-9">
-			{% if article.image_id != "" %}
+			{% if article.imageName != "" %}
 				<p class="text-center">
-					<img src="/assets/images/{{article.image_id}}" class="img-fluid imgarticle">
+					<img src="/{{article.imageName}}" class="img-fluid imgarticle">
 				</p>
 			{% else %}
 

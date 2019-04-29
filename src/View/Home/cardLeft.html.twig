@@ -1,18 +1,9 @@
-<div class="card d-flex flex-row p-0 w-100  ">
-	<!--Card image-->
-	<div class="view vLeft h-100">
-		<a href="/home/article/{{article.id}}">
-			<img src="/assets/images/{{article.image_id}}" class="card-img-top imgcardLeft" class="img-fluid" alt="">
-		</a>
-		
-	</div>
-	<!--Card content-->
-	<div class="card-body bodyLeft">
-		<!--Title-->
-		<a href="/home/article/{{article.id}}">
-			<h4 class="card-title titleLeft">{{article.title}}</h4>
-			<!--Text-->
-			<p class="card-text textLeft">{{article.content}}</p>
-		</a>
-	</div>
-</div>
+<a href="/home/article/{{article.id}}" class="d-flex artLink">
+  <div class="card d-flex flex-md-row my-2">
+    <img src="/{{article.imageName}}" class="card-img-top w-25 d-md-block d-none" alt="...">
+    <div class="card-body p-0 d-flex flex-column justify-content-between">
+      <h5 class="card-title  mb-0 p-2 ">{{article.title}}</h5>
+    <div class="card-footer text-muted py-1 "> Par {{ article.author}}, publié le {{article.articleDate}}  </div>
+    </div>
+  </div>
+</a>
