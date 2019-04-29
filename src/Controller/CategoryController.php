@@ -48,9 +48,15 @@ class CategoryController extends AbstractController
     public function show()
     {
         $categoryManager = new CategoryManager();
-        $category = $categoryManager->selectAll();
+        $categories = $categoryManager->selectAll();
 
-        return $this->twig->render('Category/category.html.twig', ['categoryAll'=> $category]);
+        return $this->twig->render(
+            'Category/category_add.html.twig',
+            ['categoryAll'=> $categories,
+            'Btn' => 'Ajouter',
+            'method'=>'add',
+            'title_page' => 'Catégorie']
+        );
     }
 
 
@@ -67,14 +73,23 @@ class CategoryController extends AbstractController
     {
         $categoryManager = new CategoryManager();
         $category = $categoryManager->selectOneById($id);
+        $categories = $categoryManager -> selectAll();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $category['name'] = $_POST['name'];
             $categoryManager->update($category);
-            header('Location: /category/show');
+            header('Location: /Category/show');
         }
 
-        return $this->twig->render('Category/categoryEdit.html.twig', ['category' => $category]);
+        return $this->twig->render(
+            'Category/category_add.html.twig',
+            ['category' => $category,
+            'categoryAll'=> $categories,
+            'title_page' => 'Editer catégorie',
+            'method'=>'edit/'.$category['id'],
+            'values' => $category,
+            'Btn' => 'Editer']
+        );
     }
 
 
@@ -91,10 +106,10 @@ class CategoryController extends AbstractController
 
 
       
+            echo "string";
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $categoryManager = new CategoryManager();
-            $addCat = ['addCat' => $_POST['addCat']];
-    
+            $addCat = ['name' => $_POST['name']];
             $idCat = $categoryManager -> insert($addCat);
             header('Location:/category/show');
         }
