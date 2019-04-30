@@ -31,7 +31,7 @@ insert into category (name) values ('Politique');
 CREATE TABLE live
 (
 id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-articleDate DATE NOT NULL,
+articleDate VARCHAR(20) NOT NULL,
 content text NOT NULL,
 tag VARCHAR(30)
 );

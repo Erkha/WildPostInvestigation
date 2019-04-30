@@ -53,7 +53,6 @@ class AdminLiveController extends AbstractController
             $adminLiveManager = new AdminLiveManager();
             $addLive = ['content' => $_POST['content'],
             'articleDate' => $_POST['articleDate']];
-            var_dump($addLive);
 
             $idLive = $adminLiveManager -> insert($addLive);
             header('Location:/adminLive/show');
