@@ -27,36 +27,25 @@ class CategoryController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    // public function index()
-    // {
-    //     // $itemManager = new ItemManager();
-    //     // $items = $itemManager->selectAll();
 
-    //     return $this->twig->render('Category/category.html.twig');
-    // }
-
-
-    // *
-    //  * Display item informations specified by $id
-    //  *
-    //  * @param int $id
-    //  * @return string
-    //  * @throws \Twig\Error\LoaderError
-    //  * @throws \Twig\Error\RuntimeError
-    //  * @throws \Twig\Error\SyntaxError
      
     public function show()
     {
-        $categoryManager = new CategoryManager();
-        $categories = $categoryManager->selectAll();
+        if (!empty($_SESSION)) {
+            $categoryManager = new CategoryManager();
+            $categories = $categoryManager->selectAll();
 
-        return $this->twig->render(
-            'Category/category_add.html.twig',
-            ['categoryAll'=> $categories,
-            'Btn' => 'Ajouter',
-            'method'=>'add',
-            'title_page' => 'Catégorie']
-        );
+            return $this->twig->render(
+                'Category/category_add.html.twig',
+                ['categoryAll'=> $categories,
+                'Btn' => 'Ajouter',
+                'method'=>'add',
+                'title_page' => 'Catégorie']
+            );
+        } else {
+            header("location:../adminRegister/adminRegister");
+            exit();
+        }
     }
 
 
