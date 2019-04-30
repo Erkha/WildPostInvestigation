@@ -14,6 +14,7 @@ class AdminLiveController extends AbstractController
 {
     public function show()
     {
+
         if (!empty($_session)) {
             $adminLiveManager = new AdminLiveManager();
             $tabLive = $adminLiveManager->selectAll();
@@ -57,7 +58,7 @@ class AdminLiveController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $adminLiveManager = new AdminLiveManager();
             $addLive = ['content' => $_POST['content'],
-            'articleDate' => $_POST['articleDate']];
+                        'articleDate' => $_POST['articleDate']];
 
             $idLive = $adminLiveManager -> insert($addLive);
             header('Location:/adminLive/show');

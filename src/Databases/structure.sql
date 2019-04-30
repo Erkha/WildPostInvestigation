@@ -81,7 +81,7 @@ insert into category (name) values ('Politique');
 CREATE TABLE live
 (
 id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-articleDate VARCHAR(20) NOT NULL,
+articleDate datetime NOT NULL,
 content text NOT NULL,
 tag VARCHAR(30)
 );
@@ -102,3 +102,4 @@ insert into authors values (3,'TATOUT','Jean-Michel','JeanMichel','6aa0217156f74
 insert into authors values (4,'COCQUYT','Ludovic','Ludo','2313211948c563819479fa2e76342156',NULL);
 insert into authors values (5,'LABRHAILA','Jamal','Jamal','2513ebcd1c08dcb209ac4c7821ac5add',NULL);
 
+-- A voir avec Jamal requet pour seclet l'heure dans le live SELECT time(articleDate) FROM live;
