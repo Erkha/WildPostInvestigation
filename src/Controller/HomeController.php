@@ -22,9 +22,12 @@ class HomeController extends AbstractController
      */
     public function index()
     {
+        $articleManager = new AdminArticleManager();
+        $articles = $articleManager->selectAll();
         $categoryManager = new CategoryManager();
         $categories = $categoryManager->selectAll();
-        return $this->twig->render('Home/index.html.twig', ['categoryAll'=> $categories]);
+        //var_dump($articles);
+        return $this->twig->render('Home/index.html.twig', ['articles' => $articles,'categoryAll'=> $categorie]);
     }
 
     /**
