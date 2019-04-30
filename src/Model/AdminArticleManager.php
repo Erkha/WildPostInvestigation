@@ -154,4 +154,18 @@ class AdminArticleManager extends AbstractManager
             SET topArt = false WHERE topArt = true");
         return $statement->execute();
     }
+
+
+
+    public function selectPublishedCategoriesWithJoin($id): array
+    {
+        $statement=$this->pdo->prepare('  SELECT a.*, c.name as catName, lastname, firstname FROM articles a
+                                    JOIN category c ON a.categoryId = c.id
+                                    JOIN authors u ON a.authorId = u.id
+                                    WHERE c.id=:id');
+
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+        return $statement->fetchAll();
+    }
 }

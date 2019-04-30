@@ -43,4 +43,20 @@ class HomeController extends AbstractController
         return $this->twig->render('Home/article.html.twig', [
             'article'=>$article,'categoryAll'=> $categories]);
     }
+
+    public function categorieVu($id)
+    {
+        $articleManager = new AdminArticleManager();
+        $articles = $articleManager->selectPublishedCategoriesWithJoin($id);
+        $categoryManager = new CategoryManager();
+        $categories = $categoryManager->selectAll();
+        $titleCategorie = $categoryManager->selectOneById($id);
+
+        return $this->twig->render(
+            'Home/index.html.twig',
+            ['articles' => $articles,
+            'categoryAll'=> $categories,
+            'TitleCat'=>$titleCategorie]
+        );
+    }
 }

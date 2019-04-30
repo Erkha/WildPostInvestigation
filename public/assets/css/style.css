@@ -17,6 +17,11 @@ h1{
 	color: white;
 }
 
+.TitleCat{
+	font-weight:bold;
+	font-size:30px;
+}
+
 
 .md-form input{
   	color:black;
