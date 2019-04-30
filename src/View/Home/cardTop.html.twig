@@ -1,8 +1,9 @@
 <a href="/home/article/{{article.id}}" class="d-flex align-content-stretch artLink">
-  <div class="card my-2">
-    <img src="/{{article.imageName}}" class="card-img-top" alt="...">
+  <div class="card my-2 jmCardTop">
     <div class="card-body p-2 px-3">
+    <img src="/{{article.imageName}}" class="card-img-top" alt="...">
       <h5 class="card-title  mb-0 ">{{article.title}}</h5>
+      <div>{{article.content|striptags|slice(0,150)}}...</div>
     </div>
     <div class="card-footer text-muted py-1"> Par {{ article.author}}, publié le {{article.articleDate}}  </div>
   </div>
