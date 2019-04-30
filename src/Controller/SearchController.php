@@ -36,8 +36,10 @@ class SearchController extends AbstractController
                 $categoryManager = new CategoryManager();
                 $categories = $categoryManager->selectAll();
             
-                return $this->twig->render('Search/search.html.twig', 
-                            ['articles' => $articles,'categoryAll'=> $categories]);
+                return $this->twig->render(
+                    'Search/search.html.twig',
+                    ['articles' => $articles,'categoryAll'=> $categories]
+                );
             }
 
             return $this->twig->render('Home/navbar.html.twig');
