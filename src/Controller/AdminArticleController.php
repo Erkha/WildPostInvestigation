@@ -27,14 +27,16 @@ class AdminArticleController extends AbstractController
      * @throws \Twig\Error\SyntaxError
      */
 
-    public function index()
+    public function index(int $page = 1)
     {
         $articleManager = new AdminArticleManager();
-        $articles = $articleManager->selectArticlesWithJoin();
+        $articles = $articleManager->selectPagedArticlesWithJoin($page);
+        $nbArticles = $articleManager->countArticles();
+        $nbPages = ceil($nbArticles['nb']/5);
 
         return $this->twig->render(
             'AdminArticle/AdminArticleList.html.twig',
-            ['articles' => $articles]
+            ['articles' => $articles, 'pages'=> $nbPages ]
         );
     }
 

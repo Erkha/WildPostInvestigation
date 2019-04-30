@@ -50,6 +50,30 @@ class AdminArticleManager extends AbstractManager
      *
      * @return array
      */
+    public function selectPagedArticlesWithJoin($page = 1): array
+    {
+        return $this->pdo->query('  SELECT a.*, c.name as catName, lastname, firstname FROM articles a
+                                    JOIN category c ON a.categoryId = c.id
+                                    JOIN authors u ON a.authorId = u.id
+                                    LIMIT '.($page-1) *5 .',5')->fetchAll();
+    }
+
+    /**
+     * Get all row from database.
+     *
+     * @return array
+     */
+    public function countArticles()
+    {
+        return $this->pdo->query('SELECT count(id) as nb FROM articles') ->fetch();
+    }
+
+
+    /**
+     * Get all row from database.
+     *
+     * @return array
+     */
     public function selectPublishedArticlesWithJoin(): array
     {
         return $this->pdo->query('  SELECT a.*, c.name as catName, lastname, firstname FROM articles a
@@ -179,6 +203,5 @@ class AdminArticleManager extends AbstractManager
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchAll();
-
     }
 }
