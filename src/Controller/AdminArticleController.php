@@ -29,15 +29,21 @@ class AdminArticleController extends AbstractController
 
     public function index(int $page = 1)
     {
-        $articleManager = new AdminArticleManager();
-        $articles = $articleManager->selectPagedArticlesWithJoin($page);
-        $nbArticles = $articleManager->countArticles();
-        $nbPages = ceil($nbArticles['nb']/5);
 
-        return $this->twig->render(
-            'AdminArticle/AdminArticleList.html.twig',
-            ['articles' => $articles, 'pages'=> $nbPages ]
-        );
+        if (!empty($_SESSION)) {
+            $articleManager = new AdminArticleManager();
+            $articles = $articleManager->selectPagedArticlesWithJoin($page);
+            $nbArticles = $articleManager->countArticles();
+            $nbPages = ceil($nbArticles['nb']/5);
+
+            return $this->twig->render(
+                'AdminArticle/AdminArticleList.html.twig',
+                ['articles' => $articles, 'pages'=> $nbPages ]
+            );
+        } else {
+            header("location:../adminRegister/adminRegister");
+            exit();
+        }
     }
 
     /**
