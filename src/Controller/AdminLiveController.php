@@ -17,6 +17,7 @@ class AdminLiveController extends AbstractController
         $adminLiveManager = new AdminLiveManager();
         $tabLive = $adminLiveManager->selectAll();
         $date = new \DateTime();
+        var_dump($date);
         return $this->twig->render(
             'AdminLive/AdminLiveForm.html.twig',
             ['liveAll'=> $tabLive,
@@ -52,7 +53,7 @@ class AdminLiveController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $adminLiveManager = new AdminLiveManager();
             $addLive = ['content' => $_POST['content'],
-            'articleDate' => $_POST['articleDate']];
+                        'articleDate' => $_POST['articleDate']];
 
             $idLive = $adminLiveManager -> insert($addLive);
             header('Location:/adminLive/show');

@@ -20,7 +20,7 @@
         	<textarea class="form-control {{isValid.content}}" id="content" name="content" placeholder="140 caracteres maxi" required="">{{ values.content }}</textarea>
         </td>
         <td class=>
-          <input type="" name="articleDate" value="{{ dateHeure.date|date("G:i d-m-Y") }}"> 
+          <input type="" name="articleDate" value="{{ dateHeure.date|date("Y-m-d G:i:s") }}"> 
   		  </td>
         <td class="">
         	<button type="submit" class="btn btn-dark btn-sm  ">{{ buttonName }}</button>
