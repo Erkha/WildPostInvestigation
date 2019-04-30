@@ -162,8 +162,12 @@ class AdminArticleManager extends AbstractManager
     public function searchArticles($search)
     {
 
-        $articlesRes = $this->pdo->prepare("SELECT * FROM $this->table WHERE title LIKE :title
-                      OR content LIKE :content");
+        $articlesRes = $this->pdo->prepare("SELECT * FROM $this->table 
+                    INNER JOIN category ON category.id = $this->table.categoryId
+                    INNER JOIN authors ON  authors.id = $this->table.authorId
+                    WHERE published = 1
+                    AND (title LIKE :title
+                      OR content LIKE :content )");
         $articlesRes->bindValue('title', '%'.$search.'%', \PDO::PARAM_STR) ;
         $articlesRes->bindValue('content', '%'.$search.'%', \PDO::PARAM_STR) ;
         $articlesRes->execute();
