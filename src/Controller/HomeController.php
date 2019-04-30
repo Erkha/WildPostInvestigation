@@ -22,7 +22,7 @@ class HomeController extends AbstractController
     public function index()
     {
         $articleManager = new AdminArticleManager();
-        $articles = $articleManager->selectAll();
+        $articles = $articleManager->selectPublishedArticlesWithJoin();
         //var_dump($articles);
         return $this->twig->render('Home/index.html.twig', ['articles' => $articles]);
     }

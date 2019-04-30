@@ -48,6 +48,19 @@ class AdminArticleManager extends AbstractManager
      *
      * @return array
      */
+    public function selectPublishedArticlesWithJoin(): array
+    {
+        return $this->pdo->query('  SELECT a.*, c.name as catName, lastname, firstname FROM articles a
+                                    JOIN category c ON a.categoryId = c.id
+                                    JOIN authors u ON a.authorId = u.id
+                                    WHERE published = 1
+            ')->fetchAll();
+    }
+    /**
+     * Get all row from database.
+     *
+     * @return array
+     */
     public function selectArticleByIdwithCatName(int $id): array
     {
         $statement=$this->pdo->prepare('SELECT a.*, c.name as catName, lastname, firstname FROM articles a

@@ -13,7 +13,7 @@
 			<p class = "category"> {{article.catName}}  </p>
 
 			<h3 class="articleTitle">{{article.title}}</h3>
-			<p class ="details"> Par {{article.author}} Publié le {{article.articleDate|date("d/m/Y")}}</p>
+			<p class ="details"> Par {{article.firstname|capitalize}} {{article.lastname|capitalize}} Publié le {{article.articleDate|date("d/m/Y")}}</p>
 		</div>
 
 		<article class="col-md-9">
