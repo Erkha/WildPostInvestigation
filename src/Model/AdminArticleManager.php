@@ -12,6 +12,8 @@
 
 namespace App\Model;
 
+use \PDO;
+
 /**
  *
  */
@@ -156,6 +158,16 @@ class AdminArticleManager extends AbstractManager
     }
 
 
+    /* liste articles par recherche (search) */
+    public function searchArticles($search)
+    {
+        
+        $articlesRes = $this->pdo->query("SELECT * FROM $this->table WHERE title LIKE '%"
+                        .$search ."%' OR content LIKE '%" .$search ."%'");
+
+        $articlesRech = $articlesRes->fetchall(PDO::FETCH_ASSOC);
+        return $articlesRech;
+    }
 
     public function selectPublishedCategoriesWithJoin($id): array
     {
@@ -167,5 +179,6 @@ class AdminArticleManager extends AbstractManager
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchAll();
+
     }
 }
