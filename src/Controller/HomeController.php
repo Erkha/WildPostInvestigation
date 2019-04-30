@@ -23,7 +23,7 @@ class HomeController extends AbstractController
     public function index()
     {
         $articleManager = new AdminArticleManager();
-        $articles = $articleManager->selectAll();
+        $articles = $articleManager->selectPublishedArticlesWithJoin();
         $categoryManager = new CategoryManager();
         $categories = $categoryManager->selectAll();
         //var_dump($articles);
