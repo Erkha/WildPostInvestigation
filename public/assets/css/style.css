@@ -66,27 +66,14 @@ input{
 	
 }
 
+.bodyLeft{
+	width:70% !important;
+}
 
+.vLeft{
+	width:25% !important;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.textLayout,.textLeft,.textTop{
+	margin-bottom:20px !important;
+}

@@ -1,21 +1,34 @@
 
-body {
-    padding-top:70px;
-    
+.adminBody
+{
+    padding : 20px;
+}
+.adminTitle
+{
+    background-color : black !important;
+    color : white !important;
 }
 
-.panel-heading {
-    font-family:UnifrakturMaguntia;
-    padding: 5px 15px;     
-    
+.adminFooter
+{
+    background-color : #7a788b  !important;
+    color : white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+
 }
 
-.panel-body {
-    padding-left: 350px;
+.textFooter
+{
+    padding : 20px;
+    font-family:URW Chancery L, cursive !important;
+    font-size: 25px; 
 }
 
 .author{
-    font-family:UnifrakturMaguntia;
+    font-family:URW Chancery L, cursive !important;
 }
 
 .user
@@ -38,14 +51,16 @@ a
 .btnuser
 {
     width : 200px !important;
+    background-color :  #7a788b   !important;
+    color : white;
 }
 
-.btnauthor
+#btnauthor
 {
     width : 200px !important;
 }
 
-.userquit
+#userquit
 {
     width : 200px !important;
     float : right;
@@ -54,19 +69,11 @@ a
 
 
 
+
 @media  ( max-width:768px ){
-    
-    .panel-heading {
-        font-family:UnifrakturMaguntia;
-        padding: 5px 15px;       
-    }
-    
-    .panel-body {
-        padding-left: 50px;
-        
-    }
+
     .author{
-        font-family:UnifrakturMaguntia;
+        font-family:URW Chancery L, cursive;
     }
 
 }

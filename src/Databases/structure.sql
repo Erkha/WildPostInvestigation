@@ -99,3 +99,8 @@ CREATE TABLE `authors` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
+insert into authors values (2,'CORTES','Nathalie,'Nath','4a8abe5d23109378be454abab48edc43',NULL);
+insert into authors values (3,'TATOUT','Jean-Michel','JeanMichel','6aa0217156f74a22fc6e0998ea1f8250',NULL);
+insert into authors values (4,'COCQUYT','Ludovic','Ludo','2313211948c563819479fa2e76342156',NULL);
+insert into authors values (5,'LABRHAILA',Jamal','Jamal','2513ebcd1c08dcb209ac4c7821ac5add',NULL);
+
