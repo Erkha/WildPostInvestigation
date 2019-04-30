@@ -166,9 +166,8 @@ class AdminArticleManager extends AbstractManager
                       OR content LIKE :content");
         $articlesRes->bindValue('title', '%'.$search.'%', \PDO::PARAM_STR) ;
         $articlesRes->bindValue('content', '%'.$search.'%', \PDO::PARAM_STR) ;
-        $articlesRes->execute();   
-        return $articlesRes-> fetchAll();    
-
+        $articlesRes->execute();
+        return $articlesRes-> fetchAll();
     }
 
     public function selectPublishedCategoriesWithJoin($id): array
@@ -181,6 +180,5 @@ class AdminArticleManager extends AbstractManager
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchAll();
-
     }
 }

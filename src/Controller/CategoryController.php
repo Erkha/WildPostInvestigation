@@ -31,17 +31,17 @@ class CategoryController extends AbstractController
      
     public function show()
     {
-        if (!empty($_SESSION)){
-        $categoryManager = new CategoryManager();
-        $categories = $categoryManager->selectAll();
+        if (!empty($_SESSION)) {
+            $categoryManager = new CategoryManager();
+            $categories = $categoryManager->selectAll();
 
-        return $this->twig->render(
-            'Category/category_add.html.twig',
-            ['categoryAll'=> $categories,
-            'Btn' => 'Ajouter',
-            'method'=>'add',
-            'title_page' => 'Catégorie']
-        );
+            return $this->twig->render(
+                'Category/category_add.html.twig',
+                ['categoryAll'=> $categories,
+                'Btn' => 'Ajouter',
+                'method'=>'add',
+                'title_page' => 'Catégorie']
+            );
         } else {
             header("location:../adminRegister/adminRegister");
             exit();

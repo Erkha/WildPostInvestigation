@@ -29,7 +29,7 @@ class AdminArticleController extends AbstractController
 
     public function index()
     {
-        if (!empty($_SESSION)){
+        if (!empty($_SESSION)) {
             $articleManager = new AdminArticleManager();
             $articles = $articleManager->selectArticlesWithJoin();
 
