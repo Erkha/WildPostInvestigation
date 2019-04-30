@@ -25,7 +25,7 @@ class HomeController extends AbstractController
         $articleManager = new AdminArticleManager();
         $articles = $articleManager->selectPublishedArticlesWithJoin();
         $categoryManager = new CategoryManager();
-        $categories = $categoryManager->selectAll();
+        $categorie = $categoryManager->selectAll();
         //var_dump($articles);
         return $this->twig->render('Home/index.html.twig', ['articles' => $articles,'categoryAll'=> $categorie]);
     }
