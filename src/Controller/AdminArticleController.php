@@ -29,8 +29,7 @@ class AdminArticleController extends AbstractController
 
     public function index(int $page = 1)
     {
-
-        if (!empty($_SESSION)) {
+        
             $articleManager = new AdminArticleManager();
             $articles = $articleManager->selectPagedArticlesWithJoin($page);
             $nbArticles = $articleManager->countArticles();
@@ -40,10 +39,7 @@ class AdminArticleController extends AbstractController
                 'AdminArticle/AdminArticleList.html.twig',
                 ['articles' => $articles, 'pages'=> $nbPages ]
             );
-        } else {
-            header("location:../adminRegister/adminRegister");
-            exit();
-        }
+        
     }
 
     /**

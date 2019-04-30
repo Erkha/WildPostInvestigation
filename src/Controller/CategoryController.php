@@ -31,7 +31,7 @@ class CategoryController extends AbstractController
      
     public function show()
     {
-        if (!empty($_SESSION)) {
+        
             $categoryManager = new CategoryManager();
             $categories = $categoryManager->selectAll();
 
@@ -42,10 +42,7 @@ class CategoryController extends AbstractController
                 'method'=>'add',
                 'title_page' => 'Catégorie']
             );
-        } else {
-            header("location:../adminRegister/adminRegister");
-            exit();
-        }
+    
     }
 
 
