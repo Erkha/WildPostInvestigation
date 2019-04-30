@@ -1,0 +1,47 @@
+{% extends 'layout.html.twig' %}
+    {% block stylesheet %}<link href="/assets/css/home.css" rel="stylesheet">{% endblock %}
+
+{% block content %}
+	<div class="contain pt-2">
+		<section>
+			<div class="container">
+				<div class="row ">
+
+					<div class="col-lg-9 ">
+						
+{#-------ACTUALITE LIGNE 3----------------------------- #}
+						<div class="row ">
+							{% for article in articles %}
+							<div class="col-lg-9 d-flex align-items-stretch">
+								{% include 'Home/cardLeft.html.twig' %}
+							</div>	
+							{% endfor %}
+						</div>
+					</div>
+{# --------Fin Block actualite 9 ------------------------#}
+					
+
+{#-------- Block Aside info en continu ------------------#}
+					<div class="col-lg-3  flex-column d-flex align-items-stretch">
+						{% for i in 1..12  %}
+							{% include 'Home/asidelist.html.twig' %}
+							<br>
+						{% endfor %}
+
+						<div class="plus unique-color  h-100 mb-3">
+							<a href="" class="text-white">
+							<span>Voir plus</span>
+							</a>
+						</div>
+
+					</div>
+				</div>
+				{# row actualite #}
+				
+			</div>	
+			{# div container #}
+		</section>			  
+	</div>	{# div contain #}		
+			
+
+{% endblock %}

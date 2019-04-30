@@ -12,6 +12,8 @@
 
 namespace App\Model;
 
+use \PDO;
+
 /**
  *
  */
@@ -138,5 +140,16 @@ class AdminArticleManager extends AbstractManager
         $statement = $this->pdo->prepare("UPDATE $this->table 
             SET topArt = false WHERE topArt = true");
         return $statement->execute();
+    }
+
+    /* liste articles par recherche (search) */
+    public function searchArticles($search)
+    {
+        
+        $articlesRes = $this->pdo->query("SELECT * FROM $this->table WHERE title LIKE '%"
+                        .$search ."%' OR content LIKE '%" .$search ."%'");
+
+        $articlesRech = $articlesRes->fetchall(PDO::FETCH_ASSOC);
+        return $articlesRech;
     }
 }
