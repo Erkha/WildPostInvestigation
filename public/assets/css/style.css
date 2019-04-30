@@ -14,13 +14,14 @@ h1{
 .nav-link,.dropdown-item{
 	font-weight:bold;
 	font-size:20px;
+	color: white;
 }
 
 
 .md-form input{
   	color:black;
   	font-weight:bold;
-  
+
 }
 
 .logo{
@@ -37,6 +38,7 @@ input{
 
 .input-group{
 	width:250px !important;
+	margin-top: 4px;
 }
 
 
@@ -44,7 +46,7 @@ input{
 .logoHome{
 	width:40px !important;
 	height:40px !important;
-	margin-top:5px;
+
 }
 
 .content{

@@ -8,6 +8,7 @@
 namespace App\Controller;
 
 use App\Model\AdminArticleManager;
+use App\Model\CategoryManager;
 
 class HomeController extends AbstractController
 {
@@ -23,8 +24,10 @@ class HomeController extends AbstractController
     {
         $articleManager = new AdminArticleManager();
         $articles = $articleManager->selectAll();
+        $categoryManager = new CategoryManager();
+        $categories = $categoryManager->selectAll();
         //var_dump($articles);
-        return $this->twig->render('Home/index.html.twig', ['articles' => $articles]);
+        return $this->twig->render('Home/index.html.twig', ['articles' => $articles,'categoryAll'=> $categorie]);
     }
 
     /**
