@@ -5,6 +5,7 @@
       <h5 class="card-title  mb-0 ">{{article.title}}</h5>
       <div>{{article.content|striptags|slice(0,150)}}...</div>
     </div>
-    <div class="card-footer text-muted py-1"> Par {{article.firstname|capitalize}} {{article.lastname|capitalize}}, publié le {{article.articleDate}}  </div>
+    <div class="card-footer text-muted py-1"> Par {{article.firstname|capitalize}} {{article.lastname|capitalize}}, publié le {{article.articleDate}}, <a href='/home/article/ {{ article.id }}#disqus_thread'></a> </div>
   </div>
 </a>
+

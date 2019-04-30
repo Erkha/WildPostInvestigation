@@ -25,9 +25,8 @@ class HomeController extends AbstractController
         $articleManager = new AdminArticleManager();
         $articles = $articleManager->selectPublishedArticlesWithJoin();
         $categoryManager = new CategoryManager();
-        $categorie = $categoryManager->selectAll();
-        //var_dump($articles);
-        return $this->twig->render('Home/index.html.twig', ['articles' => $articles,'categoryAll'=> $categorie]);
+        $categories = $categoryManager->selectAll();
+        return $this->twig->render('Home/index.html.twig', ['articles' => $articles,'categoryAll'=> $categories]);
     }
 
     /**
@@ -40,8 +39,8 @@ class HomeController extends AbstractController
         $articleManager = new AdminArticleManager();
         $article = $articleManager->selectArticleByIdwithCatName($id);
         $categoryManager = new CategoryManager();
-        $categorie = $categoryManager->selectAll();
+        $categories = $categoryManager->selectAll();
         return $this->twig->render('Home/article.html.twig', [
-            'article'=>$article,'categoryAll'=> $categorie]);
+            'article'=>$article,'categoryAll'=> $categories]);
     }
 }
