@@ -60,53 +60,54 @@ class AdminRegisterController extends AbstractController
 
     public function adminAuthor()
     {
-       
-        // verif saisie author
-        $errors=[];
-        $values=[];
-        $_SESSION['doujeviensAuthor']='createAuthor';
+        
+            // verif saisie author
+            $errors=[];
+            $values=[];
+            $_SESSION['doujeviensAuthor']='createAuthor';
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            //$_POST['password'] = md5($_POST['password']);
-            //$_POST['confpassword'] = md5($_POST['confpassword']);
-            $admin = ['username' => $_POST['username'], 'password' => $_POST['password'],
-                    'lastname'=> $_POST ['lastname'], 'firstname' => $_POST['firstname'],
-                    'confpassword'=>$_POST['confpassword'],
-                    'id'=>$_POST['id']];
-            $result = $this->verifyAuthors($admin, 'create');
-            $errors = $result['errors'];
-            $values = $result['values'];
-            
-            if (empty($errors)) {
-                $authorManager = new AdminRegisterManager();
-                $errors['lastname'] = $authorManager->authorExist($admin['lastname'], $admin['firstname']);
-               
-                if (is_null($errors['lastname'])) {
-                    // test username et password
-                    $admin['password'] = md5($admin['password']);
-                    //$_POST['confpassword'] = md5($_POST['confpassword']);
-                    $adminManager = new AdminRegisterManager();
-                    $errors['password'] = $adminManager->userAdminExist($admin['username'], $admin['password'], 'UP');
-                    if (is_null($errors['password'])) {
-                        // add author
-                        $authorManager =  new AdminRegisterManager();
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                //$_POST['password'] = md5($_POST['password']);
+                //$_POST['confpassword'] = md5($_POST['confpassword']);
+                $admin = ['username' => $_POST['username'], 'password' => $_POST['password'],
+                        'lastname'=> $_POST ['lastname'], 'firstname' => $_POST['firstname'],
+                        'confpassword'=>$_POST['confpassword'],
+                        'id'=>$_POST['id']];
+                $result = $this->verifyAuthors($admin, 'create');
+                $errors = $result['errors'];
+                $values = $result['values'];
+                
+                if (empty($errors)) {
+                    $authorManager = new AdminRegisterManager();
+                    $errors['lastname'] = $authorManager->authorExist($admin['lastname'], $admin['firstname']);
+                
+                    if (is_null($errors['lastname'])) {
+                        // test username et password
+                        $admin['password'] = md5($admin['password']);
+                        //$_POST['confpassword'] = md5($_POST['confpassword']);
+                        $adminManager = new AdminRegisterManager();
+                        $errors['password'] = $adminManager->userAdminExist($admin['username'], $admin['password'], 'UP');
+                        if (is_null($errors['password'])) {
+                            // add author
+                            $authorManager =  new AdminRegisterManager();
 
-                        $id = $authorManager->authorInsert($values);
-                        $_SESSION['authorId'] = $id;
-                        $_SESSION['lastname'] = $admin['lastname'];
-                        $_SESSION['firstname'] = $admin['firstname'];
-                        
-                        header('Location: ../AdminRegister/AdminRegister');
-                        exit();
+                            $id = $authorManager->authorInsert($values);
+                            $_SESSION['authorId'] = $id;
+                            $_SESSION['lastname'] = $admin['lastname'];
+                            $_SESSION['firstname'] = $admin['firstname'];
+                            
+                            header('Location: ../AdminRegister/AdminRegister');
+                            exit();
+                        }
                     }
                 }
             }
-        }
-        
-        return $this->twig->render(
-            'Admin/adminAuthorForm.html.twig',
-            ['errors'=>$errors,'values'=>$values,'title2'=>'Création Auteur','session'=>$_SESSION]
-        );
+            
+            return $this->twig->render(
+                'Admin/adminAuthorForm.html.twig',
+                ['errors'=>$errors,'values'=>$values,'title2'=>'Création Auteur','session'=>$_SESSION]
+            );
+
     }
 
     private function verifyAuthors($author, $quoi)

@@ -161,12 +161,14 @@ class AdminArticleManager extends AbstractManager
     /* liste articles par recherche (search) */
     public function searchArticles($search)
     {
-        
-        $articlesRes = $this->pdo->query("SELECT * FROM $this->table WHERE title LIKE '%"
-                        .$search ."%' OR content LIKE '%" .$search ."%'");
 
-        $articlesRech = $articlesRes->fetchall(PDO::FETCH_ASSOC);
-        return $articlesRech;
+        $articlesRes = $this->pdo->prepare("SELECT * FROM $this->table WHERE title LIKE :title
+                      OR content LIKE :content");
+        $articlesRes->bindValue('title', '%'.$search.'%', \PDO::PARAM_STR) ;
+        $articlesRes->bindValue('content', '%'.$search.'%', \PDO::PARAM_STR) ;
+        $articlesRes->execute();   
+        return $articlesRes-> fetchAll();    
+
     }
 
     public function selectPublishedCategoriesWithJoin($id): array

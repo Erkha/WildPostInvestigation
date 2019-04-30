@@ -14,6 +14,7 @@ class AdminLiveController extends AbstractController
 {
     public function show()
     {
+        if (!empty($_session)){
         $adminLiveManager = new AdminLiveManager();
         $tabLive = $adminLiveManager->selectAll();
         $date = new \DateTime();
@@ -25,6 +26,10 @@ class AdminLiveController extends AbstractController
             'dateHeure'=> $date,
             'title2' => 'Live-News']
         );
+        } else {
+            header("location:../adminRegister/adminRegister");
+            exit();
+        }
     }
     public function edit(int $id): string
     {

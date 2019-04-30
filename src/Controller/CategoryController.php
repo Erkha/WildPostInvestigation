@@ -27,26 +27,11 @@ class CategoryController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    // public function index()
-    // {
-    //     // $itemManager = new ItemManager();
-    //     // $items = $itemManager->selectAll();
 
-    //     return $this->twig->render('Category/category.html.twig');
-    // }
-
-
-    // *
-    //  * Display item informations specified by $id
-    //  *
-    //  * @param int $id
-    //  * @return string
-    //  * @throws \Twig\Error\LoaderError
-    //  * @throws \Twig\Error\RuntimeError
-    //  * @throws \Twig\Error\SyntaxError
      
     public function show()
     {
+        if (!empty($_SESSION)){
         $categoryManager = new CategoryManager();
         $categories = $categoryManager->selectAll();
 
@@ -57,6 +42,10 @@ class CategoryController extends AbstractController
             'method'=>'add',
             'title_page' => 'Catégorie']
         );
+        } else {
+            header("location:../adminRegister/adminRegister");
+            exit();
+        }
     }
 
 

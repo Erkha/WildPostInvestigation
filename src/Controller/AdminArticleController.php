@@ -29,13 +29,18 @@ class AdminArticleController extends AbstractController
 
     public function index()
     {
-        $articleManager = new AdminArticleManager();
-        $articles = $articleManager->selectArticlesWithJoin();
+        if (!empty($_SESSION)){
+            $articleManager = new AdminArticleManager();
+            $articles = $articleManager->selectArticlesWithJoin();
 
-        return $this->twig->render(
-            'AdminArticle/AdminArticleList.html.twig',
-            ['articles' => $articles]
-        );
+            return $this->twig->render(
+                'AdminArticle/AdminArticleList.html.twig',
+                ['articles' => $articles]
+            );
+        } else {
+            header("location:../adminRegister/adminRegister");
+            exit();
+        }
     }
 
     /**
