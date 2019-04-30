@@ -60,11 +60,11 @@ class AdminRegisterController extends AbstractController
 
     public function adminAuthor()
     {
-       
-        // verif saisie author
-        $errors=[];
-        $values=[];
-        $_SESSION['doujeviensAuthor']='createAuthor';
+        
+            // verif saisie author
+            $errors=[];
+            $values=[];
+            $_SESSION['doujeviensAuthor']='createAuthor';
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             //$_POST['password'] = md5($_POST['password']);
@@ -76,11 +76,11 @@ class AdminRegisterController extends AbstractController
             $result = $this->verifyAuthors($admin, 'create');
             $errors = $result['errors'];
             $values = $result['values'];
-            
+                
             if (empty($errors)) {
                 $authorManager = new AdminRegisterManager();
                 $errors['lastname'] = $authorManager->authorExist($admin['lastname'], $admin['firstname']);
-               
+                
                 if (is_null($errors['lastname'])) {
                     // test username et password
                     $admin['password'] = md5($admin['password']);
@@ -95,18 +95,18 @@ class AdminRegisterController extends AbstractController
                         $_SESSION['authorId'] = $id;
                         $_SESSION['lastname'] = $admin['lastname'];
                         $_SESSION['firstname'] = $admin['firstname'];
-                        
+                            
                         header('Location: ../AdminRegister/AdminRegister');
                         exit();
                     }
                 }
             }
         }
-        
-        return $this->twig->render(
-            'Admin/adminAuthorForm.html.twig',
-            ['errors'=>$errors,'values'=>$values,'title2'=>'Création Auteur','session'=>$_SESSION]
-        );
+            
+            return $this->twig->render(
+                'Admin/adminAuthorForm.html.twig',
+                ['errors'=>$errors,'values'=>$values,'title2'=>'Création Auteur','session'=>$_SESSION]
+            );
     }
 
     private function verifyAuthors($author, $quoi)

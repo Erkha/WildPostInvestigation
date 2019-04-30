@@ -24,13 +24,18 @@ class AdminAuthorController extends AbstractController
 
     public function index()
     {
-        $authorManager = new AdminRegisterManager();
-        $authors = $authorManager->selectAll();
+        if (!empty($_SESSION)) {
+            $authorManager = new AdminRegisterManager();
+            $authors = $authorManager->selectAll();
 
-        return $this->twig->render(
-            'Admin/adminAuthorList.html.twig',
-            ['authors' => $authors]
-        );
+            return $this->twig->render(
+                'Admin/adminAuthorList.html.twig',
+                ['authors' => $authors]
+            );
+        } else {
+            header("location:../adminRegister/adminRegister");
+            exit();
+        }
     }
 
     public function authorNotValidated()
