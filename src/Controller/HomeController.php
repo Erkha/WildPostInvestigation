@@ -39,7 +39,9 @@ class HomeController extends AbstractController
     {
         $articleManager = new AdminArticleManager();
         $article = $articleManager->selectArticleByIdwithCatName($id);
+        $categoryManager = new CategoryManager();
+        $categorie = $categoryManager->selectAll();
         return $this->twig->render('Home/article.html.twig', [
-            'article'=>$article]);
+            'article'=>$article,'categoryAll'=> $categorie]);
     }
 }
