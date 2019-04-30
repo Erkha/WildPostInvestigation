@@ -37,10 +37,11 @@ class AdminArticleManager extends AbstractManager
      *
      * @return array
      */
-    public function selectArticleswithCatName(): array
+    public function selectArticlesWithJoin(): array
     {
-        return $this->pdo->query('  SELECT a.*, c.name as catName FROM articles a
-                                    JOIN category c ON a.category = c.id
+        return $this->pdo->query('  SELECT a.*, c.name as catName, lastname, firstname FROM articles a
+                                    JOIN category c ON a.categoryId = c.id
+                                    JOIN authors u ON a.authorId = u.id
             ')->fetchAll();
     }
 
@@ -49,10 +50,24 @@ class AdminArticleManager extends AbstractManager
      *
      * @return array
      */
+    public function selectPublishedArticlesWithJoin(): array
+    {
+        return $this->pdo->query('  SELECT a.*, c.name as catName, lastname, firstname FROM articles a
+                                    JOIN category c ON a.categoryId = c.id
+                                    JOIN authors u ON a.authorId = u.id
+                                    WHERE published = 1
+            ')->fetchAll();
+    }
+    /**
+     * Get all row from database.
+     *
+     * @return array
+     */
     public function selectArticleByIdwithCatName(int $id): array
     {
-        $statement=$this->pdo->prepare('  SELECT a.*, c.name as catName FROM articles a
-                                    JOIN category c ON a.category = c.id
+        $statement=$this->pdo->prepare('SELECT a.*, c.name as catName, lastname, firstname FROM articles a
+                                    JOIN category c ON a.categoryId = c.id
+                                    JOIN authors u ON a.authorId = u.id
                                     WHERE a.id=:id');
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
@@ -69,13 +84,13 @@ class AdminArticleManager extends AbstractManager
     {
         // prepared request
         $statement = $this->pdo->prepare("INSERT INTO $this->table 
-            (title, articleDate, author, category, tag, content,topArt, published, imageName) 
-            VALUES (:title, :articleDate, :author, :category,
+            (title, articleDate, authorId, categoryId, tag, content,topArt, published, imageName) 
+            VALUES (:title, :articleDate, :authorId, :categoryId,
                     :tag, :content, :topArt, :published, :imageName)");
         $statement->bindValue('title', $values['title'], \PDO::PARAM_STR);
         $statement->bindValue('articleDate', $values['articleDate'], \PDO::PARAM_STR);
-        $statement->bindValue('author', $values['author'], \PDO::PARAM_STR);
-        $statement->bindValue('category', $values['category'], \PDO::PARAM_STR);
+        $statement->bindValue('authorId', $values['authorId'], \PDO::PARAM_STR);
+        $statement->bindValue('categoryId', $values['categoryId'], \PDO::PARAM_STR);
         $statement->bindValue('tag', $values['tag'], \PDO::PARAM_STR);
         $statement->bindValue('content', $values['content'], \PDO::PARAM_STR);
         $statement->bindValue('topArt', $values['topArt'], \PDO::PARAM_BOOL);
@@ -110,8 +125,8 @@ class AdminArticleManager extends AbstractManager
         $statement = $this->pdo->prepare("UPDATE $this->table 
             SET title = :title,
                 articleDate = :articleDate,
-                author = :author,
-                category = :category,
+                authorId = :authorId,
+                categoryId = :categoryId,
                 tag = :tag,
                 topArt = :topArt,
                 published = :published,
@@ -120,8 +135,8 @@ class AdminArticleManager extends AbstractManager
         $statement->bindValue(':id', $values['id'], \PDO::PARAM_INT);
         $statement->bindValue('title', $values['title'], \PDO::PARAM_STR);
         $statement->bindValue('articleDate', $values['articleDate'], \PDO::PARAM_STR);
-        $statement->bindValue('author', $values['author'], \PDO::PARAM_STR);
-        $statement->bindValue('category', $values['category'], \PDO::PARAM_STR);
+        $statement->bindValue('authorId', $values['authorId'], \PDO::PARAM_INT);
+        $statement->bindValue('categoryId', $values['categoryId'], \PDO::PARAM_INT);
         $statement->bindValue('tag', $values['tag'], \PDO::PARAM_STR);
         $statement->bindValue('content', $values['content'], \PDO::PARAM_STR);
         $statement->bindValue('topArt', $values['topArt'], \PDO::PARAM_BOOL);
@@ -142,6 +157,7 @@ class AdminArticleManager extends AbstractManager
         return $statement->execute();
     }
 
+
     /* liste articles par recherche (search) */
     public function searchArticles($search)
     {
@@ -151,5 +167,18 @@ class AdminArticleManager extends AbstractManager
 
         $articlesRech = $articlesRes->fetchall(PDO::FETCH_ASSOC);
         return $articlesRech;
+    }
+
+    public function selectPublishedCategoriesWithJoin($id): array
+    {
+        $statement=$this->pdo->prepare('  SELECT a.*, c.name as catName, lastname, firstname FROM articles a
+                                    JOIN category c ON a.categoryId = c.id
+                                    JOIN authors u ON a.authorId = u.id
+                                    WHERE c.id=:id');
+
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+        return $statement->fetchAll();
+
     }
 }

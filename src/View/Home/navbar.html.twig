@@ -19,7 +19,7 @@
   <!-- Boucle categorie navbar -->
      {% for categories in categoryAll %}
       <li>
-          <a class="dropdown-item" href="#">{{ categories.name }}</a>
+          <a class="dropdown-item" href="/home/categorieVu/{{categories.id}}">{{ categories.name }}</a>
       </li>
       {% endfor %}
       <li>
