@@ -1,81 +1,40 @@
 <!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark  stylish-color-dark" >
 
-<nav class="navbar  navbar-expand-lg navbar-dark  stylish-color-dark sticky-bottom " >
-   
 
-  
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
     aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
   <!-- Collapsible content -->
-  <div class="collapse navbar-collapse" id="basicExampleNav">
+  <div class="collapse navbar-collapse special-color" id="basicExampleNav">
     <ul class="navbar-nav w-100 justify-content-around">
         
         <div class="logoHome ">
-          <a class="nav-link logo" href="/article/index">
+          <a class="nav-link logo" href="/home/index">
             <i class="fas fa-home"></i>
           </a>
         </div>
-
-       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">Actualité</a>
-        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">International</a>
-          <a class="dropdown-item" href="#">Politique</a>
-          <a class="dropdown-item" href="#">Sport</a>
-          <a class="dropdown-item" href="#">Société</a>
-          <a class="dropdown-item" href="#">Santé</a>
-        </div>
+  <!-- Boucle categorie navbar -->
+     {% for categories in categoryAll %}
+      <li>
+          <a class="dropdown-item" href="#">{{ categories.name }}</a>
       </li>
-
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">Economie</a>
-        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">International</a>
-          <a class="dropdown-item" href="#">National</a>
-          <a class="dropdown-item" href="#">Emploi</a>
-        </div>
-      </li>
-
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">Société</a>
-        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Santé</a>
-          <a class="dropdown-item" href="#">Education</a>
-          <a class="dropdown-item" href="#">Logement</a>
-        </div>
-      </li>
-
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">Enquête</a>
-        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Vol Braquage</a>
-          <a class="dropdown-item" href="#">Meurtre</a>
-          <a class="dropdown-item" href="#">Stupéfiant</a>
-        </div>
-      </li>
-    </ul>
-    <!-- Links -->
-
-      
-
-
-  </div>
-  <!-- Collapsible content -->
-
-    <div class="input-group md-form form-sm form-1 pl-0">
+      {% endfor %}
+      <li><div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text white lighten-3" id="basic-text1"><i class="fas fa-search text-stylish-color-dark"
         aria-hidden="true"></i></span>
       </div>
       <input class="form-control my-0 py-1" type="text" placeholder="Search" aria-label="Search">
-    </div>
+    </div></li>
+    </ul>
+    <!-- Links -->
+
+  </div>
+  <!-- Collapsible content -->
+
+       
 
 </nav>
 <!--/.Navbar-->
