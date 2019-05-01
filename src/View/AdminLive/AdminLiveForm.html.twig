@@ -2,15 +2,14 @@
 
 {% block content %}
 <div class="container">
-	<h2 class="mt-2">{{ title2 }}</h2>
-	<a href="/adminArticle/index"> Retour à la liste des articles</a>
+	<h2 class="mt-2" style = "font-family:URW Chancery L, cursive !important">{{ title2 }}</h2>
   <form action="/adminLive/{{method}}" method="POST" class="" >
   	<table class="table table-striped text-center">
     <thead>
       <tr>
         <th scope="col" style="width:60%">Contenu</th>
         <th scope="col" style="width:30%">Date</th>
-        <th scope="col"style="width:10%">Action</th>
+        <th scope="col" style="width:10%">Action</th>
       </tr>
     </thead>
     <tbody>

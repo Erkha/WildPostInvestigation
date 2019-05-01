@@ -17,7 +17,6 @@ class AdminLiveController extends AbstractController
         $adminLiveManager = new AdminLiveManager();
         $tabLive = $adminLiveManager->selectAll();
         $date = new \DateTime();
-        var_dump($date);
         return $this->twig->render(
             'AdminLive/AdminLiveForm.html.twig',
             ['liveAll'=> $tabLive,

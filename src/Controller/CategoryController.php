@@ -55,7 +55,7 @@ class CategoryController extends AbstractController
             ['categoryAll'=> $categories,
             'Btn' => 'Ajouter',
             'method'=>'add',
-            'title_page' => 'Catégorie']
+            'title_page' => ' Liste des catégories']
         );
     }
 
