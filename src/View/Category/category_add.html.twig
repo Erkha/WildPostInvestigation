@@ -2,18 +2,10 @@
 {% block content %}
 <div class="container">
   <h2 class="author mt-2" style = "font-family:URW Chancery L, cursive !important">{{ title_page }}</h2>
-{#   	<form action="/Category/{{method}}" class="border border-light p-5" method="post">
-  <div class="row">
-  	    <!-- Name -->
-  	    <input type="text" id="defaultSubscriptionFormPassword" class="form-control col-8" placeholder="Nouvelle categorie" name="name" value="{{ values.name }}">
-  	    <button class="btn btn-dark btn-sm   waves-effect waves-light" type="submit">{{Btn}}</button>
-  </div>
-  	</form> #}
-
-
-
 </div>
+
 <div class="container">
+   	<form action="/Category/{{method}}" class="border border-light" method="post">
     <table class="table table-striped text-center">
           <thead>
       <tr>
@@ -29,7 +21,7 @@
           <button class="btn btn-dark btn-sm   waves-effect waves-light" type="submit">{{Btn}}</button>
         </td>
       </tr>
-        
+
         
 
         	{% for category in categoryAll %}
@@ -44,6 +36,7 @@
 
         </tbody>
     </table>
+    </form>
     {% if deleteNo == true %}
       <span class = "badge badge-warning"> Cette catégorie est non vide, réaffectez les articles avant de la supprimer</span>
     {% endif %}
