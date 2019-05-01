@@ -1,0 +1,105 @@
+{% extends 'adminLayout.html.twig' %}
+
+{% block content %}
+
+<div class="container-fluid " style = "padding : 20px" >
+	<h2 class="author" style = "font-family:URW Chancery L, cursive !important">{{title2}}</h2>
+	<form action="" method="POST">
+		<input id="id" name="id" type="hidden" value="{{values.id}}">
+		<div class="row justify-content-center">
+			<div class="form-row col-4">
+			    <div class="form-group">
+			      	<label for="inputText">Nom</label>
+			      	<input type="text" class="form-control" name="lastname" id="lastname" value="{{ values.lastname }}" >
+					<label class="form-check-label">
+						<span style = "color : red " >{{errors.lastname}}</span>
+					</label>
+			    </div>
+			</div>	
+			<div class="form-row col-4">
+			    <div class="form-group">
+			    	<label for="inputText">Prénom</label>
+			    	<input type="text" class="form-control" name="firstname" id="firstname" value="{{ values.firstname }}" >
+					<label class="form-check-label">
+						<span style = "color : red" >{{errors.firstname}} </span>
+					</label>
+			    </div>
+			</div>
+	  	</div>
+		<div class="row justify-content-center">
+			
+			<div class="form-row col-4">
+			    <div class="form-group">
+					{% if session.doujeviensAuthor=="createAuthor" %}
+					<i class="fas fa-user"></i>
+					<label for="inputText">Nom d'Utilisateur</label>
+					
+					<input type="text" class="form-control" name="username" id="username" value="{{ values.username }}" required>
+					<label class="form-check-label">
+						<span style = "color : red" > {{errors.username}}</span>
+					</label>
+					{% endif %}
+			    </div>
+			</div>
+			<div class="form-row col-4">
+				<div class="form-group">
+					{% if session.doujeviensAuthor=="createAuthor" %}
+						<i class="fas fa-key"></i>
+						<label for="inputText">Mot de Passe</label>
+						
+						<input type="password" class="form-control" name="password" id="password" required>
+						<label class="form-check-label" >
+							<span style = "color : red"> {{errors.password}}</span>
+						</label>
+					{% endif %}
+				</div>
+			</div>
+			  
+		</div>
+		<div class="row justify-content-center">
+			<div class="form-row col-4">
+				<div class="form-group">
+					<div class="form-check col-4"><!-- validated  -->
+					{% if session.doujeviensAuthor!="createAuthor" %}
+						<input class="form-check-input " type="checkbox"  {% if values.valid == true %} checked="checked" {% endif %} name="valid" id="valid">
+						<label class="form-check-label" for="valid">validé</label>
+					{% endif %}
+					</div>
+				</div>
+			</div>	
+			<div class="form-row col-4">
+				<div class="form-group">
+					{% if session.doujeviensAuthor=="createAuthor" %}
+						<i class="fas fa-key"></i>
+						<label for="inputText">Confirmation Mot de Passe</label>
+						
+						<input type="password" class="form-control" name="confpassword" id="confpassword" required>
+						<label class="form-check-label">
+							<span style = "color : red">{{errors.confpassword}}</span>
+						</label>
+					{% endif %}
+					
+				</div>
+			</div>	 	
+		</div>
+		
+		<div class="row justify-content-center ">
+			<div class="col-sm-8 col-md-6  col-md-offset-1 ">	
+				<button type="submit" class="btn btn-dark btn-sm " id="btnauthor" style="width:200px" >Enregistrer</button>
+				<input class='btn btn-dark btn-sm '  id = "userquit"  style="width:200px" type='button' value='Quitter' onClick="location.href='/adminRegister/adminRegister';"> 
+	  		</div>
+		</div>
+		</br>
+		<!--
+		<div class="row justify-content-center">
+			<div class="col-sm-8 col-md-6  col-md-offset-1 ">
+				<div class = "form-group">
+					<a href="/adminRegister/adminRegister"><button class="btn btn-dark btn-sm btnauthor" name ="QuitAuthor" >Quitter</button></a>
+				</div>
+			</div>
+		</div>
+		-->
+	</form>
+	
+</div>
+{% endblock %}

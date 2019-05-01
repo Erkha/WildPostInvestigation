@@ -14,15 +14,23 @@ class AdminLiveController extends AbstractController
 {
     public function show()
     {
-        $adminLiveManager = new AdminLiveManager();
-        $tabLive = $adminLiveManager->selectAll();
-        return $this->twig->render(
-            'AdminLive/AdminLiveForm.html.twig',
-            ['liveAll'=> $tabLive,
-            'method'=>'add',
-            'buttonName' => 'Nouveau',
-            'title2' => 'Flux live']
-        );
+
+        if (!empty($_session)) {
+            $adminLiveManager = new AdminLiveManager();
+            $tabLive = $adminLiveManager->selectAll();
+            $date = new \DateTime();
+            return $this->twig->render(
+                'AdminLive/AdminLiveForm.html.twig',
+                ['liveAll'=> $tabLive,
+                'method'=>'add',
+                'buttonName' => 'Nouveau',
+                'dateHeure'=> $date,
+                'title2' => 'Live-News']
+            );
+        } else {
+            header("location:../adminRegister/adminRegister");
+            exit();
+        }
     }
     public function edit(int $id): string
     {
@@ -42,14 +50,16 @@ class AdminLiveController extends AbstractController
             ['liveAll'=> $tabLive,
              'values' => $live,'method'=>'edit/'.$live['id'],
              'buttonName' => 'Modifier',
-            'title2' => 'Modifier flux']
+            'title2' => 'Modifier Live']
         );
     }
     public function add()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $adminLiveManager = new AdminLiveManager();
-            $addLive = ['content' => $_POST['content'],'articleDate' => $_POST['articleDate']];
+            $addLive = ['content' => $_POST['content'],
+                        'articleDate' => $_POST['articleDate']];
+
             $idLive = $adminLiveManager -> insert($addLive);
             header('Location:/adminLive/show');
         }

@@ -2,6 +2,7 @@
 
 {% block content %}
 	<h2 class="mt-2">Liste des articles</h2>
+<a href="add"><button class="btn btn-dark">Nouvel article</button></a>
   
 	<table class="table table-striped">
   <thead>
@@ -26,7 +27,7 @@
         <td>{{article.title|slice(0,50)}}</td>
         <td>{{article.articleDate}}</td>
         <td>{{article.catName}}</td>
-        <td>{{article.author}}</td>
+        <td>{{article.firstname|capitalize}} {{article.lastname|capitalize}}</td>
         <td>{% if article.published == true %} <i class="far fa-check-circle" style="color:green"></i> {% endif %}</td>
         <td>{% if article.topArt == true %} <i class="fas fa-star" style="color:red"></i> {% endif %}</td>
       </tr>
@@ -34,6 +35,9 @@
 
   </tbody>
 </table>
-	
-<a href="add"><button class="btn btn-dark">Nouvel article</button></a>
+<div class="d-flex justify-content-center pb-3"> <span> page <a href="/adminArticle/index/1">1</a>
+	{% for page in 2 .. pages %}
+    , <a href="/adminArticle/index/{{page}}"> {{page}} </a>
+  {% endfor %}
+</span></div>
 {% endblock %}

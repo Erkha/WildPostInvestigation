@@ -1,12 +1,34 @@
 {% extends 'adminLayout.html.twig' %}
 {% block content %}
-<div class="container w-50">
-	<form class="text-center border border-light p-5" method="post">
-	    <p class="h4 mb-4">Add Category</p>
+<div class="container">
+	<form action="/Category/{{method}}" class="text-center border border-light p-5" method="post">
+	    <p class="h4 mb-4">{{ title_page }}</p>
 	    <!-- Name -->
-	    <input type="text" id="defaultSubscriptionFormPassword" class="form-control mb-4" placeholder="New Category" name="addCat">
-	    <button class="btn btn-dark" type="submit">New category</button>
+	    <input type="text" id="defaultSubscriptionFormPassword" class="form-control mb-4" placeholder="Nouvelle categorie" name="name" value="{{ values.name }}">
+	    <button class="btn btn-dark" type="submit">{{Btn}}</button>
 	</form>
-<!-- Default form subscription -->
+</div>
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Categorie</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+
+        	{% for category in categoryAll %}
+            <tr>
+              	<td>{{ category.name }}</td>
+              	<th scope="row"><a href="edit/{{category.id}}"><i class="fas fa-edit"></i></a> 
+                  <a href="delete/{{category.id}}"><i class="fas fa-trash-alt"></i></a>
+                </th>
+            </tr>
+
+          {% endfor %}
+
+        </tbody>
+    </table>
 </div>
 {% endblock %}
