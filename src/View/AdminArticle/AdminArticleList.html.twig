@@ -14,16 +14,14 @@
       <th scope="col">Auteur</th>
       <th scope="col">Publié</th>
       <th scope="col">Top</th>
-
     </tr>
   </thead>
   <tbody>
   	{% for article in articles %}
       <tr>
         <th  scope="row"><a href="update/{{article.id}}"><i class="fas fa-edit" title="Modifier l'article"></i></a> 
-            <a href="show/{{article.id}}"><i class="fas fa-eye"  title="Voir l'article"></i>  </a> 
-            <a href="delete/{{article.id}}"><i class="fas fa-trash-alt" title="Supprimer l'article"></i></a>
-          </th>
+          <a href="delete/{{article.id}}"><i class="fas fa-trash-alt" title="Supprimer l'article"></i></a>
+        </th>
         <td>{{article.title|slice(0,50)}}</td>
         <td>{{article.articleDate}}</td>
         <td>{{article.catName}}</td>
@@ -32,7 +30,6 @@
         <td>{% if article.topArt == true %} <i class="fas fa-star" style="color:red"></i> {% endif %}</td>
       </tr>
     {% endfor %}
-
   </tbody>
 </table>
 <div class="d-flex justify-content-center pb-3"> <span> page <a href="/adminArticle/index/1">1</a>

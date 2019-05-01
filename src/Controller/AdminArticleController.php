@@ -19,23 +19,17 @@ use App\Model\AdminRegisterManager;
 class AdminArticleController extends AbstractController
 {
     /**
-     * Display article listing for admin
-     *
-     * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
+     * [Display article listing for admin]
+     * @param  int $page [page to be shown]
+     * @return string    [view to be shown]
      */
-
     public function index(int $page = 1)
     {
-
         if (!empty($_SESSION)) {
             $articleManager = new AdminArticleManager();
             $articles = $articleManager->selectPagedArticlesWithJoin($page);
             $nbArticles = $articleManager->countArticles();
             $nbPages = ceil($nbArticles['nb']/5);
-
             return $this->twig->render(
                 'AdminArticle/AdminArticleList.html.twig',
                 ['articles' => $articles, 'pages'=> $nbPages ]
@@ -179,8 +173,13 @@ class AdminArticleController extends AbstractController
         );
     }
 
-
-    private function isValid($errors, $values)
+    /**
+     * [isValid description]
+     * @param  array  $errors   table of errors from form
+     * @param  array  $values   table of values from form
+     * @return array  $isValid  table of valid status per input
+     */
+    private function isValid($errors, $values) : array
     {
         $isValid=[];
         
@@ -196,12 +195,14 @@ class AdminArticleController extends AbstractController
     }
 
     /**
-     *
-     */
-    private function verifyInputs($inputData)
+     * Verify data from article form
+     * @param  array  $inputData    data from form
+     * @return array                errors and cleaned values
+     **/
+    private function verifyInputs(array $inputData):array
     {
-            $value = [];
-            $error = [];
+        $value = [];
+        $error = [];
         $value['id']=$this->testInput($inputData["id"]);
         
         /** Verification title **/
@@ -263,7 +264,6 @@ class AdminArticleController extends AbstractController
              $value["topArt"] = false;
         }
 
-        /** Verification published **/
         /** Verification topArt **/
         if (isset($inputData["published"])) {
             $value["published"] = true;
