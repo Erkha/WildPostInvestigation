@@ -30,7 +30,7 @@ class AdminAuthorController extends AbstractController
 
             return $this->twig->render(
                 'Admin/adminAuthorList.html.twig',
-                ['authors' => $authors]
+                ['authors' => $authors, 'session'=>$_SESSION]
             );
         } else {
             header("location:../adminRegister/adminRegister");
@@ -46,7 +46,7 @@ class AdminAuthorController extends AbstractController
 
         return $this->twig->render(
             'Admin/adminAuthorList.html.twig',
-            ['authors' => $authors]
+            ['authors' => $authors, 'session'=>$_SESSION]
         );
     }
 }

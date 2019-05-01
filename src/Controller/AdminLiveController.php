@@ -26,6 +26,9 @@ class AdminLiveController extends AbstractController
             'title2' => 'Live-News']
         );
     }
+
+
+    
     public function edit(int $id): string
     {
         $adminLiveManager = new AdminLiveManager();

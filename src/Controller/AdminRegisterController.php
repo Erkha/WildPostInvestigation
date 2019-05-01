@@ -50,6 +50,7 @@ class AdminRegisterController extends AbstractController
             if (is_null($adminError['id'])) {
                // $_SESSION['lastname'] = $admin['lastname'];
                 //$_SESSION['firstname'] = $admin['firstname'];
+               
                 header('Location: ../AdminAuthor/authorNotValidated');
                 exit();
             }

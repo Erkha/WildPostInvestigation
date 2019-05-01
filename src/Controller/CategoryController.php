@@ -32,7 +32,6 @@ class CategoryController extends AbstractController
      
     public function show($deleteNo = false)
     {
-
         $categoryManager = new CategoryManager();
         $categories = $categoryManager->selectAll();
 
