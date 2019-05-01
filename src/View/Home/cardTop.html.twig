@@ -5,7 +5,7 @@
       <h5 class="card-title  mb-0 ">{{article.title}}</h5>
       <div>{{article.content|striptags|slice(0,150)}}...</div>
     </div>
-    <div class="card-footer text-muted py-1"> Par {{article.firstname|capitalize}} {{article.lastname|capitalize}}, publié le {{article.articleDate|date("d M")}}, <span class="disqus-comment-count" data-disqus-identifier="{{ article.id }}"> O commentaire</span> </div>
+    <div class="card-footer text-muted py-1"> Par {{article.firstname|capitalize}} {{article.lastname|capitalize}}, publié le {{article.articleDate|date("d M")}}, <span class="disqus-comment-count" data-disqus-identifier="{{ article.id }}"> 0 commentaire</span> </div>
   </div>
 </a> 
 
