@@ -68,6 +68,15 @@ class AdminArticleManager extends AbstractManager
         return $this->pdo->query('SELECT count(id) as nb FROM articles') ->fetch();
     }
 
+    public function checkArticlesOnCategory(int $catId) :array
+    {
+        $statement = $this->pdo->prepare('SELECT count(id) as nb FROM articles 
+                            WHERE categoryId = :catId');
+        $statement->bindValue('catId', $catId, \PDO::PARAM_INT);
+        $statement->execute();
+        return $statement->fetch();
+    }
+
 
     /**
      * Get all row from database.

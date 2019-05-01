@@ -21,8 +21,8 @@
         	{% for category in categoryAll %}
             <tr>
               	<td>{{ category.name }}</td>
-              	<th scope="row"><a href="edit/{{category.id}}"><i class="fas fa-edit"></i></a> 
-                  <a href="delete/{{category.id}}"><i class="fas fa-trash-alt"></i></a>
+              	<th scope="row"><a href="/category/edit/{{category.id}}"><i class="fas fa-edit"></i></a> 
+                  <a href="/category/delete/{{category.id}}"><i class="fas fa-trash-alt"></i></a>
                 </th>
             </tr>
 
@@ -30,5 +30,8 @@
 
         </tbody>
     </table>
+    {% if deleteNo == true %}
+      <span class = "badge badge-warning"> Cette catégorie est non vide, réaffectez les articles avant de la supprimer</span>
+    {% endif %}
 </div>
 {% endblock %}
