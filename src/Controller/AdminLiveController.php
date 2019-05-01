@@ -14,23 +14,17 @@ class AdminLiveController extends AbstractController
 {
     public function show()
     {
-
-        if (!empty($_session)) {
-            $adminLiveManager = new AdminLiveManager();
-            $tabLive = $adminLiveManager->selectAll();
-            $date = new \DateTime();
-            return $this->twig->render(
-                'AdminLive/AdminLiveForm.html.twig',
-                ['liveAll'=> $tabLive,
-                'method'=>'add',
-                'buttonName' => 'Nouveau',
-                'dateHeure'=> $date,
-                'title2' => 'Live-News']
-            );
-        } else {
-            header("location:../adminRegister/adminRegister");
-            exit();
-        }
+        $adminLiveManager = new AdminLiveManager();
+        $tabLive = $adminLiveManager->selectAll();
+        $date = new \DateTime();
+        return $this->twig->render(
+            'AdminLive/AdminLiveForm.html.twig',
+            ['liveAll'=> $tabLive,
+            'method'=>'add',
+            'buttonName' => 'Nouveau',
+            'dateHeure'=> $date,
+            'title2' => 'Live-News']
+        );
     }
     public function edit(int $id): string
     {

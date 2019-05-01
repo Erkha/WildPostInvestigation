@@ -32,22 +32,18 @@ class CategoryController extends AbstractController
      
     public function show($deleteNo = false)
     {
-        if (!empty($_SESSION)) {
-            $categoryManager = new CategoryManager();
-            $categories = $categoryManager->selectAll();
 
-            return $this->twig->render(
-                'Category/category_add.html.twig',
-                ['categoryAll'=> $categories,
-                'Btn' => 'Ajouter',
-                'method'=>'add',
-                'title_page' => 'Catégorie',
-                'deleteNo' =>$deleteNo]
-            );
-        } else {
-            header("location:../adminRegister/adminRegister");
-            exit();
-        }
+        $categoryManager = new CategoryManager();
+        $categories = $categoryManager->selectAll();
+
+        return $this->twig->render(
+            'Category/category_add.html.twig',
+            ['categoryAll'=> $categories,
+            'Btn' => 'Ajouter',
+            'method'=>'add',
+            'title_page' => ' Liste des catégories',
+            'deleteNo' =>$deleteNo]
+        );
     }
 
 
