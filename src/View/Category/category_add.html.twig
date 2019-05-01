@@ -1,28 +1,42 @@
 {% extends 'adminLayout.html.twig' %}
 {% block content %}
 <div class="container">
-	<form action="/Category/{{method}}" class="text-center border border-light p-5" method="post">
-	    <p class="h4 mb-4">{{ title_page }}</p>
-	    <!-- Name -->
-	    <input type="text" id="defaultSubscriptionFormPassword" class="form-control mb-4" placeholder="Nouvelle categorie" name="name" value="{{ values.name }}">
-	    <button class="btn btn-dark" type="submit">{{Btn}}</button>
-	</form>
+  <h2 class="author mt-2" style = "font-family:URW Chancery L, cursive !important">{{ title_page }}</h2>
+{#   	<form action="/Category/{{method}}" class="border border-light p-5" method="post">
+  <div class="row">
+  	    <!-- Name -->
+  	    <input type="text" id="defaultSubscriptionFormPassword" class="form-control col-8" placeholder="Nouvelle categorie" name="name" value="{{ values.name }}">
+  	    <button class="btn btn-dark btn-sm   waves-effect waves-light" type="submit">{{Btn}}</button>
+  </div>
+  	</form> #}
+
+
+
 </div>
 <div class="container">
-    <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Categorie</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
+    <table class="table table-striped text-center">
+          <thead>
+      <tr>
+        <th scope="col" style="width:60%">Catégorie</th>
+        <th scope="col" style="width:40%">Ajouter/Modifier/Supprimer</th>
+      </tr>
+    </thead>
         <tbody>
+         <td class="">
+          <input type="text" id="defaultSubscriptionFormPassword" class="form-control col-10" placeholder="Nouvelle categorie" name="name" value="{{ values.name }}">
+        </td>
+        <td>
+          <button class="btn btn-dark btn-sm   waves-effect waves-light" type="submit">{{Btn}}</button>
+        </td>
+      </tr>
+        
+        
 
         	{% for category in categoryAll %}
             <tr>
               	<td>{{ category.name }}</td>
-              	<th scope="row"><a href="edit/{{category.id}}"><i class="fas fa-edit"></i></a> 
-                  <a href="delete/{{category.id}}"><i class="fas fa-trash-alt"></i></a>
+              	<th scope="row"><a href="/category/edit/{{category.id}}"><i class="fas fa-edit"></i></a> 
+                  <a href="/category/delete/{{category.id}}"><i class="fas fa-trash-alt"></i></a>
                 </th>
             </tr>
 
@@ -30,5 +44,8 @@
 
         </tbody>
     </table>
+    {% if deleteNo == true %}
+      <span class = "badge badge-warning"> Cette catégorie est non vide, réaffectez les articles avant de la supprimer</span>
+    {% endif %}
 </div>
 {% endblock %}

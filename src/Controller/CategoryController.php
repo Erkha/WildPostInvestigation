@@ -10,6 +10,7 @@
 namespace App\Controller;
 
 use App\Model\CategoryManager;
+use App\Model\AdminArticleManager;
 
 /**
  * Class ItemController
@@ -29,23 +30,19 @@ class CategoryController extends AbstractController
      */
 
      
-    public function show()
+    public function show($deleteNo = false)
     {
-        if (!empty($_SESSION)) {
-            $categoryManager = new CategoryManager();
-            $categories = $categoryManager->selectAll();
+        $categoryManager = new CategoryManager();
+        $categories = $categoryManager->selectAll();
 
-            return $this->twig->render(
-                'Category/category_add.html.twig',
-                ['categoryAll'=> $categories,
-                'Btn' => 'Ajouter',
-                'method'=>'add',
-                'title_page' => 'Catégorie']
-            );
-        } else {
-            header("location:../adminRegister/adminRegister");
-            exit();
-        }
+        return $this->twig->render(
+            'Category/category_add.html.twig',
+            ['categoryAll'=> $categories,
+            'Btn' => 'Ajouter',
+            'method'=>'add',
+            'title_page' => ' Liste des catégories',
+            'deleteNo' =>$deleteNo]
+        );
     }
 
 
@@ -63,13 +60,11 @@ class CategoryController extends AbstractController
         $categoryManager = new CategoryManager();
         $category = $categoryManager->selectOneById($id);
         $categories = $categoryManager -> selectAll();
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $category['name'] = $_POST['name'];
             $categoryManager->update($category);
             header('Location: /Category/show');
         }
-
         return $this->twig->render(
             'Category/category_add.html.twig',
             ['category' => $category,
@@ -81,28 +76,21 @@ class CategoryController extends AbstractController
         );
     }
 
-
-//     *
+// *
 //      * Display item creation page
 //      *
 //      * @return string
 //      * @throws \Twig\Error\LoaderError
 //      * @throws \Twig\Error\RuntimeError
 //      * @throws \Twig\Error\SyntaxError
-     
     public function add()
     {
-
-
-      
-            echo "string";
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $categoryManager = new CategoryManager();
             $addCat = ['name' => $_POST['name']];
             $idCat = $categoryManager -> insert($addCat);
             header('Location:/category/show');
         }
-
         return $this->twig->render('Category/category_add.html.twig');
     }
 
@@ -114,8 +102,14 @@ class CategoryController extends AbstractController
      */
     public function delete(int $id)
     {
-        $categoryManager = new CategoryManager();
-        $categoryManager->delete($id);
-        header('Location:/category/show');
+        $articleManager = new AdminArticleManager();
+        $nbArticles = $articleManager->checkArticlesOnCategory($id) ;
+        if ($nbArticles['nb'] == 0) {
+            $categoryManager = new CategoryManager();
+            $categoryManager->delete($id);
+            header('Location:/category/show');
+        } else {
+            header('Location:/category/show/deleteNo=true');
+        }
     }
 }

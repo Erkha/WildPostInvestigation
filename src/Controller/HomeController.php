@@ -45,19 +45,22 @@ class HomeController extends AbstractController
             'categoryAll'=> $categories]);
     }
 
-    public function categorieVu($id)
+    public function categorieVu($id, $page = 1)
     {
         $articleManager = new AdminArticleManager();
-        $articles = $articleManager->selectPublishedCategoriesWithJoin($id);
+        $nbArticles = $articleManager->countPublishedCategoriesWithJoin($id);
+        $nbPages = ceil($nbArticles['nb']/5);
+        $articles = $articleManager->selectPagedCategorizedArticlesWithJoin($id, $page);
         $categoryManager = new CategoryManager();
         $categories = $categoryManager->selectAll();
         $titleCategorie = $categoryManager->selectOneById($id);
 
         return $this->twig->render(
-            'Home/index.html.twig',
+            'Home/articleList.html.twig',
             ['articles' => $articles,
             'categoryAll'=> $categories,
-            'TitleCat'=>$titleCategorie]
+            'titlePage'=>$titleCategorie,
+            'pages'=> $nbPages]
         );
     }
 }

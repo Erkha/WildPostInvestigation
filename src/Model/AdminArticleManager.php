@@ -68,6 +68,15 @@ class AdminArticleManager extends AbstractManager
         return $this->pdo->query('SELECT count(id) as nb FROM articles') ->fetch();
     }
 
+    public function checkArticlesOnCategory(int $catId) :array
+    {
+        $statement = $this->pdo->prepare('SELECT count(id) as nb FROM articles 
+                            WHERE categoryId = :catId');
+        $statement->bindValue('catId', $catId, \PDO::PARAM_INT);
+        $statement->execute();
+        return $statement->fetch();
+    }
+
 
     /**
      * Get all row from database.
@@ -205,6 +214,30 @@ class AdminArticleManager extends AbstractManager
                                     JOIN authors u ON a.authorId = u.id
                                     WHERE c.id=:id');
 
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+        return $statement->fetchAll();
+    }
+
+    public function countPublishedCategoriesWithJoin($id) :array
+    {
+        $statement=$this->pdo->prepare('  SELECT count(a.id)as nb FROM articles a
+                                    JOIN category c ON a.categoryId = c.id
+                                    JOIN authors u ON a.authorId = u.id
+                                    WHERE c.id=:id AND published = 1');
+
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+        return $statement->fetch();
+    }
+
+    public function selectPagedCategorizedArticlesWithJoin($id, $page = 1): array
+    {
+        $statement=$this->pdo->prepare('  SELECT a.*, c.name as catName, lastname, firstname FROM articles a
+                                    JOIN category c ON a.categoryId = c.id
+                                    JOIN authors u ON a.authorId = u.id
+                                    WHERE c.id=:id AND published = 1
+                                    LIMIT '.($page-1) *5 .',5');
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchAll();

@@ -1,38 +1,36 @@
 {% extends 'adminLayout.html.twig' %}
 
 {% block content %}
-	<h2 class="mt-2">Liste des articles</h2>
-<a href="add"><button class="btn btn-dark">Nouvel article</button></a>
+
+	<h2 class="author mt-2" style = "font-family:URW Chancery L, cursive !important">Liste des articles</h2>
+
   
 	<table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">#</th>
       <th scope="col">Article</th>
       <th scope="col">Date</th>
       <th scope="col">Catégorie</th>
       <th scope="col">Auteur</th>
       <th scope="col">Publié</th>
       <th scope="col">Top</th>
-
+      <th scope="col">#</th>
     </tr>
   </thead>
   <tbody>
   	{% for article in articles %}
       <tr>
-        <th  scope="row"><a href="update/{{article.id}}"><i class="fas fa-edit" title="Modifier l'article"></i></a> 
-            <a href="show/{{article.id}}"><i class="fas fa-eye"  title="Voir l'article"></i>  </a> 
-            <a href="delete/{{article.id}}"><i class="fas fa-trash-alt" title="Supprimer l'article"></i></a>
-          </th>
         <td>{{article.title|slice(0,50)}}</td>
         <td>{{article.articleDate}}</td>
         <td>{{article.catName}}</td>
         <td>{{article.firstname|capitalize}} {{article.lastname|capitalize}}</td>
         <td>{% if article.published == true %} <i class="far fa-check-circle" style="color:green"></i> {% endif %}</td>
         <td>{% if article.topArt == true %} <i class="fas fa-star" style="color:red"></i> {% endif %}</td>
+        <th  scope="row"><a href="update/{{article.id}}"><i class="fas fa-edit" title="Modifier l'article"></i></a> 
+            <a href="delete/{{article.id}}"><i class="fas fa-trash-alt" title="Supprimer l'article"></i></a>
+        </th>
       </tr>
     {% endfor %}
-
   </tbody>
 </table>
 <div class="d-flex justify-content-center pb-3"> <span> page <a href="/adminArticle/index/1">1</a>
