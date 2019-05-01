@@ -27,23 +27,7 @@ class CategoryController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    // public function index()
-    // {
-    //     // $itemManager = new ItemManager();
-    //     // $items = $itemManager->selectAll();
 
-    //     return $this->twig->render('Category/category.html.twig');
-    // }
-
-
-    // *
-    //  * Display item informations specified by $id
-    //  *
-    //  * @param int $id
-    //  * @return string
-    //  * @throws \Twig\Error\LoaderError
-    //  * @throws \Twig\Error\RuntimeError
-    //  * @throws \Twig\Error\SyntaxError
      
     public function show()
     {
