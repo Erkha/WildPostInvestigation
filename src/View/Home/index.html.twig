@@ -54,19 +54,15 @@
 					
 
 {#-------- Block Aside info en continu ------------------#}
-					<div class="col-md-3  flex-column d-flex align-items-stretch">
-						{% for i in 1..12  %}
-							{% include 'Home/asidelist.html.twig' %}
-							<br>
-						{% endfor %}
-
-						<div class="plus unique-color  h-100 mb-3">
-							<a href="" class="text-white">
-							<span>Voir plus</span>
-							</a>
-						</div>
+					<div class="col-md-3  flex-column d-flex align-items-stretch" id="asidecol">
+								
+					{% for i in 0..4 %}
+						{% include 'Home/asidelist.html.twig' %}
+						<br>
+					{% endfor %}
 
 					</div>
+				  </div>
 				</div>
 				{# row actualite #}
 				
@@ -74,6 +70,6 @@
 			{# div container #}
 		</section>			  
 	</div>	{# div contain #}		
-			
 
 {% endblock %}
+

@@ -72,4 +72,15 @@ class AdminLiveManager extends AbstractManager
 
         return $statement->execute();
     }
+
+
+      /**
+     * Get all row from database live.
+     *
+     * @return array
+     */
+    public function liveManage(): array
+    {
+        return $this->pdo->query("SELECT * FROM $this->table ORDER BY articleDate")->fetchAll();
+    }
 }
