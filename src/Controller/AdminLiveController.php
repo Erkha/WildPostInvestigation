@@ -74,16 +74,11 @@ class AdminLiveController extends AbstractController
     }
 
 
-     public function liveAll()
+    public function liveAll()
     {
         $adminLiveManager = new AdminLiveManager();
         $lives=$adminLiveManager->liveManage();
-        $this->twig->render('Home/asidelist.html.twig',['lives'=>$lives]);
+        $this->twig->render('Home/asidelist.html.twig', ['lives'=>$lives]);
         return json_encode($lives);
     }
-
-
-
 }
-
-   
