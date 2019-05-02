@@ -10,7 +10,7 @@
           <thead>
       <tr>
         <th scope="col" style="width:60%">Catégorie</th>
-        <th scope="col" style="width:40%">Ajouter/Modifier/Supprimer</th>
+        <th scope="col" style="width:40%">Action</th>
       </tr>
     </thead>
         <tbody>
@@ -38,7 +38,7 @@
     </table>
     </form>
     {% if deleteNo == true %}
-      <span class = "badge badge-warning"> Cette catégorie est non vide, réaffectez les articles avant de la supprimer</span>
+      <span class = "badge badge-danger"> Cette catégorie est non vide, réaffectez les articles avant de la supprimer</span>
     {% endif %}
 </div>
 {% endblock %}

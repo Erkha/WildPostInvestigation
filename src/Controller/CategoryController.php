@@ -69,10 +69,10 @@ class CategoryController extends AbstractController
             'Category/category_add.html.twig',
             ['category' => $category,
             'categoryAll'=> $categories,
-            'title_page' => 'Editer catégorie',
+            'title_page' => 'Modifier catégorie',
             'method'=>'edit/'.$category['id'],
             'values' => $category,
-            'Btn' => 'Editer']
+            'Btn' => 'Modifier']
         );
     }
 
