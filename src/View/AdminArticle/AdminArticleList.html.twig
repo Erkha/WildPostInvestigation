@@ -2,6 +2,7 @@
 
 {% block content %}
 	<h2 class="mt-2">Liste des articles</h2>
+<a href="add"><button class="btn btn-dark">Nouvel article</button></a>
   
 	<table class="table table-striped">
   <thead>
@@ -34,6 +35,9 @@
 
   </tbody>
 </table>
-	
-<a href="add"><button class="btn btn-dark">Nouvel article</button></a>
+<div class="d-flex justify-content-center pb-3"> <span> page <a href="/adminArticle/index/1">1</a>
+	{% for page in 2 .. pages %}
+    , <a href="/adminArticle/index/{{page}}"> {{page}} </a>
+  {% endfor %}
+</span></div>
 {% endblock %}

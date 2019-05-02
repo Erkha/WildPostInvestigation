@@ -50,6 +50,30 @@ class AdminArticleManager extends AbstractManager
      *
      * @return array
      */
+    public function selectPagedArticlesWithJoin($page = 1): array
+    {
+        return $this->pdo->query('  SELECT a.*, c.name as catName, lastname, firstname FROM articles a
+                                    JOIN category c ON a.categoryId = c.id
+                                    JOIN authors u ON a.authorId = u.id
+                                    LIMIT '.($page-1) *5 .',5')->fetchAll();
+    }
+
+    /**
+     * Get all row from database.
+     *
+     * @return array
+     */
+    public function countArticles()
+    {
+        return $this->pdo->query('SELECT count(id) as nb FROM articles') ->fetch();
+    }
+
+
+    /**
+     * Get all row from database.
+     *
+     * @return array
+     */
     public function selectPublishedArticlesWithJoin(): array
     {
         return $this->pdo->query('  SELECT a.*, c.name as catName, lastname, firstname FROM articles a
@@ -162,8 +186,12 @@ class AdminArticleManager extends AbstractManager
     public function searchArticles($search)
     {
 
-        $articlesRes = $this->pdo->prepare("SELECT * FROM $this->table WHERE title LIKE :title
-                      OR content LIKE :content");
+        $articlesRes = $this->pdo->prepare("SELECT * FROM $this->table 
+                    INNER JOIN category ON category.id = $this->table.categoryId
+                    INNER JOIN authors ON  authors.id = $this->table.authorId
+                    WHERE published = 1
+                    AND (title LIKE :title
+                      OR content LIKE :content )");
         $articlesRes->bindValue('title', '%'.$search.'%', \PDO::PARAM_STR) ;
         $articlesRes->bindValue('content', '%'.$search.'%', \PDO::PARAM_STR) ;
         $articlesRes->execute();
