@@ -24,7 +24,7 @@ class AdminAuthorController extends AbstractController
 
     public function index()
     {
-        if (/*!empty($_SESSION)*/true) {
+        if (!empty($_SESSION)) {
             $authorManager = new AdminRegisterManager();
             $authors = $authorManager->selectAll();
 
