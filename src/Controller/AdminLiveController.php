@@ -69,4 +69,12 @@ class AdminLiveController extends AbstractController
         $adminLiveManager->delete($id);
         header('Location:/adminLive/show');
     }
+
+
+    public function liveAll()
+    {
+        $adminLiveManager = new AdminLiveManager();
+        $lives = $adminLiveManager->liveManage();
+        return $this->twig->render('Home/asidelist.html.twig', ['lives'=>$lives]);
+    }
 }

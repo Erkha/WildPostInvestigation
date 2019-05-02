@@ -72,4 +72,17 @@ class AdminLiveManager extends AbstractManager
 
         return $statement->execute();
     }
+
+
+      /**
+     * Get all row from database live.
+     *
+     * @return array
+     */
+    public function liveManage(): array
+    {
+        return $this->pdo->query("SELECT SUBSTR(TIME(articleDate),1,8) AS heure ,
+            wildPost.live.* FROM wildPost.live ORDER BY DATE(articleDate) DESC,
+            TIME(articleDate) DESC;")->fetchAll();
+    }
 }
