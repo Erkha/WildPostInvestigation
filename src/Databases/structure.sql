@@ -1,4 +1,4 @@
-	drop database wildPost;
+drop database wildPost;
 create database wildPost;
 
 USE wildPost;
