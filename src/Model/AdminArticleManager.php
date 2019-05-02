@@ -194,18 +194,48 @@ class AdminArticleManager extends AbstractManager
     /* liste articles par recherche (search) */
     public function searchArticles($search)
     {
-
         $articlesRes = $this->pdo->prepare("SELECT * FROM $this->table 
                     INNER JOIN category ON category.id = $this->table.categoryId
                     INNER JOIN authors ON  authors.id = $this->table.authorId
                     WHERE published = 1
-                    AND (title LIKE :title
-                      OR content LIKE :content )");
+                    AND (title LIKE :title OR content LIKE :content )");
         $articlesRes->bindValue('title', '%'.$search.'%', \PDO::PARAM_STR) ;
         $articlesRes->bindValue('content', '%'.$search.'%', \PDO::PARAM_STR) ;
         $articlesRes->execute();
         return $articlesRes-> fetchAll();
     }
+    
+    public function countSearchArticles($search)
+    {
+        $articlesRes = $this->pdo->prepare("SELECT count($this->table.id) as nb FROM $this->table 
+                    WHERE published = 1
+                    AND (title LIKE :title OR content LIKE :content )");
+        $articlesRes->bindValue('title', '%'.$search.'%', \PDO::PARAM_STR) ;
+        $articlesRes->bindValue('content', '%'.$search.'%', \PDO::PARAM_STR) ;
+        $articlesRes->execute();
+        return $articlesRes-> fetch();
+        
+    }
+
+    public function searchArticlesPagination($search, $page = 1)
+    {
+        $page = ($page-1)*5;
+        $articlesRes = $this->pdo->prepare("SELECT * FROM $this->table 
+                    INNER JOIN category ON category.id = $this->table.categoryId
+                    INNER JOIN authors ON  authors.id = $this->table.authorId
+                    WHERE published = 1
+                    AND (title LIKE :title OR content LIKE :content )
+                    LIMIT :pagination ,5");
+        $articlesRes->bindValue('title', '%'.$search.'%', \PDO::PARAM_STR) ;
+        $articlesRes->bindValue('content', '%'.$search.'%', \PDO::PARAM_STR) ;
+        $articlesRes->bindValue('pagination', $page, \PDO::PARAM_INT) ;
+        $articlesRes->execute();
+        return $articlesRes-> fetchAll();
+        
+    }
+
+
+    /* fin partie search */
 
     public function selectPublishedCategoriesWithJoin($id): array
     {

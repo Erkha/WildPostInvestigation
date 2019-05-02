@@ -24,23 +24,32 @@ class SearchController extends AbstractController
      */
     
 
-    public function searchArticles()
+    public function searchArticles(INT $page=1)
     {
-       
-        if ($_SERVER['REQUEST_METHOD']==='POST') {
-            if (isset($_POST['search'])) {
-                $critere = $_POST['search'];
+
+        if ( ($_SERVER['REQUEST_METHOD']==='POST' && isset($_POST['search']))
+            || $_SERVER['REQUEST_METHOD']==='GET')  {
+
+                if ($_SERVER['REQUEST_METHOD']==='POST'){
+                    $critere = $_POST['search'];
+                    $_SESSION['search'] = $critere;
+                }
+                $critere = $_SESSION['search'];
                 $articleManager = new AdminArticleManager();
                 
-                $articles = $articleManager->searchArticles($critere);
+                //$articles = $articleManager->searchArticles($critere);
+                $articles = $articleManager->searchArticlesPagination($critere, $page);
+                $nbArticles = $articleManager->countSearchArticles($critere);
+                $nbPages = ceil($nbArticles['nb']/5);
+                
                 $categoryManager = new CategoryManager();
                 $categories = $categoryManager->selectAll();
             
                 return $this->twig->render(
                     'Search/search.html.twig',
-                    ['articles' => $articles,'categoryAll'=> $categories]
+                    ['articles' => $articles,'categoryAll'=> $categories, 'pages'=> $nbPages]
                 );
-            }
+           
 
             return $this->twig->render('Home/navbar.html.twig');
         }
