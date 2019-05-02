@@ -31,12 +31,8 @@
 		</article>
 
 		{# Block Aside info en continu #}
-		<div class="col-md-3 flex-column d-flex align-items-stretch">
-			{% for i in 0..4  %}
-				{% include 'Home/asidelist.html.twig' %}
-				<br>
-			{% endfor %}
-
+		<div class="col-md-3 flex-column d-flex align-items-stretch id="fluxLive"">
+			{% include 'Home/asidelist.html.twig' %}
 		</div>
 
 	</div> {# fin du container #}
