@@ -10,6 +10,7 @@ namespace App\Controller;
 
 use App\Model\AdminArticleManager;  // utilisation de la class AdminArticleManager
 use App\Model\CategoryManager;
+use App\Model\AdminLiveManager;
 
 class SearchController extends AbstractController
 {
@@ -43,10 +44,15 @@ class SearchController extends AbstractController
                 
                 $categoryManager = new CategoryManager();
                 $categories = $categoryManager->selectAll();
+
+                $adminLiveManager = new AdminLiveManager();
+                $lives = $adminLiveManager->liveManage();
+                
             
                 return $this->twig->render(
                     'Search/search.html.twig',
-                    ['articles' => $articles,'categoryAll'=> $categories, 'pages'=> $nbPages]
+                    ['articles' => $articles,'categoryAll'=> $categories, 'pages'=> $nbPages,
+                    'lives'=>$lives]
                 );
            
 

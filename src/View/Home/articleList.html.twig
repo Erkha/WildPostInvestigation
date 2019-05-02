@@ -25,18 +25,9 @@
 					</div>			
 
 {#-------- Block Aside info en continu ------------------#}
-					<div class="col-lg-3  flex-column d-flex align-items-stretch">
-						{% for i in 1..12  %}
-							{% include 'Home/asidelist.html.twig' %}
-							<br>
-						{% endfor %}
-
-						<div class="plus unique-color  h-100 mb-3">
-							<a href="" class="text-white">
-							<span>Voir plus</span>
-							</a>
-						</div>
-
+					<div class="col-lg-3  flex-column d-flex align-items-stretch id="fluxLive">
+						{% include 'Home/asidelist.html.twig' %}
+						
 					</div>
 				</div>
 				{# row actualite #}
