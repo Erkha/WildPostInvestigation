@@ -48,29 +48,21 @@
   <script type="text/javascript">
 
     function flux()
-    {
-      fetch('/adminLive/liveAll')
-      
-        .then(function(response) {
-            response.json().then(function(lives){
-            console.log("lives", lives);
+      { 
+        setInterval(function(){
 
-            for (var i = 0; i < 6; i++) {
-                                  
-              let maDate = document.createTextNode(lives[i].articleDate);
-              let divDate = document.getElementById("asideTime"+i); 
-              let date=divDate.appendChild(maDate); 
-
-              let maContent = document.createTextNode(lives[i].content);
-              let divContent = document.getElementById("asideContent"+i); 
-              let text=divContent.appendChild(maContent); 
-
-            }
-            
-          });
-
-        });
-    }
+          fetch('/adminLive/liveAll')
+          
+            .then(function(response) {
+              return response.text();
+            })
+            .then(text => {
+              console.log(text);
+              let flux = document.getElementById('fluxLive');
+              flux.innerHTML = text;
+            });
+        },3000); //Fin setInterval   
+    } //fin flux()
 
   </script>
  

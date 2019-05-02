@@ -9,6 +9,7 @@ namespace App\Controller;
 
 use App\Model\AdminArticleManager;
 use App\Model\CategoryManager;
+use App\Model\AdminLiveManager;
 
 class HomeController extends AbstractController
 {
@@ -26,7 +27,14 @@ class HomeController extends AbstractController
         $articles = $articleManager->selectPublishedArticlesWithJoin();
         $categoryManager = new CategoryManager();
         $categories = $categoryManager->selectAll();
-        return $this->twig->render('Home/index.html.twig', ['articles' => $articles,'categoryAll'=> $categories]);
+        $adminLiveManager = new AdminLiveManager();
+        $lives = $adminLiveManager->liveManage();
+
+        return $this->twig->render('Home/index.html.twig', [
+            'articles' => $articles,
+            'categoryAll'=> $categories,
+            'lives' => $lives
+        ]);
     }
 
     /**
@@ -40,9 +48,13 @@ class HomeController extends AbstractController
         $article = $articleManager->selectArticleByIdwithCatName($id);
         $categoryManager = new CategoryManager();
         $categories = $categoryManager->selectAll();
+        $adminLiveManager=new AdminLiveManager;
+        $lives = $adminLiveManager->liveManage();
         return $this->twig->render('Home/article.html.twig', [
             'article'=>$article,
-            'categoryAll'=> $categories]);
+            'categoryAll'=> $categories,
+            'lives' => $lives
+        ]);
     }
 
     public function categorieVu($id)
@@ -52,12 +64,16 @@ class HomeController extends AbstractController
         $categoryManager = new CategoryManager();
         $categories = $categoryManager->selectAll();
         $titleCategorie = $categoryManager->selectOneById($id);
+        $adminLiveManager=new AdminLiveManager;
+        $lives = $adminLiveManager->liveManage();
+        
 
         return $this->twig->render(
             'Home/index.html.twig',
             ['articles' => $articles,
             'categoryAll'=> $categories,
-            'TitleCat'=>$titleCategorie]
+            'TitleCat'=>$titleCategorie,
+            'lives' => $lives]
         );
     }
 }
