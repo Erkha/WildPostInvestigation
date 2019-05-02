@@ -24,16 +24,15 @@ class SearchController extends AbstractController
      */
     
 
-    public function searchArticles(INT $page=1)
+    public function searchArticles(INT $page = 1)
     {
 
-        if ( ($_SERVER['REQUEST_METHOD']==='POST' && isset($_POST['search']))
-            || $_SERVER['REQUEST_METHOD']==='GET')  {
-
-                if ($_SERVER['REQUEST_METHOD']==='POST'){
-                    $critere = $_POST['search'];
-                    $_SESSION['search'] = $critere;
-                }
+        if (($_SERVER['REQUEST_METHOD']==='POST' && isset($_POST['search']))
+            || $_SERVER['REQUEST_METHOD']==='GET') {
+            if ($_SERVER['REQUEST_METHOD']==='POST') {
+                $critere = $_POST['search'];
+                $_SESSION['search'] = $critere;
+            }
                 $critere = $_SESSION['search'];
                 $articleManager = new AdminArticleManager();
                 

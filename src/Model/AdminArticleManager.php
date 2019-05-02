@@ -214,7 +214,6 @@ class AdminArticleManager extends AbstractManager
         $articlesRes->bindValue('content', '%'.$search.'%', \PDO::PARAM_STR) ;
         $articlesRes->execute();
         return $articlesRes-> fetch();
-        
     }
 
     public function searchArticlesPagination($search, $page = 1)
@@ -231,7 +230,6 @@ class AdminArticleManager extends AbstractManager
         $articlesRes->bindValue('pagination', $page, \PDO::PARAM_INT) ;
         $articlesRes->execute();
         return $articlesRes-> fetchAll();
-        
     }
 
 
