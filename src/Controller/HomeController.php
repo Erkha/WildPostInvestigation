@@ -8,6 +8,8 @@
 namespace App\Controller;
 
 use App\Model\AdminArticleManager;
+use App\Model\CategoryManager;
+use App\Model\AdminLiveManager;
 
 class HomeController extends AbstractController
 {
@@ -21,7 +23,18 @@ class HomeController extends AbstractController
      */
     public function index()
     {
-        return $this->twig->render('Home/index.html.twig');
+        $articleManager = new AdminArticleManager();
+        $articles = $articleManager->selectPublishedArticlesWithJoin();
+        $categoryManager = new CategoryManager();
+        $categories = $categoryManager->selectAll();
+        $adminLiveManager = new AdminLiveManager();
+        $lives = $adminLiveManager->liveManage();
+
+        return $this->twig->render('Home/index.html.twig', [
+            'articles' => $articles,
+            'categoryAll'=> $categories,
+            'lives' => $lives
+        ]);
     }
 
     /**
@@ -33,7 +46,37 @@ class HomeController extends AbstractController
     {
         $articleManager = new AdminArticleManager();
         $article = $articleManager->selectArticleByIdwithCatName($id);
+        $categoryManager = new CategoryManager();
+        $categories = $categoryManager->selectAll();
+        $adminLiveManager=new AdminLiveManager;
+        $lives = $adminLiveManager->liveManage();
         return $this->twig->render('Home/article.html.twig', [
-            'article'=>$article]);
+            'article'=>$article,
+            'categoryAll'=> $categories,
+            'lives' => $lives
+        ]);
+    }
+
+    public function categorieVu($id, $page = 1)
+    {
+        $articleManager = new AdminArticleManager();
+        $nbArticles = $articleManager->countPublishedCategoriesWithJoin($id);
+        $nbPages = ceil($nbArticles['nb']/5);
+        $articles = $articleManager->selectPagedCategorizedArticlesWithJoin($id, $page);
+        $categoryManager = new CategoryManager();
+        $categories = $categoryManager->selectAll();
+        $titleCategorie = $categoryManager->selectOneById($id);
+        $adminLiveManager=new AdminLiveManager;
+        $lives = $adminLiveManager->liveManage();
+        
+
+        return $this->twig->render(
+            'Home/articleList.html.twig',
+            ['articles' => $articles,
+            'categoryAll'=> $categories,
+            'titlePage'=>$titleCategorie,
+            'pages'=> $nbPages,
+            'lives'=> $lives]
+        );
     }
 }

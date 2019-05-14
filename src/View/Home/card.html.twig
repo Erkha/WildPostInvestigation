@@ -1,19 +1,9 @@
-<div class="card">
-  
-      <!--Card image-->
-      <div class="view viewTop">
-         <a href="/home/article/{{article.id}}"> 
-          <img class="img w-100 imgcard" src="/assets/images/{{article.image_id}}" alt="">
-         </a>
-      </div>
-
-      <!--Card content-->
-      <div class="card-body ">
-        <a href="/home/article/{{article.id}}">
-          <h4 class="card-title titleTop">{{article.title}}</h4>
-          <!--Text-->
-          <p class="card-text textTop">{{article.content}}</p>
-        </a>
-      </div>
-
-</div>
+<a href="/home/article/{{article.id}}" class="d-flex align-content-stretch artLink">
+  <div class="card m-0">
+    <img src="/{{article.imageName}}" class="card-img-top" alt="...">
+    <div class="card-body p-2 px-3">
+      <h5 class="card-title  mb-0 ">{{article.title}}</h5>
+    </div>
+    <div class="card-footer text-muted py-1">Par {{article.firstname|capitalize}} {{article.lastname|capitalize}}, publié le {{article.articleDate|date("d M")}}, <span class="disqus-comment-count" data-disqus-identifier="{{ article.id }}"> 0 commentaire</span></div>
+  </div>
+</a>

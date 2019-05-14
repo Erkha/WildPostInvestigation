@@ -1,0 +1,36 @@
+{% extends 'adminLayout.html.twig' %}
+{% set session_name = session.lastname +' '+session.firstname %}
+
+{% block content %}
+  <div class="container-fluid">
+    <h2 class="author mt-2" style = "font-family:URW Chancery L, cursive !important">Auteurs non Validés</h2>
+    
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Nom</th>
+          <th scope="col">Prénom</th>
+          <th scope="col">Validé</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for author in authors %}
+          <tr>
+            <td>{{author.lastname}}</td>
+            <td>{{author.firstname}}</td>
+
+            <td>{% if author.valid == true %} <i class="far fa-check-circle" style="color:green"></i> {% endif %}</td>
+            <td  scope="row">
+              <a href="/adminRegister/authorUpdate/{{author.id}}"><i class="fas fa-edit" title="Modification Auteur"></i></a> 
+              <a href="/adminRegister/authorDelete/{{author.id}}"><i class="fas fa-trash-alt" title="Suppression Auteur"></i></a>
+            </td>
+          
+          </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+	</div>
+<!--<a href="add"><button class="btn btn-dark">Nouvel article</button></a> -->
+{% endblock %}

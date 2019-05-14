@@ -1,12 +1,44 @@
 {% extends 'adminLayout.html.twig' %}
 {% block content %}
-<div class="container w-50">
-	<form class="text-center border border-light p-5" method="post">
-	    <p class="h4 mb-4">Add Category</p>
-	    <!-- Name -->
-	    <input type="text" id="defaultSubscriptionFormPassword" class="form-control mb-4" placeholder="New Category" name="addCat">
-	    <button class="btn btn-dark" type="submit">New category</button>
-	</form>
-<!-- Default form subscription -->
+<div class="container">
+  <h2 class="author mt-2" style = "font-family:URW Chancery L, cursive !important">{{ title_page }}</h2>
+</div>
+
+<div class="container">
+   	<form action="/Category/{{method}}" class="border border-light" method="post">
+    <table class="table table-striped text-center">
+          <thead>
+      <tr>
+        <th scope="col" style="width:60%">Catégorie</th>
+        <th scope="col" style="width:40%">Action</th>
+      </tr>
+    </thead>
+        <tbody>
+         <td class="">
+          <input type="text" id="defaultSubscriptionFormPassword" class="form-control col-10" placeholder="Nouvelle categorie" name="name" value="{{ values.name }}">
+        </td>
+        <td>
+          <button class="btn btn-dark btn-sm   waves-effect waves-light" type="submit">{{Btn}}</button>
+        </td>
+      </tr>
+
+        
+
+        	{% for category in categoryAll %}
+            <tr>
+              	<td>{{ category.name }}</td>
+              	<th scope="row"><a href="/category/edit/{{category.id}}"><i class="fas fa-edit"></i></a> 
+                  <a href="/category/delete/{{category.id}}"><i class="fas fa-trash-alt"></i></a>
+                </th>
+            </tr>
+
+          {% endfor %}
+
+        </tbody>
+    </table>
+    </form>
+    {% if deleteNo == true %}
+      <span class = "badge badge-danger"> Cette catégorie est non vide, réaffectez les articles avant de la supprimer</span>
+    {% endif %}
 </div>
 {% endblock %}

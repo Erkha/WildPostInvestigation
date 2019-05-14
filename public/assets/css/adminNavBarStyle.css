@@ -1,0 +1,27 @@
+.info-color-dark 
+{
+    background-color :black !important;
+}
+
+.text-light
+{
+    color : white;
+}
+
+.navbar-expand-lg .navbar-collapse
+{
+    background-color :  #7a788b   !important;
+}
+
+.navbar.navbar-light .navbar-nav .nav-item .nav-link
+{
+    color : white !important;
+    font-family:URW Chancery L, cursive !important;
+    font-size : 25px;
+}
+
+.btn-info
+{
+    background-color : #7a788b !important;
+    width : 15px;
+}

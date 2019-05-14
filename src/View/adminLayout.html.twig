@@ -13,15 +13,24 @@
     <link href="/assets/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="/assets/mdbootstrap/css/mdb.min.css" rel="stylesheet">
+    
     <!-- Your custom styles (optional) -->
-    <link href="/assets/css/style.css" rel="stylesheet">
-    {% block stylesheet %}{% endblock %}
+   
+    {% block stylesheet %} 
+      <link href="/assets/css/style.css" rel="stylesheet">
+	    <link href="/assets/css/adminNavBarStyle.css" rel="stylesheet"
+	    <link rel="stylesheet" href="/assets/css/adminStyle.css">
+    {% endblock %}
+
+  
   </head>
 
   <body >
     <div class="container p-0">
       <div class="sticky-top">
-        <h1 class="text-center m-0 info-color-dark text-light mx-1 sticky-top">Wild Post Investigation</h1>
+        <a  href = "/home/index">
+          <h1 class="text-center m-0 info-color-dark text-light mx-1 sticky-top " >Wild Post Investigation</h1>
+        </a>
         <!--Navbar-->
         <nav class="navbar navbar-expand-lg  navbar-light info-color p-0 mx-1 ">
           <!-- Collapse button -->
@@ -40,17 +49,20 @@
                 <a class="nav-link" href="/adminLive/show">Live-News</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/adminAuthor/authorNotValidated">Utilisateurs</a>
+                <a class="nav-link" href="/adminAuthor/authorNotValidated">Auteurs</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/category/show">Catégories</a>
               </li>
+              
             </ul>
-            <!-- Links -->
+                        
             <form class="form-inline">
-              <div class="md-form my-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-              </div>
+
+              <a href="/adminRegister/logout" class="btn btn-info btn-lg">
+                      <span class="fas fa-sign-out-alt"></span> 
+              </a>
+              
             </form>
           </div>
           <!-- Collapsible content -->
@@ -59,7 +71,7 @@
       <!--/.Navbar-->
 
 {% block content %}{% endblock %}
-
+{% block footer %}{% include 'Admin/adminFooter.html.twig'%}{% endblock %}
     </div>
     
     <script type="text/javascript" src="/assets/mdbootstrap/js/jquery-3.3.1.min.js"></script>

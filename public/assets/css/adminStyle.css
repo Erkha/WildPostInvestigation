@@ -1,0 +1,79 @@
+
+.adminBody
+{
+    padding : 20px;
+}
+.adminTitle
+{
+    background-color : black !important;
+    color : white !important;
+}
+
+.adminFooter
+{
+    background-color : #7a788b  !important;
+    color : white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+
+}
+
+.textFooter
+{
+    padding : 20px;
+    font-family:URW Chancery L, cursive !important;
+    font-size: 25px; 
+}
+
+.author{
+    font-family:URW Chancery L, cursive !important;
+}
+
+.user
+{
+
+    margin-bottom: 20px;
+
+}
+
+.user h2
+{
+    text-align: center;
+}
+
+a
+{
+	width:auto !important;
+}
+
+.btnuser
+{
+    width : 200px !important;
+    background-color :  #7a788b   !important;
+    color : white;
+}
+
+#btnauthor
+{
+    width : 200px !important;
+}
+
+#userquit
+{
+    width : 200px !important;
+    float : right;
+    text-transform: uppercase;
+}
+
+
+
+
+@media  ( max-width:768px ){
+
+    .author{
+        font-family:URW Chancery L, cursive;
+    }
+
+}

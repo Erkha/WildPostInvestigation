@@ -16,14 +16,19 @@ class AdminLiveController extends AbstractController
     {
         $adminLiveManager = new AdminLiveManager();
         $tabLive = $adminLiveManager->selectAll();
+        $date = new \DateTime();
         return $this->twig->render(
             'AdminLive/AdminLiveForm.html.twig',
             ['liveAll'=> $tabLive,
             'method'=>'add',
             'buttonName' => 'Nouveau',
-            'title2' => 'Flux live']
+            'dateHeure'=> $date,
+            'title2' => 'Live-News']
         );
     }
+
+
+    
     public function edit(int $id): string
     {
         $adminLiveManager = new AdminLiveManager();
@@ -42,14 +47,16 @@ class AdminLiveController extends AbstractController
             ['liveAll'=> $tabLive,
              'values' => $live,'method'=>'edit/'.$live['id'],
              'buttonName' => 'Modifier',
-            'title2' => 'Modifier flux']
+            'title2' => 'Modifier Live']
         );
     }
     public function add()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $adminLiveManager = new AdminLiveManager();
-            $addLive = ['content' => $_POST['content'],'articleDate' => $_POST['articleDate']];
+            $addLive = ['content' => $_POST['content'],
+                        'articleDate' => $_POST['articleDate']];
+
             $idLive = $adminLiveManager -> insert($addLive);
             header('Location:/adminLive/show');
         }
@@ -61,5 +68,13 @@ class AdminLiveController extends AbstractController
         $adminLiveManager = new AdminLiveManager();
         $adminLiveManager->delete($id);
         header('Location:/adminLive/show');
+    }
+
+
+    public function liveAll()
+    {
+        $adminLiveManager = new AdminLiveManager();
+        $lives = $adminLiveManager->liveManage();
+        return $this->twig->render('Home/asidelist.html.twig', ['lives'=>$lives]);
     }
 }

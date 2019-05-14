@@ -1,0 +1,41 @@
+{% extends 'layout.html.twig' %}
+    {% block stylesheet %}<link href="/assets/css/home.css" rel="stylesheet">{% endblock %}
+
+{% block content %}
+	<div class="contain pt-2">
+		<section>
+			<div class="container">
+{# 				<h2 class="TitleCat">{{ titlePage.name }}</a></h2> #}
+				<div class="row ">
+
+					<div class="col-lg-9 ">
+						
+						<div class="row">
+							{% for article in articles %}
+							<div class="col-lg-12 d-flex align-items-stretch">
+								{% include 'Home/cardLeft.html.twig' %}
+							</div>	
+							{% endfor %}
+							<div class="d-flex justify-content-center pb-3"> <span> page <a href="/home/categorieVu/{{titlePage.id}}/1">1</a>
+								{% for page in 2 .. pages %}
+	    						, <a href="/home/categorieVu/{{titlePage.id}}/{{page}}"> {{page}} </a>
+	  						{% endfor %} </span>
+	  					 </div>
+						</div>
+					</div>			
+
+{#-------- Block Aside info en continu ------------------#}
+					<div class="col-lg-3  flex-column d-flex align-items-stretch id="fluxLive">
+						{% include 'Home/asidelist.html.twig' %}
+						
+					</div>
+				</div>
+				{# row actualite #}
+				
+			</div>	
+			{# div container #}
+		</section>			  
+	</div>	{# div contain #}		
+			
+
+{% endblock %}

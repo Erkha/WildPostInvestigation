@@ -10,12 +10,13 @@
 {% endblock %}
 {% block content %}
 <div class="container">
-	<h2 class="mt-2">{{title2}}</h2>
+	<h2 class="author mt-2" style = "font-family:URW Chancery L, cursive !important">{{title2}}</h2>
 	<a href="/adminArticle/index"> Retour à la liste des articles</a>
 
 
 	<form action="" method="POST" class="mt-4" enctype="multipart/form-data">
 		<input id="id" name="id" type="hidden" value="{{values.id}}">
+		<input id="imageName" name="imageName" type="hidden" value="{{ values.imageName }}">
 
 		<div class="row">
 			<div class="col-md-6"> 
@@ -24,19 +25,23 @@
 		      <input type="date" class="form-control col-8 {{isValid.articleDate}}" name="articleDate" id="articleDate" value="{{ values.articleDate }}" required>
 		      <div class="invalid-feedback">{{ errors.articleDate }}</div>
 		    </div>
-		    <div class="form-group row"><!-- auteur  -->
-		      <label for="author" class="col-4 text-right my-auto">Auteur</label>
-		      <input type="text" class="form-control col-8 {{isValid.author}}" name="author" id="author" value="{{ values.author }}" required>
-		      <div class="invalid-feedback">{{ errors.author }}</div>
-		    </div>
-				<div class="form-group row"> <!-- categorie  -->
-					<label for="category" class="col-4 text-right my-auto">Categorie</label>
-					<select name="category" id="category" class="custom-select col-8 {{isValid.category}}" required>
-						{% for category in categories %}
-							<option value="{{category.id}}" {% if category.id == values.category %} selected {% endif %}>{{category.name}}</option>
+				<div class="form-group row"> <!-- auteur  -->
+					<label for="authorId" class="col-4 text-right my-auto">Auteur</label>
+					<select name="authorId" id="authorId" class="custom-select col-8 {{isValid.authorId}}" required>
+						{% for author in authors %}
+							<option value="{{author.id}}" {% if author.id == values.authorId %} selected {% endif %}>{{author.firstname}} {{author.lastname}}</option>
 						{% endfor %}
 					</select>
-					<div class="invalid-feedback">{{ errors.category }}</div>
+					<div class="invalid-feedback">{{ errors.authorId }}</div>
+				</div>
+				<div class="form-group row"> <!-- categorie  -->
+					<label for="categoryId" class="col-4 text-right my-auto">Categorie</label>
+					<select name="categoryId" id="categoryId" class="custom-select col-8 {{isValid.categoryId}}" required>
+						{% for category in categories %}
+							<option value="{{category.id}}" {% if category.id == values.categoryId %} selected {% endif %}>{{category.name}}</option>
+						{% endfor %}
+					</select>
+					<div class="invalid-feedback">{{ errors.categoryId }}</div>
 				</div>
 			</div>
 			<div class="col-md-6">

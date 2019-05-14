@@ -1,14 +1,21 @@
-<div class="Live d-flex unique-color m-0">
-<ul class="Live_news d-flex pl-2 pr-2">
-  <li class="news d-flex m-0">
-    <a href="">
-      <div class="new_header text-white">
-        15:05
-      </div>
-      <div class="content text-white ">
-        Lorem ipsum dolor sit amet,
-        consectetur adipisicing elit.
-      </div>
-    </a>
-  </ul>
-</div>
+{% for i in 0..4 %}
+  <div class="Live d-flex unique-color m-0" id="cardSide">
+    <ul class="Live_news d-flex pl-2 pr-2 w-100">
+
+      <li class="news d-flex flex-column m-0">
+      
+        
+    <!-- Heure de patution    --> 
+          <div class="new_header text-white mb-2">
+       		{{ lives[i].heure }}
+          </div>
+
+          <!-- content -->
+          <div class="content text-white">
+           {{ lives[i].content }}
+          </div>
+         
+     	</li>
+    </ul>
+  </div>
+{% endfor %}

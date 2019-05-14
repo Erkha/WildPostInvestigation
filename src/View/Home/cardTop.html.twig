@@ -1,0 +1,11 @@
+<a href="/home/article/{{article.id}}" class="d-flex align-content-stretch artLink">
+  <div class="card m-0 jmCardTop">
+    <div class="card-body p-2 px-3">
+    <img src="/{{article.imageName}}" class="card-img-top" alt="...">
+      <h5 class="card-title  mb-0 ">{{article.title}}</h5>
+      <div>{{article.content|striptags|slice(0,150)}}...</div>
+    </div>
+    <div class="card-footer text-muted py-1"> Par {{article.firstname|capitalize}} {{article.lastname|capitalize}}, publié le {{article.articleDate|date("d M")}}, <span class="disqus-comment-count" data-disqus-identifier="{{ article.id }}"> 0 commentaire</span> </div>
+  </div>
+</a> 
+

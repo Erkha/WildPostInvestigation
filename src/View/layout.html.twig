@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head >
   {# <link rel="icon" href="/assets/images/favicon.png"> #}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -25,7 +25,7 @@
 
 
 
-<body>
+<body onload="flux()">
 
 {% block header %}{% include 'Home/header.html.twig'%}{% endblock %}
 
@@ -42,8 +42,34 @@
   <script type="text/javascript" src="/assets/mdbootstrap/js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="/assets/mdbootstrap/js/mdb.min.js"></script>
-	{% block javascript %}{% endblock %}
-</body>
+	
+  
+
+  <script type="text/javascript">
+
+    function flux()
+      { 
+        setInterval(function(){
+
+          fetch('/adminLive/liveAll')
+          
+            .then(function(response) {
+              return response.text();
+            })
+            .then(text => {
+              console.log(text);
+              let flux = document.getElementById('fluxLive');
+              flux.innerHTML = text;
+            });
+        },3000); //Fin setInterval   
+    } //fin flux()
+
+  </script>
+ 
+
+  
+  <script id="dsq-count-scr" src="//wildpost-1.disqus.com/count.js" async></script>
+  </body>
 
 </html>
 

@@ -10,6 +10,7 @@ namespace App\Controller;
 
 use App\Model\AdminArticleManager;
 use App\Model\CategoryManager;
+use App\Model\AdminRegisterManager;
 
 /**
  * Class ItemController
@@ -18,23 +19,21 @@ use App\Model\CategoryManager;
 class AdminArticleController extends AbstractController
 {
     /**
-     * Display article listing for admin
-     *
-     * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
+     * [Display article listing for admin]
+     * @param  int $page [page to be shown]
+     * @return string    [view to be shown]
      */
-
-    public function index()
+    public function index(int $page = 1)
     {
-        $articleManager = new AdminArticleManager();
-        $articles = $articleManager->selectArticleswithCatName();
 
-        return $this->twig->render(
-            'AdminArticle/AdminArticleList.html.twig',
-            ['articles' => $articles]
-        );
+            $articleManager = new AdminArticleManager();
+            $articles = $articleManager->selectPagedArticlesWithJoin($page);
+            $nbArticles = $articleManager->countArticles();
+            $nbPages = ceil($nbArticles['nb']/5);
+            return $this->twig->render(
+                'AdminArticle/AdminArticleList.html.twig',
+                ['articles' => $articles, 'pages'=> $nbPages ]
+            );
     }
 
     /**
@@ -57,17 +56,20 @@ class AdminArticleController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-
     public function add()
     {
+        $CategoryManager = new CategoryManager();
+        $categories = $CategoryManager->selectAll();
+        $AdminAuthorManager = new AdminRegisterManager();
+        $authors = $AdminAuthorManager->selectAll();
+
         /** Verification ajout article **/
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $result = $this->verifyInputs($_POST);
             $errors = $result['errors'];
             $values = $result['values'];
-
             if (!empty($_FILES)) {
-                if ($_FILES['fileU']['size']<1000000) {
+                if ($_FILES['fileU']['size']<1000000 && $_FILES['fileU']['size']>0) {
                     $uploadDir = 'assets/images/';
                     $extension = explode('/', $_FILES['fileU']['type']);
                     $values['imageName'] = $uploadDir . "image".microtime();
@@ -79,31 +81,25 @@ class AdminArticleController extends AbstractController
                     move_uploaded_file($_FILES['fileU']['tmp_name'], $values['imageName']);
                 }
             }
-
             if (!empty($result['errors'])) {
-                $CategoryManager = new CategoryManager();
-                $categories = $CategoryManager->selectAll();
                 return $this->twig->render(
                     'AdminArticle/adminArticleForm.html.twig',
                     [   'errors'=>$errors,
                         'values'=>$values,
                         'isValid'=>$this->isValid($errors, $values),
                         'categories'=>$categories,
+                        'authors' =>$authors,
                         'title2'=>"Nouvel Article"]
                 );
             }
-
             $adminArticleManager = new AdminArticleManager();
-
             $id = $adminArticleManager->insert($values);
-            
             header('Location:/adminArticle/index');
         }
-        $CategoryManager = new CategoryManager();
-        $categories = $CategoryManager->selectAll();
         return $this->twig->render(
             'AdminArticle/adminArticleForm.html.twig',
             ['categories'=>$categories,
+             'authors' =>$authors,
             'values'=>['articleDate'=>date("Y-m-j")],
             'title2'=>"NouvelArticle"]
         );
@@ -118,16 +114,25 @@ class AdminArticleController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-
     public function update(int $id)
     {
+        $articleManager = new AdminArticleManager();
+        $article = $articleManager->selectOneById($id);
+        $CategoryManager = new CategoryManager();
+        $categories = $CategoryManager->selectAll();
+        $AdminAuthorManager = new AdminRegisterManager();
+        $authors = $AdminAuthorManager->selectAll();
+
         // si POST, vérifier les entrées
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $result = $this->verifyInputs($_POST);
             $errors = $result['errors'];
             $values = $result['values'];
-            if (!empty($_FILES)) {
-                if ($_FILES['fileU']['size']<1000000) {
+            if (!empty($_POST['imageName'])) { //récupère la photo initiale
+                $values['imageName'] = $_POST['imageName'];
+            }
+            if (!empty($_FILES)) { // gestion de la modif de photos
+                if ($_FILES['fileU']['size']<1000000 && $_FILES['fileU'][ 'size']>0) {
                     $uploadDir = 'assets/images/';
                     $extension = explode('/', $_FILES['fileU']['type']);
                     $values['imageName'] = $uploadDir . "image".microtime();
@@ -140,13 +145,12 @@ class AdminArticleController extends AbstractController
                 }
             }
             if (!empty($result['errors'])) {
-                $CategoryManager = new CategoryManager();
-                $categories = $CategoryManager->selectAll();
                 return $this->twig->render(
                     'AdminArticle/adminArticleForm.html.twig',
                     [   'errors'=>$errors,
                         'values'=>$values,
                         'isValid'=>$this->isValid($errors, $values),
+                        'authors' =>$authors,
                         'categories'=>$categories,
                         'title2'=>"Mise à jour de l'article"]
                 );
@@ -156,20 +160,22 @@ class AdminArticleController extends AbstractController
             header('Location:/adminArticle/index');
         }
 
-        $articleManager = new AdminArticleManager();
-        $article = $articleManager->selectOneById($id);
-        $CategoryManager = new CategoryManager();
-        $categories = $CategoryManager->selectAll();
         return $this->twig->render(
             'AdminArticle/adminArticleForm.html.twig',
             [   'values' => $article,
                 'categories'=>$categories,
+                'authors' =>$authors,
                 'title2'=>"Mise à jour de l'article"]
         );
     }
 
-
-    private function isValid($errors, $values)
+    /**
+     * [isValid description]
+     * @param  array  $errors   table of errors from form
+     * @param  array  $values   table of values from form
+     * @return array  $isValid  table of valid status per input
+     */
+    private function isValid($errors, $values) : array
     {
         $isValid=[];
         
@@ -185,13 +191,14 @@ class AdminArticleController extends AbstractController
     }
 
     /**
-     *
-     */
-    private function verifyInputs($inputData)
+     * Verify data from article form
+     * @param  array  $inputData    data from form
+     * @return array                errors and cleaned values
+     **/
+    private function verifyInputs(array $inputData):array
     {
-            $value = [];
-            $error = [];
-
+        $value = [];
+        $error = [];
         $value['id']=$this->testInput($inputData["id"]);
         
         /** Verification title **/
@@ -211,22 +218,22 @@ class AdminArticleController extends AbstractController
              $value["articleDate"] = $this->testInput($inputData["articleDate"]);
         }
         /** Verification author **/
-        if (empty($inputData["author"])) {
-            $error['author'] = 'Add author';
-        } elseif (strlen($inputData["author"])>50) {
-            $value["author"] = $this->testInput($inputData["author"]);
-            $error['author'] = 'le nom de l\'auteur doit faire moins de 50 caracteres' ;
+        if (empty($inputData["authorId"])) {
+            $error['authorId'] = 'Add author';
+        } elseif (strlen($inputData["authorId"])>50) {
+            $value["authorId"] = $this->testInput($inputData["authorId"]);
+            $error['authorId'] = 'le nom de l\'auteur doit faire moins de 50 caracteres' ;
         } else {
-             $value["author"] = $this->testInput($inputData["author"]);
+             $value["authorId"] = $this->testInput($inputData["authorId"]);
         }
         /** Verification Category **/
-        if (empty($inputData["category"])) {
-            $error['category'] = 'Select Category';
-        } elseif (strlen($inputData["category"])>50) {
-            $value["category"] = $this->testInput($inputData["category"]);
-            $error['category'] = 'la catégorie doit faire moins de 50 caractères';
+        if (empty($inputData["categoryId"])) {
+            $error['categoryId'] = 'Select Category';
+        } elseif (strlen($inputData["categoryId"])>50) {
+            $value["categoryId"] = $this->testInput($inputData["categoryId"]);
+            $error['categoryId'] = 'la catégorie doit faire moins de 50 caractères';
         } else {
-             $value["category"] = $this->testInput($inputData["category"]);
+             $value["categoryId"] = $this->testInput($inputData["categoryId"]);
         }
         
         /** Verification content **/
@@ -253,7 +260,6 @@ class AdminArticleController extends AbstractController
              $value["topArt"] = false;
         }
 
-        /** Verification published **/
         /** Verification topArt **/
         if (isset($inputData["published"])) {
             $value["published"] = true;
