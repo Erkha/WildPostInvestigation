@@ -3,7 +3,7 @@
 ## Description
 
 This is my second project done during Wild Code School Training.
-Done by a team of 4 dévelopers.
+Done by a team of 4 developers.
 The goal was to  create the website of an online Journal with an admin interface in order to manage articles, categories,...
 We have used scrum methods: user stories, planning poker, 1-week sprints,...
 
